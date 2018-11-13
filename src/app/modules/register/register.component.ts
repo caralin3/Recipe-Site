@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService, FirebaseUserService } from '../../core'
+import { AuthService } from '../../core'
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,6 @@ export class RegisterComponent {
     public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    public firebaseService: FirebaseUserService
   ) {
     this.createForm();
    }
@@ -33,16 +32,9 @@ export class RegisterComponent {
    tryRegister(value){
      this.authService.doSignUp(value)
      .then(res => {
-       console.log(value);
        this.errorMessage = "";
        this.successMessage = "Your account has been created";
-       this.firebaseService.createUser({
-         firstName: 'Test',
-         lastName: 'Test',
-         email: value.email,
-       }).then(() => {
-         this.router.navigate(['/']);
-       })
+       this.router.navigate(['/']);
      }, err => {
        console.log(err);
        this.errorMessage = err.message;

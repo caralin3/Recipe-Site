@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FirebaseUserModel } from './user.model';
+import { User } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,12 @@ export class UserService {
   }
 
   // Create User
-  createUser = (user: FirebaseUserModel) => {
-    return this.usersCollection.add(user);
+  createUser = (user: User) => {
+    return this.usersCollection.doc(user.id).set({
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    } as FirebaseUserModel);
   }
 
   // TODO: Get User
