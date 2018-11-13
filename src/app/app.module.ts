@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -13,6 +14,7 @@ import { LoginComponent } from './modules';
 import { RegisterComponent } from './modules';
 import { UserResolver, UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
+import { reducer as sessionReducer } from './store/session/session.reducer';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,9 @@ import { UserComponent } from './modules/user/user.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({
+      sessionState: sessionReducer,
+    })
   ],
   providers: [AuthGuard, AuthService, UserResolver, UserService, FirebaseUserService],
   bootstrap: [AppComponent]
