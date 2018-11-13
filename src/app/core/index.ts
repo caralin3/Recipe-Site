@@ -1,7 +1,8 @@
-import { AuthGuard } from './auth.guard';
-import { AuthService } from './auth.service';
+import { AuthGuard, AuthService } from './auth';
+import { FirebaseUserService } from './firestore';
 
 export {
   AuthGuard,
   AuthService,
+  FirebaseUserService,
 }
