@@ -8,7 +8,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard, AuthService } from './core';
+import { AuthGuard, AuthService, FirebaseUserService } from './core';
 import { LoginComponent } from './modules';
 import { RegisterComponent } from './modules';
 import { UserResolver, UserService } from './modules/user';
@@ -30,7 +30,7 @@ import { UserComponent } from './modules/user/user.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthGuard, AuthService, UserResolver, UserService],
+  providers: [AuthGuard, AuthService, UserResolver, UserService, FirebaseUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
