@@ -1,10 +1,89 @@
 <form class="recipeForm" [formGroup]="recipeForm">
   <div class="recipeForm_row">
-    <label class="recipeForm_label">Title</label>
+    <label class="recipeForm_label">
+      Title
+      <span class="recipeForm_required">*</span>
+    </label>
     <input class="recipeForm_control" type="text" formControlName="title">
   </div>
+  <div class="recipeForm_row">
+    <label class="recipeForm_label">
+      My Rating
+      <span class="recipeForm_required">*</span>
+    </label>
+    <div class="recipeForm_stars">
+      <span>
+        <label for="r1">
+          <i
+            class="fa-star recipeForm_star"
+            [ngClass]="(hover >= 1) ? 'fas' : 'far'"
+            (mouseover)="onHover(1)"
+            (mouseleave)="onHover(0)"
+            *ngIf="stars === undefined"
+          ></i>
+          <i class="fas fa-star recipeForm_star" *ngIf="stars >= 1"></i>
+        </label>
+        <input class="recipeForm_radio" id="r1" type="radio" value="1" formControlName="myRating">
+      </span>
+      <span>
+        <label for="r2">
+          <i
+            class="fa-star recipeForm_star"
+            [ngClass]="(hover >= 2) ? 'fas' : 'far'"
+            (mouseover)="onHover(2)"
+            (mouseleave)="onHover(0)"
+            *ngIf="stars === undefined || stars < 2"
+          ></i>
+          <i class="fas fa-star recipeForm_star" *ngIf="stars >= 2"></i>
+        </label>
+        <input class="recipeForm_radio" id="r2" type="radio" value="2" formControlName="myRating">
+      </span>
+      <span>
+        <label for="r3">
+          <i
+            class="fa-star recipeForm_star"
+            [ngClass]="(hover >= 3) ? 'fas' : 'far'"
+            (mouseover)="onHover(3)"
+            (mouseleave)="onHover(0)"
+            *ngIf="stars === undefined || stars < 3"
+          ></i>
+          <i class="fas fa-star recipeForm_star" *ngIf="stars >= 3"></i>
+        </label>
+        <input class="recipeForm_radio" id="r3" type="radio" value="3" formControlName="myRating">
+      </span>
+      <span>
+        <label for="r4">
+          <i
+            class="fa-star recipeForm_star"
+            [ngClass]="(hover >= 4) ? 'fas' : 'far'"
+            (mouseover)="onHover(4)"
+            (mouseleave)="onHover(0)"
+            *ngIf="stars === undefined || stars < 4"
+          ></i>
+          <i class="fas fa-star recipeForm_star" *ngIf="stars >= 4"></i>
+        </label>
+        <input class="recipeForm_radio" id="r4" type="radio" value="4" formControlName="myRating">
+      </span>
+      <span>
+        <label for="r5">
+          <i
+            class="fa-star recipeForm_star"
+            [ngClass]="(hover >= 5) ? 'fas' : 'far'"
+            (mouseover)="onHover(5)"
+            (mouseleave)="onHover(0)"
+            *ngIf="stars === undefined || stars < 5"
+          ></i>
+          <i class="fas fa-star recipeForm_star" *ngIf="stars >= 5"></i>
+        </label>
+        <input class="recipeForm_radio" id="r5" type="radio" value="5" formControlName="myRating">
+      </span>
+    </div>
+  </div>
   <div class="recipeForm_group">
-    <label class="recipeForm_label recipeForm_above">Ingredients</label>
+    <label class="recipeForm_label recipeForm_above">
+      Ingredients
+      <span class="recipeForm_required">*</span>
+    </label>
     <textarea
       class="recipeForm_textArea"
       type="text"
@@ -13,7 +92,10 @@
     </textarea>
   </div>
   <div class="recipeForm_group">
-    <label class="recipeForm_label recipeForm_above">Directions</label>
+    <label class="recipeForm_label recipeForm_above">
+      Directions
+      <span class="recipeForm_required">*</span>
+    </label>
     <textarea
       class="recipeForm_textArea"
       type="text"
@@ -26,7 +108,10 @@
     <input class="recipeForm_number" type="number" formControlName="prepTime">
   </div>
   <div class="recipeForm_row">
-    <label class="recipeForm_label">Cook Time (mins)</label>
+    <label class="recipeForm_label">
+      Cook Time (mins)
+      <span class="recipeForm_required">*</span>
+    </label>
     <input class="recipeForm_number" type="number" formControlName="cookTime">
   </div>
   <div class="recipeForm_row">
@@ -38,7 +123,10 @@
     <input class="recipeForm_number" type="number" formControlName="yield">
   </div>
   <div class="recipeForm_row">
-    <label class="recipeForm_label">Meals</label>
+    <label class="recipeForm_label">
+      Meals
+      <span class="recipeForm_required">*</span>
+    </label>
     <select class="recipeForm_control" formControlName="meals" multiple="true">
       <option value="breakfast">Breakfast</option>
       <option value="lunch">Lunch</option>
@@ -50,7 +138,10 @@
     </select>
   </div>
   <div class="recipeForm_row">
-    <label class="recipeForm_label">Calories</label>
+    <label class="recipeForm_label">
+      Calories
+      <span class="recipeForm_required">*</span>
+    </label>
     <input class="recipeForm_number" type="number" formControlName="calories">
     <a
       class="recipeForm_link"
@@ -73,16 +164,6 @@
     <input class="recipeForm_control" type="text" formControlName="tags" list="tags">
     <datalist id="tags">
     </datalist>
-  </div>
-  <div class="recipeForm_row">
-    <label class="recipeForm_label">My Rating</label>
-    <div class="recipeForm_stars">
-      <input class="recipeForm_star" type="radio" value="1" formControlName="myRating">
-      <input class="recipeForm_star" type="radio" value="2" formControlName="myRating">
-      <input class="recipeForm_star" type="radio" value="3" formControlName="myRating">
-      <input class="recipeForm_star" type="radio" value="4" formControlName="myRating">
-      <input class="recipeForm_star" type="radio" value="5" formControlName="myRating">
-    </div>
   </div>
   <button
     class="recipeForm_button"

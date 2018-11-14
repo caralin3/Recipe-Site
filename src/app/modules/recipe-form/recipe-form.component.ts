@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -16,7 +16,8 @@ export class RecipeFormComponent implements OnInit {
   recipeForm: FormGroup;
   currentUser: Observable<User>;
   currentUserId: string;
-  innerWidth: any;
+  stars: number;
+  hover: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -28,17 +29,12 @@ export class RecipeFormComponent implements OnInit {
   
   ngOnInit() {
     this.createForm();
-    this.innerWidth = window.innerWidth;
     this.currentUser.subscribe((user) => {
       if (user) {
         this.currentUserId = user.id;
       }
     });
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.onChanges();
   }
 
   createForm() {
@@ -66,6 +62,17 @@ export class RecipeFormComponent implements OnInit {
       document.removeEventListener('copy', null);
     });
     document.execCommand('copy');
+  }
+
+  onChanges = () => {
+    this.recipeForm.valueChanges.subscribe(val => {
+      this.stars = parseInt(val.myRating);
+      this.hover = 0;
+    });
+  }
+  
+  onHover = (num) => {
+    this.hover = num;
   }
 
   addRecipe = (recipe, status) => {

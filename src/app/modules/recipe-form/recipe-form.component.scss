@@ -28,6 +28,11 @@
     padding-bottom: 0.5rem;
   }
 
+  &_required {
+    color: red;
+    font-size: 1.2rem;
+  }
+
   &_link {
     color: black;
     font-size: 0.8rem;
@@ -87,5 +92,20 @@
 
   &_button {
     align-self: center;
+  }
+
+  &_radio {
+    display: none;
+  }
+
+  &_star {
+    color: #FCD44B;
+    font-size: 1.2rem;
+    padding-right: 0.5rem;
+
+    &:focus,
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
