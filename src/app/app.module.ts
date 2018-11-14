@@ -9,9 +9,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard, AuthService, FirebaseUserService } from './core';
-import { LoginComponent } from './modules';
-import { RegisterComponent } from './modules';
+import { AuthGuard, AuthService } from './core/auth'
+import { FirebaseUserService, RecipesService } from './core/firestore';
+import { LoginComponent, RecipeFormComponent, RecipesComponent, RegisterComponent } from './modules';
 import { UserResolver, UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { reducer as sessionReducer } from './store/session/session.reducer';
@@ -21,7 +21,9 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    RecipesComponent,
+    RecipeFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
       sessionState: sessionReducer,
     })
   ],
-  providers: [AuthGuard, AuthService, UserResolver, UserService, FirebaseUserService],
+  providers: [AuthGuard, AuthService, RecipesService, UserResolver, UserService, FirebaseUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

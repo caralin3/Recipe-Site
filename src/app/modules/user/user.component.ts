@@ -5,10 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { FirebaseUserModel, UserService } from './';
-import { AuthService } from '../../core';
+import { AuthService } from '../../core/auth';
 import { AppState } from '../../../app/store';
 import { User } from '../../../app/core/models';
-import { SessionState } from '../../../app/store/session/session.reducer';
 
 @Component({
   selector: 'page-user',
@@ -28,7 +27,7 @@ export class UserComponent implements OnInit {
     private store: Store<AppState>,
     private fb: FormBuilder
   ) {
-    this.currentUser = store.select(appState => appState.sessionState.currentUser);
+    this.currentUser = this.store.select(appState => appState.sessionState.currentUser);
   }
 
   ngOnInit(): void {
