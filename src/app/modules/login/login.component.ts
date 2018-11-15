@@ -1,24 +1,21 @@
-import { Component } from '@angular/core';
-import { Router, Params } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { AuthService } from '../../core/auth'
-import { AppState } from '../../../app/store';
 
 @Component({
-  selector: 'page-login',
+  selector: 'app-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.scss']
 })
 export class LoginComponent {
-
+  @Input() register: () => void;
   loginForm: FormGroup;
   errorMessage: string = '';
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    private store: Store<AppState>,
     private fb: FormBuilder
   ) {
     this.createForm();
@@ -34,7 +31,7 @@ export class LoginComponent {
   tryLogin(value){
     this.authService.doLogin(value)
     .then(res => {
-      this.router.navigate(['/user']);
+      this.router.navigate(['/recipes']);
     }, err => {
       console.log(err);
       this.errorMessage = err.message;

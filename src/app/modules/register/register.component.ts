@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router, Params } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/auth'
 
@@ -9,10 +9,9 @@ import { AuthService } from '../../core/auth'
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-
+  @Input() login: () => void;
   registerForm: FormGroup;
   errorMessage: string = '';
-  successMessage: string = '';
 
   constructor(
     public authService: AuthService,
@@ -25,21 +24,21 @@ export class RegisterComponent {
    createForm() {
      this.registerForm = this.fb.group({
        email: ['', Validators.required ],
-       password: ['',Validators.required]
+       firstName: ['', Validators.required ],
+       lastName: ['', Validators.required ],
+       password: ['', Validators.required ],
+       passwordConfirm: ['', Validators.required ],
      });
    }
 
    tryRegister(value){
-     this.authService.doSignUp(value)
-     .then(res => {
-       this.errorMessage = "";
-       this.successMessage = "Your account has been created";
-       this.router.navigate(['/']);
-     }, err => {
-       console.log(err);
-       this.errorMessage = err.message;
-       this.successMessage = "";
-     })
-   }
-
+    this.authService.doSignUp(value)
+      .then(res => {
+        this.errorMessage = "";
+        this.router.navigate(['/recipes']);
+      }, err => {
+        console.log(err);
+        this.errorMessage = err.message;
+      });
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from "@angular/router";
-import { FirebaseUserModel } from '../model';
-import { UserService } from '../service';
+import { FirebaseUserModel } from '../modules/user/model';
+import { UserService } from '../modules/user/service';
 
 @Injectable()
 export class UserResolver implements Resolve<FirebaseUserModel> {
@@ -30,7 +30,7 @@ export class UserResolver implements Resolve<FirebaseUserModel> {
           return resolve(user);
         }
       }, err => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/home']);
         return reject(err);
       })
     })

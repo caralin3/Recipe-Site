@@ -8,7 +8,7 @@ import { FirebaseRecipeModel } from '../../../app/core/firestore/recipes.model';
 import { AppState } from '../../../app/store';
 
 @Component({
-  selector: 'recipe-form',
+  selector: 'app-recipe-form',
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.scss']
 })

@@ -1,0 +1,40 @@
+
+.home {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  
+  &_section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10rem;
+  }
+
+  &_content {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_heading {
+    align-self: flex-start;
+    color: black;
+    text-decoration: none;
+  }
+
+  &_top {
+    color: #ccc;
+    font-size: 3rem;
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    text-decoration: none;
+  }
+
+  &_text {
+    text-align: left;
+    text-overflow: wrap;
+    width: 40%;
+  }
+}

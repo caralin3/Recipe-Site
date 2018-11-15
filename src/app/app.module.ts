@@ -11,8 +11,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
 import { FirebaseUserService, RecipesService } from './core/firestore';
-import { LoginComponent, RecipeFormComponent, RecipesComponent, RegisterComponent } from './modules';
-import { UserResolver, UserService } from './modules/user';
+import { UserResolver } from './core/user.resolver';
+import { 
+  HomeComponent,
+  LoginComponent,
+  RecipeFormComponent,
+  RecipesComponent,
+  RegisterComponent
+} from './modules';
+import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { reducer as sessionReducer } from './store/session/session.reducer';
 
@@ -24,6 +31,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     UserComponent,
     RecipesComponent,
     RecipeFormComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

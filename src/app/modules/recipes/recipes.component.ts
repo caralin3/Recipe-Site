@@ -4,7 +4,7 @@ import { RecipesService } from '../../../app/core/firestore';
 import { Recipe } from '../../../app/core/models';
 
 @Component({
-  selector: 'recipes',
+  selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss']
 })

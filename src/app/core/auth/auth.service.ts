@@ -19,8 +19,8 @@ export class AuthService {
       .then(user => {
         resolve(user);
         this.firebaseService.createUser({
-          firstName: 'Test',
-          lastName: 'Test',
+          firstName: value.firstName,
+          lastName: value.lastName,
           email: value.email,
           id: user.user.uid,
         })
