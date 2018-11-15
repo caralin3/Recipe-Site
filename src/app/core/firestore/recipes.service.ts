@@ -15,58 +15,58 @@ export class RecipesService {
     this.recipesCollection = db.collection<FirebaseRecipeModel>('recipes');
   }
 
-    // Get All Recipes
-    getRecipes = () => {
-      const user = firebase.auth().currentUser;
-      return this.db.collection<FirebaseRecipeModel>('recipes',
-        ref => ref.where('userId', '==', user.uid)).snapshotChanges()
-        .pipe(map(actions => actions.map(a => {
-          //Get document data
-          const data = a.payload.doc.data() as FirebaseRecipeModel;
-          //Get document id
-          const id = a.payload.doc.id;
-          //Use spread operator to add the id to the document data
-          return { id, ...data } as Recipe;
-        })
-      ));
-    }
+  // Get All Recipes
+  getRecipes = () => {
+    const user = firebase.auth().currentUser;
+    return this.db.collection<FirebaseRecipeModel>('recipes',
+      ref => ref.where('userId', '==', user.uid)).snapshotChanges()
+      .pipe(map(actions => actions.map(a => {
+        //Get document data
+        const data = a.payload.doc.data() as FirebaseRecipeModel;
+        //Get document id
+        const id = a.payload.doc.id;
+        //Use spread operator to add the id to the document data
+        return { id, ...data } as Recipe;
+      })
+    ));
+  }
 
-    // Create Recipe
-    createRecipe = (recipe: FirebaseRecipeModel) => {
-      return this.recipesCollection.add(recipe);
-    }
+  // Create Recipe
+  createRecipe = (recipe: FirebaseRecipeModel) => {
+    return this.recipesCollection.add(recipe);
+  }
 
-    // TODO: Get Recipe
-    getRecipe = (recipeId: string) => {
-      const user = firebase.auth().currentUser;
-      return this.db.collection<FirebaseRecipeModel>('recipes',
-        ref => ref.where('userId', '==', user.uid))
-        .doc(recipeId).snapshotChanges();
-    }
+  // TODO: Get Recipe
+  getRecipe = (recipeId: string) => {
+    const user = firebase.auth().currentUser;
+    return this.db.collection<FirebaseRecipeModel>('recipes',
+      ref => ref.where('userId', '==', user.uid))
+      .doc(recipeId).snapshotChanges();
+  }
 
-    // TODO: Update Recipe
-    updateRecipe = (recipeId: string, recipe: FirebaseRecipeModel) => {
-      const user = firebase.auth().currentUser;
-      return this.db.collection<FirebaseRecipeModel>('recipes',
-        ref => ref.where('userId', '==', user.uid))
-        .doc(recipeId).set(recipe);
-    }
+  // TODO: Update Recipe
+  updateRecipe = (recipeId: string, recipe: FirebaseRecipeModel) => {
+    const user = firebase.auth().currentUser;
+    return this.db.collection<FirebaseRecipeModel>('recipes',
+      ref => ref.where('userId', '==', user.uid))
+      .doc(recipeId).set(recipe);
+  }
 
-    // TODO: Delete Recipe
-    deleteRecipe = (recipeId: string) => {
-      const user = firebase.auth().currentUser;
-      return this.db.collection<FirebaseRecipeModel>('recipes',
-        ref => ref.where('userId', '==', user.uid))
-        .doc(recipeId).delete();
-    }
+  // TODO: Delete Recipe
+  deleteRecipe = (recipeId: string) => {
+    const user = firebase.auth().currentUser;
+    return this.db.collection<FirebaseRecipeModel>('recipes',
+      ref => ref.where('userId', '==', user.uid))
+      .doc(recipeId).delete();
+  }
 
-    // searchRecipes(searchValue){
-    //   return this.db.collection('recipes',ref => ref.where('nameToSearch', '>=', searchValue)
-    //     .where('nameToSearch', '<=', searchValue + '\uf8ff'))
-    //     .snapshotChanges()
-    // }
+  // searchRecipes(searchValue){
+  //   return this.db.collection('recipes',ref => ref.where('nameToSearch', '>=', searchValue)
+  //     .where('nameToSearch', '<=', searchValue + '\uf8ff'))
+  //     .snapshotChanges()
+  // }
 
-    // searchRecipesByAge(value){
-    //   return this.db.collection('recipes',ref => ref.orderBy('age').startAt(value)).snapshotChanges();
-    // }
+  // searchRecipesByAge(value){
+  //   return this.db.collection('recipes',ref => ref.orderBy('age').startAt(value)).snapshotChanges();
+  // }
 }

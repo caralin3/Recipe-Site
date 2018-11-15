@@ -8,12 +8,12 @@ export interface FirebaseRecipeModel {
   ingredients: string[],
   meals: mealType[],
   myRating: number,
-  notes: string,
+  notes?: string,
   prepTime?: number,
   // rating: Rating,
-  tags: string[],
+  tags?: string[],
   title: string,
-  totalTime: number,
+  totalTime?: number,
   userId: string,
-  yield?: number
+  yield: number
 }

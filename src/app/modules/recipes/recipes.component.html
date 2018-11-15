@@ -3,6 +3,7 @@
   <ul>
     <li *ngFor="let recipe of recipes | async">
       <h3>{{ recipe.title }}</h3>
+      <h3>{{ recipe.calories }}</h3>
     </li>
   </ul>
 </div>
