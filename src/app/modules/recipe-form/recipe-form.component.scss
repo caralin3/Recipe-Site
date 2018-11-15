@@ -1,0 +1,111 @@
+
+
+.recipeForm {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+
+  &_group {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+
+  &_row {
+    align-items: center;
+    display: flex;
+    padding: 1rem 0;
+  }
+
+  &_label {
+    padding-right: 1rem;
+  }
+
+  &_above {
+    padding-bottom: 0.5rem;
+  }
+
+  &_required {
+    color: red;
+    font-size: 1.2rem;
+  }
+
+  &_link {
+    color: black;
+    font-size: 0.8rem;
+    padding-left: 1rem;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      color: black;
+      cursor: pointer;
+      text-decoration: underline;
+
+      .recipeForm_tooltip {
+        opacity: 1;
+      }
+    }
+  }
+
+  &_tooltip {
+    background-color: #ccc;
+    font-size: 0.8rem;
+    margin-left: 10.5rem;
+    margin-top: 3rem;
+    opacity: 0;
+    padding: 0.3rem;
+    position: absolute;
+    width: 7rem;
+    text-overflow: wrap;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &_control {
+    width: 10rem;
+  }
+
+  &_textArea {
+    height: 10rem;
+    width: 20rem;
+
+    @media only screen and (max-width: 640px) {
+      width: 15rem;
+    }
+  }
+
+  &_number {
+    text-align: right;
+    width: 3rem;
+  }
+
+  &_stars {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &_button {
+    align-self: center;
+  }
+
+  &_radio {
+    display: none;
+  }
+
+  &_star {
+    color: #FCD44B;
+    font-size: 1.2rem;
+    padding-right: 0.5rem;
+
+    &:focus,
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

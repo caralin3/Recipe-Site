@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core'
+import { Store } from '@ngrx/store';
+import { AuthService } from '../../core/auth'
+import { AppState } from '../../../app/store';
 
 @Component({
   selector: 'page-login',
@@ -16,6 +18,7 @@ export class LoginComponent {
   constructor(
     public authService: AuthService,
     private router: Router,
+    private store: Store<AppState>,
     private fb: FormBuilder
   ) {
     this.createForm();
