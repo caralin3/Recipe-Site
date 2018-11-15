@@ -65,8 +65,8 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onChanges = () => {
-    this.recipeForm.valueChanges.subscribe(val => {
-      this.stars = parseInt(val.myRating);
+    this.recipeForm.get('myRating').valueChanges.subscribe(val => {
+      this.stars = parseInt(val);
       this.hover = 0;
     });
   }

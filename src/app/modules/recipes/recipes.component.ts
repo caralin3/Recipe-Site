@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../../../app/store';
+import { RecipesService } from '../../../app/core/firestore';
+import { Recipe } from '../../../app/core/models';
 
 @Component({
   selector: 'recipes',
@@ -6,10 +12,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipes.component.scss']
 })
 export class RecipesComponent implements OnInit {
+  recipes: Observable<Recipe[]>;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    public recipesService: RecipesService
+  ) {
   }
 
+  ngOnInit() {
+    this.recipes = this.recipesService.getRecipes();
+  }
 }

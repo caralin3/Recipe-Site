@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
+import { Recipe } from '../models';
 import { FirebaseRecipeModel } from './recipes.model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,18 @@ export class RecipesService {
 
     // Get All Recipes
     getRecipes = () => {
-      return this.recipesCollection.snapshotChanges();
+      const user = firebase.auth().currentUser;
+      return this.db.collection<FirebaseRecipeModel>('recipes',
+        ref => ref.where('userId', '==', user.uid)).snapshotChanges()
+        .pipe(map(actions => actions.map(a => {
+          //Get document data
+          const data = a.payload.doc.data() as FirebaseRecipeModel;
+          //Get document id
+          const id = a.payload.doc.id;
+          //Use spread operator to add the id to the document data
+          return { id, ...data } as Recipe;
+        })
+      ));
     }
 
     // Create Recipe
@@ -25,17 +38,26 @@ export class RecipesService {
 
     // TODO: Get Recipe
     getRecipe = (recipeId: string) => {
-      return this.recipesCollection.doc(recipeId).snapshotChanges();
+      const user = firebase.auth().currentUser;
+      return this.db.collection<FirebaseRecipeModel>('recipes',
+        ref => ref.where('userId', '==', user.uid))
+        .doc(recipeId).snapshotChanges();
     }
 
     // TODO: Update Recipe
     updateRecipe = (recipeId: string, recipe: FirebaseRecipeModel) => {
-      return this.recipesCollection.doc(recipeId).set(recipe);
+      const user = firebase.auth().currentUser;
+      return this.db.collection<FirebaseRecipeModel>('recipes',
+        ref => ref.where('userId', '==', user.uid))
+        .doc(recipeId).set(recipe);
     }
 
     // TODO: Delete Recipe
     deleteRecipe = (recipeId: string) => {
-      return this.recipesCollection.doc(recipeId).delete();
+      const user = firebase.auth().currentUser;
+      return this.db.collection<FirebaseRecipeModel>('recipes',
+        ref => ref.where('userId', '==', user.uid))
+        .doc(recipeId).delete();
     }
 
     // searchRecipes(searchValue){
