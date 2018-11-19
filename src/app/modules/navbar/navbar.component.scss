@@ -9,6 +9,10 @@
   display: flex;
   justify-content: space-between;
 
+  @media only screen and (max-width: 1265px) {
+    flex-direction: column;
+  }
+
   &_title {
     color: $color-primary;
     font-family: $font-logo;
