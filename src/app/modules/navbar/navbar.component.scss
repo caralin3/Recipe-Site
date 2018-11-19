@@ -1,0 +1,47 @@
+@import '../../../styles';
+
+.active {
+  color: $color-primary;
+}
+
+.navbar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  &_title {
+    color: $color-primary;
+    font-family: $font-logo;
+    font-size: 2rem;
+    padding: 1rem;
+  }
+
+  &_nav {
+    align-items: center;
+    display: flex;
+    font-family: $font-primary;
+    justify-content: space-around;
+    padding: 0 1rem;
+
+    &-item {
+      color: $black;
+      font-size: 1.3rem;
+      padding: 0 1rem;
+
+      &:focus,
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    &-active {
+      color: $color-primary;
+    }
+
+    &-input {
+      font-family: $font-primary;
+      font-size: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}

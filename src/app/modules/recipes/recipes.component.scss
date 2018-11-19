@@ -1,5 +1,8 @@
+@import '../../../styles';
+
 .recipes {
-  align-items: flex-start;
+  background-color: $color-lt-bg;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
 }

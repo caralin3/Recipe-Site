@@ -1,0 +1,15 @@
+<div class="navbar">
+  <a class="navbar_title" [routerLink]="['./']">
+    RecipeMine
+    <i class="fas fa-utensils home_icon"></i>
+  </a>
+  <div class="navbar_nav">
+    <a class="navbar_nav-item" *ngIf="authUser" [routerLink]="['/recipes']" [routerLinkActive]="'navbar_nav-active'">My Recipes</a>
+    <input class="navbar_nav-input" *ngIf="authUser" type="search" placeholder="Search New Recipes" />
+    <a class="navbar_nav-item" *ngIf="authUser" [routerLink]="['/grocery']" [routerLinkActive]="'navbar_nav-active'">Grocery Lists</a>
+    <a class="navbar_nav-item" *ngIf="authUser" [routerLink]="['/planner']" [routerLinkActive]="'navbar_nav-active'">Meal Planner</a>
+    <a class="navbar_nav-item" *ngIf="!authUser" [routerLink]="['./']" fragment="two" [routerLinkActive]="'navbar_nav-active'">About</a>
+    <a class="navbar_nav-item" *ngIf="!authUser" [routerLink]="['/contact']" [routerLinkActive]="'navbar_nav-active'">Contact</a>
+    <button class="navbar_button" type="button" (click)="logout()" *ngIf="authUser">Logout</button>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { AngularFireModule } from 'angularfire2';
@@ -15,6 +16,7 @@ import { UserResolver } from './core/user.resolver';
 import { 
   HomeComponent,
   LoginComponent,
+  NavbarComponent,
   RecipeFormComponent,
   RecipesComponent,
   RegisterComponent
@@ -26,12 +28,13 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     LoginComponent,
+    NavbarComponent,
+    RecipeFormComponent,
+    RecipesComponent,
     RegisterComponent,
     UserComponent,
-    RecipesComponent,
-    RecipeFormComponent,
-    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     AngularFirestoreModule.enablePersistence(), // Offline data
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     StoreModule.forRoot({
       sessionState: sessionReducer,
     })

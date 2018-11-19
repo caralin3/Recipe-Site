@@ -1,5 +1,6 @@
 <div class="recipes">
-  <app-recipe-form></app-recipe-form>
+  <button type="button" [routerLink]="'./add'">Add Recipe</button>
+  <button type="button" [routerLink]="'./import'">Import Recipe</button>
   <ul>
     <li *ngFor="let recipe of recipes | async">
       <h3>{{ recipe.title }}</h3>

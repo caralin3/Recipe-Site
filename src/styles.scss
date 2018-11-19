@@ -2,8 +2,88 @@
 @import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
 
 // Google fonts
+@import url('https://fonts.googleapis.com/css?family=Courgette|Pacifico');
 
 // fonts
+$font-logo: Pacifico, cursive;
+$font-primary: Courgette, cursive;
 
 // colors
+$color-primary: #E27241;
+$color-lt-bg: #F9DDD1;
+$black: #000;
+$off-white: #F4F4F4;
+$very-light-gray: #ccc;
 $white: #FFF;
+
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: arial, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  background-color: #CA4320;
+  color: $white;
+  font-size: 1rem;
+  padding: 0.5rem;
+
+  &:focus,
+  &:hover {
+    background-color: darken(#CA4320, 10%);
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+input,
+datalist,
+select {
+  background-color: #FFFFFF;
+}
+
+.cta {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: $color-primary;
+  font-family: $font-primary;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding-right: 0.5rem;
+
+  &:focus,
+  &:hover {
+    color: darken(#E27241, 20%);
+    cursor: pointer;
+  }
+
+  &-icon {
+    padding: 0 0.5rem;
+  }
+}

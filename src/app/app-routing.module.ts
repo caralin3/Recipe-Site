@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/auth';
 import { UserResolver } from './core/user.resolver';
-import { HomeComponent, RecipesComponent } from './modules';
+import { HomeComponent, RecipesComponent, RecipeFormComponent } from './modules';
 import { UserComponent } from './modules/user/user.component';
 
 const routes: Routes = [
@@ -10,6 +10,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent,  resolve: { data: UserResolver}},
   { path: 'recipes', component: RecipesComponent, resolve: { data: UserResolver}},
+  { path: 'recipes/add', component: RecipeFormComponent, resolve: { data: UserResolver}},
+  { path: 'grocery', component: RecipesComponent, resolve: { data: UserResolver}},
+  { path: 'planner', component: RecipesComponent, resolve: { data: UserResolver}},
+  { path: 'search', component: RecipesComponent, resolve: { data: UserResolver}},
+  { path: 'contact', component: RecipesComponent, resolve: { data: UserResolver}},
   // { path: '**', component: PageNotFoundComponent }
 ];
 

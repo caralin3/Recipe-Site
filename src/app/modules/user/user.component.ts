@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
     public userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
-    private location : Location,
+    private location: Location,
     private store: Store<AppState>,
     private fb: FormBuilder
   ) {
@@ -38,7 +38,6 @@ export class UserComponent implements OnInit {
         this.createForm(this.user.name);
       }
     })
-    this.currentUser.subscribe((user: User) => console.log(user));
   }
 
   createForm(name) {

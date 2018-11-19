@@ -1,43 +1,40 @@
-<h1 class="header">Create an account</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <form [formGroup]="registerForm">
-        <label class="error">{{errorMessage}}</label>
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text" formControlName="firstName" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" formControlName="lastName" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input type="email" formControlName="email" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" formControlName="password">
-        </div>
-        <div class="form-group">
-          <label>Confirm Password</label>
-          <input type="password" formControlName="passwordConfirm" class="form-control">
-        </div>
-        <button
-          class="btn btn-default"
-          type="submit"
-          [disabled]="!registerForm.valid || registerForm.value.password !== registerForm.value.passwordConfirm"
-          (click)="tryRegister(registerForm.value)"
-        >
-          Register
-        </button>
-      </form>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <p>Already have an account? <a (click)="login()">Login</a></p>
-    </div>
+<div class="register">
+  <h1 class="register_header">Create an account</h1>
+  <div class="register_form">
+    <form class="register_form" [formGroup]="registerForm">
+      <label class="error">{{errorMessage}}</label>
+      <div class="register_form-group">
+        <label class="register_form-label">First Name</label>
+        <input class="register_form-input" type="text" formControlName="firstName" class="form-control">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Last Name</label>
+        <input class="register_form-input" type="text" formControlName="lastName" class="form-control">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Email address</label>
+        <input class="register_form-input" type="email" formControlName="email" class="form-control">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Password</label>
+        <input class="register_form-input" type="password" class="form-control" formControlName="password">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Confirm Password</label>
+        <input class="register_form-input" type="password" formControlName="passwordConfirm" class="form-control">
+      </div>
+      <button
+        class="register_button"
+        type="submit"
+        [disabled]="!registerForm.valid || registerForm.value.password !== registerForm.value.passwordConfirm"
+        (click)="tryRegister(registerForm.value)"
+      >
+        Register
+      </button>
+    </form>
+    <p class="register_footer">
+      Already have an account? 
+      <a class="register_login" (click)="login()">Login</a>
+    </p>
   </div>
 </div>
