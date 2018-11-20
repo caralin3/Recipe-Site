@@ -1,10 +1,38 @@
 <div class="recipes">
-  <button type="button" [routerLink]="'./add'">Add Recipe</button>
-  <button type="button" [routerLink]="'./import'">Import Recipe</button>
-  <ul>
-    <li *ngFor="let recipe of recipes | async">
+  <app-image-carousel></app-image-carousel>
+  <input class="recipes_search" type="search" placeholder="Search New Recipes" />
+  <div class="recipes_header">
+    <h2 class="recipes_header-text">{{ greeting }}</h2>
+    <div class="recipes_buttons">
+      <button class="recipes_button" type="button" [routerLink]="'./add'">Add Recipe</button>
+      <button class="recipes_button" type="button" [routerLink]="'./import'">Import Recipe</button>
+    </div>
+  </div>
+  <ul class="recipes_list" *ngIf="mealRecipes">
+    <li class="recipes_list-item" *ngFor="let recipe of mealRecipes.slice(0, 4)" [routerLink]="['/recipes', recipe.id]">
+      <img class="recipes_list-image" src="/assets/images/background1.jpg">
+      <div class="recipes_list-container">
+        <div class="recipes_list-text">
+          <div class="recipes_row">
+            <h3 class="recipes_list-text-title">{{ recipe.title }}</h3>
+            <div class="recipes_list-text-stars">
+              <i class="fas fa-star recipeForm_star" *ngIf="recipe.myRating >= 1"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="recipe.myRating >= 2"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="recipe.myRating >= 3"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="recipe.myRating >= 4"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="recipe.myRating >= 5"></i>
+            </div>
+          </div>
+          <div class="recipes_row">
+            <h3 class="recipes_list-text-num">Time: {{ recipe.totalTime || 0 }} mins</h3>
+            <h3 class="recipes_list-text-num">{{ recipe.calories }} calories</h3>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- <li *ngFor="let recipe of recipes | async">
       <h3>{{ recipe.title }}</h3>
       <h3>{{ recipe.calories }}</h3>
-    </li>
+    </li> -->
   </ul>
 </div>

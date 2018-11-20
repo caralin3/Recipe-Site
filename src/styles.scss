@@ -12,8 +12,10 @@ $font-primary: Courgette, cursive;
 $color-primary: #E27241;
 $color-lt-bg: #F9DDD1;
 $color-button: #CA4320;
+$color-star: #FCD44B;
 $black: #000;
 $off-white: #F4F4F4;
+$red: #FF0000;
 $very-light-gray: #ccc;
 $white: #FFF;
 
@@ -51,6 +53,7 @@ button {
   border: none;
   background-color: #CA4320;
   color: $white;
+  font-family: $font-primary;
   font-size: 1rem;
   padding: 0.5rem;
 

@@ -21,14 +21,27 @@ export class RecipesService {
     return this.db.collection<FirebaseRecipeModel>('recipes',
       ref => ref.where('userId', '==', user.uid)).snapshotChanges()
       .pipe(map(actions => actions.map(a => {
-        //Get document data
+        // Get document data
         const data = a.payload.doc.data() as FirebaseRecipeModel;
-        //Get document id
+        // Get document id
         const id = a.payload.doc.id;
-        //Use spread operator to add the id to the document data
+        // Use spread operator to add the id to the document data
         return { id, ...data } as Recipe;
       })
     ));
+  }
+
+  // Get Recipes by Meal
+  getRecipesByMeal = (meal: string) => {
+    const recipes: Recipe[] = [];
+    this.getRecipes().subscribe((rec: Recipe[]) => {
+      rec.forEach((r) => {
+        if (r.meals[meal]) {
+          recipes.push(r);
+        }
+      })
+    });
+    return recipes;
   }
 
   // Create Recipe

@@ -11,6 +11,8 @@ const routes: Routes = [
   { path: 'user', component: UserComponent,  resolve: { data: UserResolver}},
   { path: 'recipes', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'recipes/add', component: RecipeFormComponent, resolve: { data: UserResolver}},
+  { path: 'recipes/import', component: RecipeFormComponent, resolve: { data: UserResolver}},
+  { path: 'recipes/:id', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'grocery', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'planner', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'search', component: RecipesComponent, resolve: { data: UserResolver}},

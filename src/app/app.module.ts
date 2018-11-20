@@ -24,6 +24,7 @@ import {
 import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { reducer as sessionReducer } from './store/session/session.reducer';
+import { ImageCarouselComponent } from './modules/image-carousel/image-carousel.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     RecipesComponent,
     RegisterComponent,
     UserComponent,
+    ImageCarouselComponent,
   ],
   imports: [
     BrowserModule,

@@ -77,18 +77,39 @@ export class RecipeFormComponent implements OnInit {
 
   addRecipe = (recipe, status) => {
     if (status === 'VALID') {
-      const ingredients = recipe.ingredients.split('\n').map((i: string) => i.trim());
-      const directions = recipe.directions.split('\n').map((d: string) => d.trim());
+      const ingredients = recipe.ingredients.split('\n').map((i: string) => i !== '' && i.trim());
+      const directions = recipe.directions.split('\n').map((d: string) => d !== '' && d.trim());
       const tags = recipe.tags.split(',').map((tag: string) => tag.trim());
+      let meals = {
+        'breakfast': false,
+        'lunch': false,
+        'dinner': false,
+        'snack': false,
+        'side': false,
+        'appetizer': false,
+        'dessert': false,
+      };
+      recipe.meals.forEach((meal) => {
+        meals = {
+          ...meals,
+          [meal]: true,
+        }
+      })
+      let totalTime = recipe.totalTime;
+      if (!totalTime || totalTime === 0) {
+        totalTime += recipe.cookTime + recipe.prepTime;
+      }
       const newRecipe: FirebaseRecipeModel = {
         ...recipe,
         directions,
         ingredients,
+        meals,
         tags,
+        totalTime,
         userId: this.currentUserId,
       }
-      console.log(newRecipe);
       this.recipesService.createRecipe(newRecipe);
+      this.recipeForm.reset();
     }
   }
 
