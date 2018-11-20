@@ -10,7 +10,7 @@ const initialState: SessionState = {
   currentUser: null,
 }
 
-export const reducer = (state: SessionState = initialState, action: SessionActions.Actions) => {
+export function reducer (state: SessionState = initialState, action: SessionActions.Actions) {
   switch(action.type) {
     case SessionActions.SET_USER:
       return {
