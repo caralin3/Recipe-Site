@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { User } from '../../../app/core/models';
@@ -14,6 +14,9 @@ import * as SessionActions from '../../store/session/session.actions';
 })
 export class NavbarComponent implements OnInit {
   authUser: User;
+  innerWidth: number;
+  mobile: boolean = false;
+  showMenu: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -21,12 +24,28 @@ export class NavbarComponent implements OnInit {
     private store: Store<AppState>
   ) {}
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 1000) {
+      this.mobile = true;
+    }
+  }
+
   ngOnInit() {
     this.store.select(appState => appState.sessionState.currentUser)
       .subscribe((user: User) => this.authUser = user);
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 1000) {
+      this.mobile = true;
+    }
   }
 
-  logout(){
+  toggleMenu = () => {
+    this.showMenu = !this.showMenu;
+  }
+
+  logout = () => {
     this.authService.doLogout()
     .then((res) => {
       this.store.dispatch(new SessionActions.SetUser(null));
