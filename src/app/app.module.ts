@@ -25,6 +25,8 @@ import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { reducer as sessionReducer } from './store/session/session.reducer';
 import { ImageCarouselComponent } from './modules/image-carousel/image-carousel.component';
+import { RecipesItemComponent } from './modules/recipes-item/recipes-item.component';
+import { RecipeDetailComponent } from './modules/recipe-detail/recipe-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ImageCarouselComponent } from './modules/image-carousel/image-carousel.
     RegisterComponent,
     UserComponent,
     ImageCarouselComponent,
+    RecipesItemComponent,
+    RecipeDetailComponent,
   ],
   imports: [
     BrowserModule,

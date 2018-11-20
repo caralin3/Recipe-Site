@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/auth';
 import { UserResolver } from './core/user.resolver';
-import { HomeComponent, RecipesComponent, RecipeFormComponent } from './modules';
+import { HomeComponent, RecipesComponent, RecipeDetailComponent, RecipeFormComponent } from './modules';
 import { UserComponent } from './modules/user/user.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'recipes', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'recipes/add', component: RecipeFormComponent, resolve: { data: UserResolver}},
   { path: 'recipes/import', component: RecipeFormComponent, resolve: { data: UserResolver}},
-  { path: 'recipes/:id', component: RecipesComponent, resolve: { data: UserResolver}},
+  { path: 'recipes/:id', component: RecipeDetailComponent, resolve: { data: UserResolver}},
   { path: 'grocery', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'planner', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'search', component: RecipesComponent, resolve: { data: UserResolver}},
