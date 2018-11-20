@@ -25,20 +25,19 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     this.innerWidth = window.innerWidth;
     if (this.innerWidth < 1000) {
       this.mobile = true;
+    } else {
+      this.mobile = false;
     }
   }
 
   ngOnInit() {
     this.store.select(appState => appState.sessionState.currentUser)
       .subscribe((user: User) => this.authUser = user);
-    this.innerWidth = window.innerWidth;
-    if (this.innerWidth < 1000) {
-      this.mobile = true;
-    }
+    this.onResize();
   }
 
   toggleMenu = () => {
