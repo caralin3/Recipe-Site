@@ -13,34 +13,40 @@ import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
 import { FirebaseUserService, RecipesService } from './core/firestore';
 import { UserResolver } from './core/user.resolver';
-import { 
+import {
+  ContactComponent,
+  GroceryComponent,
   HomeComponent,
+  ImageCarouselComponent,
   LoginComponent,
   NavbarComponent,
+  PlannerComponent,
+  RecipeDetailComponent,
   RecipeFormComponent,
   RecipesComponent,
+  RecipesItemComponent,
   RegisterComponent
 } from './modules';
 import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { reducer as sessionReducer } from './store/session/session.reducer';
-import { ImageCarouselComponent } from './modules/image-carousel/image-carousel.component';
-import { RecipesItemComponent } from './modules/recipes-item/recipes-item.component';
-import { RecipeDetailComponent } from './modules/recipe-detail/recipe-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ContactComponent,
+    GroceryComponent,
     HomeComponent,
+    ImageCarouselComponent,
     LoginComponent,
     NavbarComponent,
+    PlannerComponent,
+    RecipeDetailComponent,
     RecipeFormComponent,
     RecipesComponent,
+    RecipesItemComponent,
     RegisterComponent,
     UserComponent,
-    ImageCarouselComponent,
-    RecipesItemComponent,
-    RecipeDetailComponent,
   ],
   imports: [
     BrowserModule,
