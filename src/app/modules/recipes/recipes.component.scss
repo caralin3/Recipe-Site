@@ -113,6 +113,9 @@
     position: fixed;
     bottom: 1rem;
     right: 2rem;
-    text-decoration: none;
+
+    @media only screen and (max-width: 640px) {
+      right: 0.2rem;
+    }
   }
 }
