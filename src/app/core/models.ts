@@ -21,7 +21,7 @@ export interface Recipe {
   id: string,
   images: string[],
   ingredients: string[],
-  meals: mealType[],
+  meals: object,
   myRating: number,
   notes: string,
   prepTime?: number,

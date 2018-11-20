@@ -1,0 +1,16 @@
+<div class="carousel">
+  <img class="carousel_image" [src]="image.src" />
+  <input class="carousel_search" type="search" placeholder="Search Recipes" />
+  <div class="carousel_caption">
+    <a class="carousel_caption-text">Caption Text Title</a>
+  </div>
+  <div class="carousel_buttons">
+    <div class="carousel_buttons-dots" *ngFor="let image of images; let i = index">
+      <i
+        class="carousel_buttons-dot"
+        (click)="selectImage(i)"
+        [ngClass]="i === currentIndex ? 'fas fa-circle' : 'far fa-circle'"
+      ></i>
+    </div>
+  </div>
+</div>

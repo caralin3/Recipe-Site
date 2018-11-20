@@ -1,0 +1,50 @@
+@import '../../../styles';
+
+.recipesItem {
+  display: flex;
+  flex-direction: column;
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  &_row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    &:last-child {
+      padding-bottom: 1rem;
+    }
+  }
+
+  &_container {
+    background-color: $color-primary;
+    width: 100%;
+  }
+  
+  &_text {
+    color: $white;
+    font-family: $font-primary;
+    padding: 0 1rem;
+    margin: 0;
+    line-height: 0;
+
+    &-title {
+      font-size: 1.2rem;
+    }
+
+    &-num {
+      font-size: 1rem;
+    }
+  }
+
+  &_image {
+    height: auto;
+    max-width: 250px;
+    object-fit: contain;
+    width: auto;
+  }
+}

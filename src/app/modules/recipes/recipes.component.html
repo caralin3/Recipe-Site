@@ -1,10 +1,30 @@
 <div class="recipes">
-  <button type="button" [routerLink]="'./add'">Add Recipe</button>
-  <button type="button" [routerLink]="'./import'">Import Recipe</button>
-  <ul>
-    <li *ngFor="let recipe of recipes | async">
-      <h3>{{ recipe.title }}</h3>
-      <h3>{{ recipe.calories }}</h3>
+  <app-image-carousel></app-image-carousel>
+  <input class="recipes_search" type="search" placeholder="Search New Recipes" />
+  <div class="recipes_header">
+    <h2 class="recipes_header-text">{{ greeting }}</h2>
+    <div class="recipes_buttons">
+      <button class="recipes_button" type="button" [routerLink]="'./add'">Add Recipe</button>
+      <button class="recipes_button" type="button" [routerLink]="'./import'">Import Recipe</button>
+    </div>
+  </div>
+  <ul class="recipes_list" *ngIf="mealRecipes">
+    <li class="recipes_item" *ngFor="let recipe of mealRecipes.slice(0, 4)">
+      <app-recipes-item [recipe]="recipe"></app-recipes-item>
     </li>
   </ul>
+  <div class="recipes_header">
+    <h2 class="recipes_header-text">More Recipes</h2>
+    <div class="recipes_buttons">
+      <button class="recipes_button" type="button">Filter</button>
+    </div>
+  </div>
+  <ul class="recipes_grid">
+    <li class="recipes_item" *ngFor="let recipe of recipes | async">
+      <app-recipes-item [recipe]="recipe"></app-recipes-item>
+    </li>
+  </ul>
+  <a class="recipes_top" (click)="scrollToTop()" *ngIf="showTop">
+    <i class="fas fa-chevron-circle-up"></i>
+  </a>
 </div>

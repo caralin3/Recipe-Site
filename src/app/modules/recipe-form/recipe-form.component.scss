@@ -1,27 +1,39 @@
 @import '../../../styles';
 
 .recipeForm {
-  background-color: $color-lt-bg;
+  // background-color: $color-lt-bg;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 1rem 0 2rem;
 
-  &_title {
-    font-family: $font-primary;
-  }
-
+  
   &_cta {
     align-self: flex-start;
     padding: 1rem;
+    
+    @media only screen and (max-width: 640px) {
+      align-self: center;
+    }
   }
-
+  
+  &_title {
+    align-self: center;
+    font-family: $font-primary;
+  }
+  
   &_form {
     align-items: flex-start;
+    background-color: $color-lt-bg;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1rem 0;
+    padding: 2rem;
+
+    @media only screen and (min-width: 641px) {
+      align-items: center;
+    }
   }
 
   &_group {
@@ -29,12 +41,32 @@
     display: flex;
     flex-direction: column;
     padding: 1rem 0;
+
+    @media only screen and (min-width: 641px) {
+      padding: 1rem;
+    }
   }
 
   &_row {
     align-items: center;
     display: flex;
     padding: 1rem 0;
+
+    &-time {
+      @media only screen and (min-width: 641px) {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  }
+
+  &_rowContainer {
+    @media only screen and (min-width: 641px) {
+      align-items: center;
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+    }
   }
 
   &_label {
@@ -47,19 +79,19 @@
   }
 
   &_required {
-    color: red;
+    color: $red;
     font-size: 1.2rem;
   }
 
   &_link {
-    color: black;
+    color: $black;
     font-size: 0.8rem;
     padding-left: 1rem;
     text-decoration: none;
 
     &:focus,
     &:hover {
-      color: black;
+      color: $black;
       cursor: pointer;
       text-decoration: underline;
 
@@ -70,7 +102,7 @@
   }
 
   &_tooltip {
-    background-color: #ccc;
+    background-color: $very-light-gray;
     font-size: 0.8rem;
     margin-left: 10.5rem;
     margin-top: 3rem;
@@ -118,7 +150,7 @@
 
   &_star {
     color: $color-primary;
-    // color: #FCD44B;
+    // color: $color-star;
     font-size: 1.2rem;
     padding-right: 0.5rem;
 

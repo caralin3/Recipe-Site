@@ -13,12 +13,18 @@ import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
 import { FirebaseUserService, RecipesService } from './core/firestore';
 import { UserResolver } from './core/user.resolver';
-import { 
+import {
+  ContactComponent,
+  GroceryComponent,
   HomeComponent,
+  ImageCarouselComponent,
   LoginComponent,
   NavbarComponent,
+  PlannerComponent,
+  RecipeDetailComponent,
   RecipeFormComponent,
   RecipesComponent,
+  RecipesItemComponent,
   RegisterComponent
 } from './modules';
 import { UserService } from './modules/user';
@@ -28,11 +34,17 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
 @NgModule({
   declarations: [
     AppComponent,
+    ContactComponent,
+    GroceryComponent,
     HomeComponent,
+    ImageCarouselComponent,
     LoginComponent,
     NavbarComponent,
+    PlannerComponent,
+    RecipeDetailComponent,
     RecipeFormComponent,
     RecipesComponent,
+    RecipesItemComponent,
     RegisterComponent,
     UserComponent,
   ],

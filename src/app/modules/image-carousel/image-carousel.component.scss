@@ -1,0 +1,94 @@
+@import '../../../styles';
+
+.carousel {
+  height: 400px;
+  position: relative;
+
+  @media only screen and (max-width: 640px) {
+    height: 200px;
+  }
+
+  &_image {
+    height: 400px;
+    object-fit: cover;
+    width: 100%;
+
+    @media only screen and (max-width: 640px) {
+      height: 200px;
+    }
+  }
+
+  &_search {
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    left: 14%;
+    padding: 1.5rem;
+    position: absolute;
+    top: 50%;
+    width: 75%;
+
+    @media only screen and (max-width: 640px) {
+      display: none;
+    }
+
+    &:focus {
+      outline-color: $color-primary;
+    }
+  }
+
+  &_caption {
+    background-color: $color-primary;
+    bottom: 0;
+    color: $white;
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    max-width: 25%;
+    position: absolute;
+    right: 0;
+    padding: 1rem 2rem;
+    text-align: center;
+
+    @media only screen and (max-width: 640px) {
+      bottom: auto;
+      font-size: 1rem;
+      max-width: 45%;
+      padding: 1rem;
+      top: 0;
+    }
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &_buttons {
+    bottom: 1rem;
+    display: flex;
+    left: 47%;
+    position: absolute;
+
+    @media only screen and (max-width: 1030px) {
+      left: 45%;
+    }
+
+    @media only screen and (max-width: 640px) {
+      left: 40%;
+    }
+
+    &-dots {
+      display: flex;
+    }
+
+    &-dot {
+      color: $white;
+      font-size: 0.8rem;
+      padding-right: 0.5rem;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
