@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
   showTop: boolean;
   image: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private location: Location, private route: ActivatedRoute) {}
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
       this.showTop = true;
     } else {
       this.showTop = false;
+      this.location.go('/home');
     }
   }
 
