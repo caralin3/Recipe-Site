@@ -106,4 +106,13 @@
       flex-direction: column;
     }
   }
+
+  &_top {
+    color: $color-primary;
+    font-size: 3rem;
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    text-decoration: none;
+  }
 }

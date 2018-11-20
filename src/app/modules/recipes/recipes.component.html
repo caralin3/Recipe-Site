@@ -19,4 +19,7 @@
       <app-recipes-item [recipe]="recipe"></app-recipes-item>
     </li>
   </ul>
+  <a class="recipes_top" (click)="scrollToTop()" *ngIf="showTop">
+    <i class="fas fa-chevron-circle-up"></i>
+  </a>
 </div>

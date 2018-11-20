@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RecipesService } from '../../../app/core/firestore';
 import { Recipe } from '../../../app/core/models';
@@ -9,6 +9,7 @@ import { Recipe } from '../../../app/core/models';
   styleUrls: ['./recipes.component.scss']
 })
 export class RecipesComponent implements OnInit {
+  showTop: boolean;
   recipes: Observable<Recipe[]>;
   mealRecipes: Recipe[];
   greeting: string;
@@ -17,9 +18,22 @@ export class RecipesComponent implements OnInit {
     public recipesService: RecipesService
   ) {}
 
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    if (window.scrollY > 0) {
+      this.showTop = true;
+    } else {
+      this.showTop = false;
+    }
+  }
+
   ngOnInit() {
     this.recipes = this.recipesService.getRecipes();
     this.setGreeting();
+  }
+
+  scrollToTop = () => {
+    window.scrollTo(0, 0);
   }
   
   setGreeting = () => {
