@@ -1,0 +1,76 @@
+<div class="home" id="top">
+  <section class="home_section-one" [style.backgroundImage]="'url(' + image + ')'" id="one">
+    <div class="home_hero">
+      <span class="home_header">
+        <a class="home_header-heading" [routerLink]="['./']" fragment="one">Create Your Personal Cookbook Online</a>
+        <ul class="home_header-list">
+          <li class="home_item">
+            <i class="fas fa-utensils home_icon"></i>
+            <a class="home_link"[routerLink]="['./']" fragment="two">Save Favorite Recipes</a>
+          </li>
+          <li class="home_item">
+            <i class="fas fa-utensils home_icon"></i>
+            <a class="home_link" [routerLink]="['./']" fragment="three">Import Recipes</a>
+          </li>
+          <li class="home_item">
+            <i class="fas fa-utensils home_icon"></i>
+            <a class="home_link" [routerLink]="['./']" fragment="four">Create Grocery Lists</a>
+          </li>
+          <li class="home_item">
+            <i class="fas fa-utensils home_icon"></i>
+            <a class="home_link" [routerLink]="['./']" fragment="five">Plan Meals</a>
+          </li>
+        </ul>
+      </span>
+      <div class="home_form">
+        <app-register *ngIf="!login" [login]="toggleForm"></app-register>
+        <app-login *ngIf="login" [register]="toggleForm"></app-login>
+      </div>
+    </div>
+  </section>
+  <div class="home_form-mobile">
+    <app-register *ngIf="!login" [login]="toggleForm"></app-register>
+    <app-login *ngIf="login" [register]="toggleForm"></app-login>
+  </div>
+  <section class="home_section" id="two">
+    <a class="home_heading" [routerLink]="['./']" fragment="two">Save Favorite Recipes</a>
+    <div class="home_content">
+      <img class="home_image" src="https://picsum.photos/500/300" />
+      <p class="home_text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
+  </section>
+  <section class="home_section" id="three">
+    <a class="home_heading" [routerLink]="['./']" fragment="three">Import Recipes</a>
+    <div class="home_content">
+      <p class="home_text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <img class="home_image" src="https://picsum.photos/500/300" />
+      <!-- TODO: Goes to demo -->
+      <a class="home_cta cta">
+        Check It Out
+        <i class="fas fa-angle-right cta-icon"></i>
+      </a>
+    </div>
+  </section>
+  <section class="home_section" id="four">
+    <a class="home_heading" [routerLink]="['./']" fragment="four">Create Grocery Lists</a>
+    <div class="home_content">
+      <img class="home_image" src="https://picsum.photos/500/300" />
+      <p class="home_text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
+  </section>
+  <section class="home_section" id="five">
+      <a class="home_heading" [routerLink]="['./']" fragment="five">Plan Meals</a>
+      <div class="home_content">
+        <img class="home_calendar" src="https://picsum.photos/1000/500" />
+      </div>
+    </section>
+  <a class="home_top" [routerLink]="['./']" (click)="scrollToTop()" *ngIf="showTop">
+    <i class="fas fa-chevron-circle-up"></i>
+  </a>
+</div>

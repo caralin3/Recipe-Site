@@ -1,0 +1,21 @@
+<div class="login">
+  <h1 class="login_header">Login</h1>
+  <form class="login_form" [formGroup]="loginForm">
+    <div class="login_form-group">
+      <label class="login_form-label">Email address</label>
+      <input type="email" formControlName="email" class="form-control">
+    </div>
+    <div class="login_form-group">
+      <label class="login_form-label">Password</label>
+      <input type="password" class="form-control" formControlName="password">
+      <label class="error">{{errorMessage}}</label>
+    </div>
+    <button class="login_button" type="submit" [disabled]="!loginForm.valid" (click)="tryLogin(loginForm.value)">
+      Login
+    </button>
+  </form>
+  <p class="login_footer">
+    No account yet? 
+    <a class="login_register" (click)="register()">Create an account</a>
+  </p>
+</div>

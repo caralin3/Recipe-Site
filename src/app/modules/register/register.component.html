@@ -1,0 +1,40 @@
+<div class="register">
+  <h1 class="register_header">Create an account</h1>
+  <div class="register_form">
+    <form class="register_form" [formGroup]="registerForm">
+      <label class="error">{{errorMessage}}</label>
+      <div class="register_form-group">
+        <label class="register_form-label">First Name</label>
+        <input class="register_form-input" type="text" formControlName="firstName" class="form-control">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Last Name</label>
+        <input class="register_form-input" type="text" formControlName="lastName" class="form-control">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Email address</label>
+        <input class="register_form-input" type="email" formControlName="email" class="form-control">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Password</label>
+        <input class="register_form-input" type="password" class="form-control" formControlName="password">
+      </div>
+      <div class="register_form-group">
+        <label class="register_form-label">Confirm Password</label>
+        <input class="register_form-input" type="password" formControlName="passwordConfirm" class="form-control">
+      </div>
+      <button
+        class="register_button"
+        type="submit"
+        [disabled]="!registerForm.valid || registerForm.value.password !== registerForm.value.passwordConfirm"
+        (click)="tryRegister(registerForm.value)"
+      >
+        Register
+      </button>
+    </form>
+    <p class="register_footer">
+      Already have an account? 
+      <a class="register_login" (click)="login()">Login</a>
+    </p>
+  </div>
+</div>

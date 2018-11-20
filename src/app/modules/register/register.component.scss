@@ -1,0 +1,45 @@
+@import '../../../styles';
+
+.register {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &_header,
+  &_footer {
+    font-family: $font-primary;
+    text-align: center;
+  }
+
+  &_form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &-label {
+      font-family: $font-primary;
+      font-size: 1.2rem;
+      line-height: 2;
+    }
+  }
+
+  &_button {
+    margin-top: 1rem;
+  }
+
+  &_login {
+    &:focus,
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
