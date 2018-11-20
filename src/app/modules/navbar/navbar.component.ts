@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit {
     .then((res) => {
       this.store.dispatch(new SessionActions.SetUser(null));
       this.location.back();
+      this.toggleMenu();
     }, (error) => {
       console.log("Logout error", error);
     });
