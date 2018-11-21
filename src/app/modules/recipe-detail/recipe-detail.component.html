@@ -65,6 +65,13 @@
     </section>
     <section class="recipeDetail_recommendations">
       <h2 class="recipeDetail_recommendations-title">Recommended Recipes</h2>
+      <div class="recipeDetail_recommendations-container">
+        <ul class="recipeDetail_recommendations-list" *ngFor="let recipe of limitedRecipes">
+          <li>
+            <app-recipes-item [recipe]="recipe"></app-recipes-item>
+          </li>
+        </ul>
+      </div>
     </section>
   </div>
 </div>

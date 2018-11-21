@@ -15,6 +15,7 @@ export class RecipeDetailComponent implements OnInit {
   recipeFromParam: Observable<Recipe>;
   recipe: Recipe;
   checked: string[] = [];
+  limitedRecipes: Recipe[];
 
   constructor(
     private location: Location,
@@ -41,6 +42,7 @@ export class RecipeDetailComponent implements OnInit {
       })
     );
     this.recipeFromParam.subscribe(r => this.recipe = r);
+    this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
   }
 
   check = (direction: string, index: number) => {
