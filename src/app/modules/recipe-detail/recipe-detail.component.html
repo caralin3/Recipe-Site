@@ -1,3 +1,77 @@
-<p>
-  recipe-detail works!
-</p>
+<div class="recipeDetail" *ngIf="recipe">
+  <app-image-carousel [title]="recipe.title"></app-image-carousel>
+  <div class="recipeDetail_container">
+    <div class="recipeDetail_header">
+      <div class="recipeDetail_left">
+        <h1 class="recipeDetail_title">{{ recipe.title }}</h1>
+        <div class="recipeDetail_stars">
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 1"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 2"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 3"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 4"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 5"></i>
+        </div>
+      </div>
+      <div class="recipeDetail_right">
+        <div class="recipeDetail_col">
+          <h3 class="recipeDetail_col-text">Prep Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.prepTime || 0 }} mins</h3>
+        </div>
+        <div class="recipeDetail_col">
+          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Calories: {{ recipe.calories || 'N/A' }} cals</h3>
+        </div>
+      </div>
+    </div>
+    <section class="recipeDetail_ingredients">
+      <h2 class="recipeDetail_ingredients-title">Ingredients</h2>
+      <div class="recipeDetail_ingredients-grid">
+        <ul class="recipeDetail_ingredients-list" *ngFor="let ing of recipe.ingredients; let i = index">
+          <li class="recipeDetail_ingredItem">
+            <label class="recipeDetail_ingredItem-label">
+              <input class="recipeDetail_ingredItem-input" type="checkbox" value="ing" (click)="check(ing, i)" />
+              <i *ngIf="checked.indexOf(ing) <= -1" class="recipeDetail_checkbox far fa-square"></i>
+              <i *ngIf="checked.indexOf(ing) > -1" class="recipeDetail_checkbox far fa-check-square"></i>
+              <span
+                class="recipeDetail_ingredItem-text"
+                [ngClass]="{'recipeDetail_checked': checked.indexOf(ing) > -1}">
+                {{ ing }}
+              </span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="recipeDetail_directions">
+      <h2 class="recipeDetail_directions-title">Directions</h2>
+      <ul class="recipeDetail_directions-list" *ngFor="let dir of recipe.directions; let i = index">
+        <li class="recipeDetail_directionsItem" id="{{(i + 2) | numberToLabel}}">
+          <label class="recipeDetail_directionsItem-label" [routerLink]="['./']" fragment="{{(i + 2) | numberToLabel}}">
+            <input class="recipeDetail_directionsItem-input" type="checkbox" value="dir" (click)="check(dir, i)" />
+            <i *ngIf="checked.indexOf(dir) <= -1" class="recipeDetail_checkbox far fa-square"></i>
+            <i *ngIf="checked.indexOf(dir) > -1" class="recipeDetail_checkbox far fa-check-square"></i>
+            <span class="recipeDetail_directionsItem-num">{{ i + 1 }}.</span>
+            <span
+              class="recipeDetail_directionsItem-text"
+              [ngClass]="{'recipeDetail_checked': checked.indexOf(dir) > -1}">
+              {{ dir }}
+            </span>
+          </label>
+        </li>
+      </ul>
+    </section>
+    <section class="recipeDetail_notes">
+      <h2 class="recipeDetail_notes-title">Notes</h2>
+    </section>
+    <section class="recipeDetail_recommendations">
+      <h2 class="recipeDetail_recommendations-title">Recommended Recipes</h2>
+      <div class="recipeDetail_recommendations-container">
+        <ul class="recipeDetail_recommendations-list" *ngFor="let recipe of limitedRecipes">
+          <li>
+            <app-recipes-item [recipe]="recipe"></app-recipes-item>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>

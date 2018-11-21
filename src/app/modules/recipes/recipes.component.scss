@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-between;
 
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width: 760px) {
       flex-direction: column-reverse;
     }
 
@@ -18,7 +18,7 @@
       font-family: $font-primary;
       padding-left: 1rem;
 
-      @media only screen and (max-width: 640px) {
+      @media only screen and (max-width: 760px) {
         margin-top: 0;
         padding: 1rem 1rem 0;
         text-align: center;
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: flex-end;
 
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width: 760px) {
       display: block;
     }
   }
@@ -39,7 +39,7 @@
     margin: 1rem;
     width: 10rem;
 
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width: 760px) {
       // &:first-child {
       //   margin-top: 0.5rem;
       // }
@@ -55,7 +55,7 @@
     font-size: 1.2rem;
     padding: 1rem;
 
-    @media only screen and (min-width: 641px) {
+    @media only screen and (min-width: 760px) {
       display: none;
     }
 
@@ -69,21 +69,27 @@
     display: flex;
     justify-content: space-around;
     padding: 2rem;
-
-    @media only screen and (max-width: 640px) {
+    
+    @media only screen and (max-width: 760px) {
       flex-direction: column;
       justify-content: space-evenly;
       padding: 0 1rem 1rem;
     }
   }
-
+  
   &_item {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    
+    @media only screen and (max-width: 1095px) {
+      &:last-child {
+        display: none;
+      }
+    }
 
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width: 760px) {
       margin: 1rem auto;
     }
   }
@@ -95,7 +101,11 @@
     grid-template-columns: repeat(4, auto);
     padding: 1rem 0 2rem;
 
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width: 1095px) {
+      grid-template-columns: repeat(3, auto);
+    }
+
+    @media only screen and (max-width: 760px) {
       display: flex;
       flex-direction: column;
     }
@@ -108,7 +118,7 @@
     bottom: 1rem;
     right: 2rem;
 
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width: 760px) {
       right: 0.2rem;
     }
   }
