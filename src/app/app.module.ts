@@ -29,7 +29,7 @@ import {
 } from './modules';
 import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
-import { TrimTextPipe } from './pipes';
+import { NumberToLabelPipe, TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
 
 @NgModule({
@@ -41,6 +41,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     ImageCarouselComponent,
     LoginComponent,
     NavbarComponent,
+    NumberToLabelPipe,
     PlannerComponent,
     RecipeDetailComponent,
     RecipeFormComponent,
