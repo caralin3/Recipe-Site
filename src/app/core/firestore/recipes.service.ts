@@ -31,6 +31,19 @@ export class RecipesService {
     ));
   }
 
+  // Get Limited Recipes
+  getLimitedRecipes = (limit: number) => {
+    let recipes: Recipe[] = [];
+    this.getRecipes().subscribe((rec: Recipe[]) => {
+      rec.forEach((r, i) => {
+        if (i < limit) {
+          recipes.push(r);
+        }
+      });
+    });
+    return recipes;
+  }
+
   // Get Recipes by Meal
   getRecipesByMeal = (meal: string) => {
     const recipes: Recipe[] = [];
@@ -39,7 +52,7 @@ export class RecipesService {
         if (r.meals[meal]) {
           recipes.push(r);
         }
-      })
+      });
     });
     return recipes;
   }
@@ -49,12 +62,21 @@ export class RecipesService {
     return this.recipesCollection.add(recipe);
   }
 
-  // TODO: Get Recipe
+  // Get Recipe
   getRecipe = (recipeId: string) => {
     const user = firebase.auth().currentUser;
     return this.db.collection<FirebaseRecipeModel>('recipes',
       ref => ref.where('userId', '==', user.uid))
-      .doc(recipeId).snapshotChanges();
+      .doc(recipeId)
+      .snapshotChanges()
+      .pipe(map(action => {
+        // Get document data
+        const data = action.payload.data() as FirebaseRecipeModel;
+        // // Get document id
+        const id = action.payload.id;
+        // // Use spread operator to add the id to the document data
+        return { id, ...data } as Recipe;
+      }));
   }
 
   // TODO: Update Recipe

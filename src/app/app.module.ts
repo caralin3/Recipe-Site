@@ -29,6 +29,7 @@ import {
 } from './modules';
 import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
+import { TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
 
 @NgModule({
@@ -47,6 +48,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     RecipesItemComponent,
     RegisterComponent,
     UserComponent,
+    TrimTextPipe,
   ],
   imports: [
     BrowserModule,

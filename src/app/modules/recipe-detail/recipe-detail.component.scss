@@ -1,0 +1,87 @@
+@import '../../../styles';
+
+.recipeDetail {
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+    font-family: $font-primary;
+    // padding: 1rem;
+  }
+
+  &_header {
+    align-items: center;
+    background-color: $color-primary;
+    display: flex;
+    font-family: $font-primary;
+    justify-content: space-between;
+    padding: 1rem 0;
+
+    @media only screen and (max-width: 640px) {
+      flex-direction: column;
+    }
+  }
+
+  &_left {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+
+    @media only screen and (max-width: 640px) {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &_title {
+    color: $white;
+    margin: 0;
+
+    @media only screen and (max-width: 640px) {
+      text-align: center;
+    }    
+  }
+
+  &_stars {
+    display: flex;
+    padding-top: 1rem;
+
+    @media only screen and (max-width: 640px) {
+      padding: 1rem;
+    }
+  }
+  
+  &_star {
+    color: $color-star;
+    padding-right: 0.5rem;
+  }
+
+  &_right {
+    align-items: center;
+    color: $white;
+    display: flex;
+    justify-content: center;
+
+    @media only screen and (max-width: 640px) {
+      flex-direction: column;
+    }
+  }
+
+  &_col {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1rem;
+
+    @media only screen and (max-width: 640px) {
+      align-items: center;
+    }
+
+    &-text {
+      margin: 0;
+      line-height: 2;
+    }
+  }
+}

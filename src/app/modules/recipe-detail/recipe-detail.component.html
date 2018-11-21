@@ -1,3 +1,42 @@
-<p>
-  recipe-detail works!
-</p>
+<div class="recipeDetail" *ngIf="recipe">
+  <app-image-carousel [title]="recipe.title"></app-image-carousel>
+  <div class="recipeDetail_container">
+    <div class="recipeDetail_header">
+      <div class="recipeDetail_left">
+        <h1 class="recipeDetail_title">{{ recipe.title }}</h1>
+        <div class="recipeDetail_stars">
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 1"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 2"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 3"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 4"></i>
+          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 5"></i>
+        </div>
+      </div>
+      <div class="recipeDetail_right">
+        <div class="recipeDetail_col">
+          <h3 class="recipeDetail_col-text">Prep Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.prepTime || 0 }} mins</h3>
+        </div>
+        <div class="recipeDetail_col">
+          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Calories: {{ recipe.calories || 'N/A' }} cals</h3>
+        </div>
+      </div>
+    </div>
+    <section class="recipeDetail_ingredients">
+      <h2>Ingredients</h2>
+      <ul *ngFor="let ing of recipe.ingredients">
+        <li>{{ ing }}</li>
+      </ul>
+    </section>
+    <section class="recipeDetail_directions">
+      <h2>Directions</h2>
+      <ul *ngFor="let dir of recipe.directions">
+        <li>{{ dir }}</li>
+      </ul>
+    </section>
+    <section class="recipeDetail_recommendations">
+
+    </section>
+  </div>
+</div>

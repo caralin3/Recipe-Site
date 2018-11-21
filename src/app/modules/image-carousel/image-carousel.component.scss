@@ -43,9 +43,9 @@
     font-family: $font-primary;
     font-size: 1.2rem;
     max-width: 25%;
+    padding: 1rem 2rem;
     position: absolute;
     right: 0;
-    padding: 1rem 2rem;
     text-align: center;
 
     @media only screen and (max-width: 640px) {
@@ -59,6 +59,27 @@
     &:focus,
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &_title {
+    align-items: center;
+    background-color: rgba($color: $black, $alpha: 0.3);
+    color: $white;
+    display: flex;
+    font-family: $font-primary;
+    font-size: 2rem;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    
+    @media only screen and (max-width: 640px) {
+      font-size: 1rem;
+      text-overflow: ellipsis;
     }
   }
 

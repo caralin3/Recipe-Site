@@ -1,8 +1,11 @@
 <div class="carousel">
   <img class="carousel_image" [src]="image.src" />
-  <input class="carousel_search" type="search" placeholder="Search Recipes" />
-  <div class="carousel_caption">
-    <a class="carousel_caption-text">Caption Text Title</a>
+  <input *ngIf="search" class="carousel_search" type="search" placeholder="Search Recipes" />
+  <div class="carousel_caption" *ngIf="lowerRightCaption">
+    <a class="carousel_caption-text">{{ lowerRightCaption }}</a>
+  </div>
+  <div class="carousel_title" *ngIf="title">
+    <h1 class="carousel_title-text">{{ title }}</h1>
   </div>
   <div class="carousel_buttons">
     <div class="carousel_buttons-dots" *ngFor="let image of images; let i = index">

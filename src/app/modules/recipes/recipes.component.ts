@@ -12,11 +12,10 @@ export class RecipesComponent implements OnInit {
   showTop: boolean;
   recipes: Observable<Recipe[]>;
   mealRecipes: Recipe[];
+  limitedRecipes: Recipe[];
   greeting: string;
 
-  constructor(
-    public recipesService: RecipesService
-  ) {}
+  constructor(public recipesService: RecipesService) {}
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
@@ -29,6 +28,7 @@ export class RecipesComponent implements OnInit {
 
   ngOnInit() {
     this.recipes = this.recipesService.getRecipes();
+    this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
     this.setGreeting();
   }
 
@@ -40,15 +40,24 @@ export class RecipesComponent implements OnInit {
     const hour = new Date().getHours();
     if (hour > 11 && hour <= 15) {
       this.mealRecipes = this.recipesService.getRecipesByMeal('lunch');
-      this.greeting = "Good Afternoon! Check out these lunch recipes";
-    } else if (hour > 15) {
+      if (this.mealRecipes.length > 0) {
+        this.greeting = "Good Afternoon! Check out these lunch recipes";
+      }
+      this.greeting = "Good Afternoon! Check out these recent recipes";
+      } else if (hour > 15) {
       this.mealRecipes = this.recipesService.getRecipesByMeal('dinner');
-      this.greeting = "Good Evening! Check out these dinner recipes";
+      if (this.mealRecipes.length > 0) {
+        this.greeting = "Good Evening! Check out these dinner recipes";
+      }
+      this.greeting = "Good Evening! Check out these recent recipes";
     } else if (hour <= 11 ) {
       this.mealRecipes = this.recipesService.getRecipesByMeal('breakfast');
-      this.greeting = "Good Morning! Check out these breakfast recipes";
+      if (this.mealRecipes.length > 0) {
+        this.greeting = "Good Morning! Check out these breakfast recipes";
+      }
+      this.greeting = "Good Morning! Check out these recent recipes";
     } else {
-      this.greeting = "Check out these recipes";
+      this.greeting = "Hungry? Check out these recent recipes";
     }
   }
 }
