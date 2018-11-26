@@ -33,6 +33,7 @@ import { UserComponent } from './modules/user/user.component';
 import { NumberToLabelPipe, TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
 import { DropZoneDirective } from './directives/drop-zone.directive';
+import { FullscreenDirective } from './directives';
 import { FileUploadComponent } from './modules/file-upload/file-upload.component';
 import { FileSizePipe } from './pipes/file-size.pipe';
 
@@ -40,6 +41,7 @@ import { FileSizePipe } from './pipes/file-size.pipe';
   declarations: [
     AppComponent,
     ContactComponent,
+    FullscreenDirective,
     GroceryComponent,
     HomeComponent,
     ImageCarouselComponent,

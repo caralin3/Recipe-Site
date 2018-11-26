@@ -1,4 +1,4 @@
-<div class="recipeDetail" *ngIf="recipe">
+<div class="recipeDetail" *ngIf="recipe" ngsf-fullscreen>
   <app-image-carousel [images]="images" [title]="recipe.title"></app-image-carousel>
   <div class="recipeDetail_container">
     <div class="recipeDetail_header">
@@ -24,7 +24,10 @@
       </div>
     </div>
     <section class="recipeDetail_ingredients">
-      <h2 class="recipeDetail_ingredients-title">Ingredients</h2>
+      <div class="recipeDetail_ingredients-header">
+        <h2 class="recipeDetail_ingredients-title">Ingredients</h2>
+        <button toggleFullscreen>Toggle fullscreen</button>
+      </div>
       <div class="recipeDetail_ingredients-grid">
         <ul class="recipeDetail_ingredients-list" *ngFor="let ing of recipe.ingredients; let i = index">
           <li class="recipeDetail_ingredItem">
@@ -60,15 +63,16 @@
         </li>
       </ul>
     </section>
-    <section class="recipeDetail_notes">
+    <section class="recipeDetail_notes" *ngIf="recipe.notes">
       <h2 class="recipeDetail_notes-title">Notes</h2>
+      <p>{{ recipe.notes }}</p>
     </section>
-    <section class="recipeDetail_recommendations">
+    <section class="recipeDetail_recommendations" *ngIf="!fullscreen">
       <h2 class="recipeDetail_recommendations-title">Recommended Recipes</h2>
       <div class="recipeDetail_recommendations-container">
-        <ul class="recipeDetail_recommendations-list" *ngFor="let recipe of limitedRecipes">
+        <ul class="recipeDetail_recommendations-list" *ngFor="let rec of limitedRecipes">
           <li>
-            <app-recipes-item [recipe]="recipe"></app-recipes-item>
+            <app-recipes-item [recipe]="rec"></app-recipes-item>
           </li>
         </ul>
       </div>

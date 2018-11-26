@@ -5,7 +5,7 @@ import { User } from '../../../app/core/models';
 import { AppState } from '../../../app/store';
 import { AuthService } from '../../core/auth';
 import * as SessionActions from '../../store/session/session.actions';
-
+import * as screenfull from 'screenfull';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   innerWidth: number;
   mobile: boolean = false;
   showMenu: boolean = false;
+  fullscreen: boolean;
 
   constructor(
     public authService: AuthService,
@@ -35,6 +36,11 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (screenfull.enabled) {
+      screenfull.on('change', () => {
+        this.fullscreen = screenfull.isFullscreen;
+      });
+    }
     this.store.select(appState => appState.sessionState.currentUser)
       .subscribe((user: User) => this.authUser = user);
     this.onResize();
