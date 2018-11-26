@@ -2,9 +2,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { RecipesService } from '../../../app/core/firestore';
-import { Recipe } from '../../../app/core/models';
+import { switchMap, map } from 'rxjs/operators';
+import { ImagesService, RecipesService } from '../../../app/core/firestore';
+import { Image, Recipe } from '../../../app/core/models';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,10 +16,12 @@ export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
   checked: string[] = [];
   limitedRecipes: Recipe[];
+  images: Observable<Image>[] = [];
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
+    private imagesService: ImagesService,
     public recipesService: RecipesService
   ) { }
 
@@ -41,7 +43,29 @@ export class RecipeDetailComponent implements OnInit {
         return this.recipesService.getRecipe(id);
       })
     );
-    this.recipeFromParam.subscribe(r => this.recipe = r);
+    const imgs = [];
+    const pathImgs = [];
+    this.recipeFromParam.subscribe(r => {
+      this.recipe = r;
+      this.recipe.images.forEach(path => {
+        imgs.push(this.imagesService.getImageByPath(path));
+        const img = this.imagesService.getImageFromPath(path)
+          .subscribe(obs => {console.log(obs)})
+        console.log(img);
+        pathImgs.push(img);
+         
+        console.log(pathImgs)
+        // this.images = this.imagesService.getImageByPath(path);
+        // this.images = imgs;
+        // console.log(this.images);
+      });
+      // console.log(pathImgs.map(d => [].concat(...d)))
+      // pathImgs.forEach(img => console.log(img))
+      // const igs = []
+      // imgs.forEach(img => img.subscribe(i => this.images.push(i[0])));
+      // console.log(this.images);
+    });
+    // console.log(this.images);
     this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
   }
 
@@ -53,5 +77,4 @@ export class RecipeDetailComponent implements OnInit {
       this.checked.push(direction);
     }
   }
-
 }

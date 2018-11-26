@@ -5,6 +5,16 @@ export interface User {
   lastName: string;
 }
 
+export interface Image {
+  id: string;
+  file: string;
+  name: string;
+  path: string;
+  size: number;
+  src: string;
+  userId: string;
+}
+
 export interface Ingredient {
   amount: number,
   id: string,
@@ -29,7 +39,7 @@ export interface Recipe {
   tags: string[],
   title: string;
   totalTime: number,
-  yield?: number
+  yield: number
 }
 
 // export interface Rating {

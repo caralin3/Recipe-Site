@@ -1,7 +1,6 @@
 @import '../../../styles';
 
 .recipeForm {
-  // background-color: $color-lt-bg;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -150,7 +149,6 @@
 
   &_star {
     color: $color-primary;
-    // color: $color-star;
     font-size: 1.2rem;
     padding-right: 0.5rem;
 

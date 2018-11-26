@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { RecipesService } from '../../../app/core/firestore';
@@ -18,6 +18,7 @@ export class RecipeFormComponent implements OnInit {
   currentUserId: string;
   stars: number;
   hover: number = 0;
+  images: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -75,6 +76,10 @@ export class RecipeFormComponent implements OnInit {
     this.hover = num;
   }
 
+  onImageUpload = (path: string) => {
+    this.images.push(path);
+  }
+
   addRecipe = (recipe, status) => {
     if (status === 'VALID') {
       const ingredients = recipe.ingredients.split('\n').map((i: string) => i !== '' && i.trim());
@@ -102,6 +107,7 @@ export class RecipeFormComponent implements OnInit {
       const newRecipe: FirebaseRecipeModel = {
         ...recipe,
         directions,
+        images: this.images,
         ingredients,
         meals,
         tags,
@@ -110,6 +116,7 @@ export class RecipeFormComponent implements OnInit {
       }
       this.recipesService.createRecipe(newRecipe);
       this.recipeForm.reset();
+      this.images = [];
     }
   }
 

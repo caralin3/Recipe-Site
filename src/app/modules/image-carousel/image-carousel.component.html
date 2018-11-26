@@ -1,5 +1,5 @@
 <div class="carousel">
-  <img class="carousel_image" [src]="image.src" />
+  <img class="carousel_image" *ngIf="image" [src]="image.src" [alt]="image.name" />
   <input *ngIf="search" class="carousel_search" type="search" placeholder="Search Recipes" />
   <div class="carousel_caption" *ngIf="lowerRightCaption">
     <a class="carousel_caption-text">{{ lowerRightCaption }}</a>
