@@ -122,4 +122,19 @@
       right: 0.2rem;
     }
   }
+
+  &_none {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-text {
+      color: $color-primary;
+      font-family: $font-primary;
+      font-size: 1.8rem;
+      text-align: center;
+      padding: 1rem;
+    }
+  }
 }
