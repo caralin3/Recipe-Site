@@ -60,5 +60,4 @@ export class RecipeDetailComponent implements OnInit {
       this.checked.push(direction);
     }
   }
-
 }
