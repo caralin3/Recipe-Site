@@ -31,6 +31,7 @@ import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { NumberToLabelPipe, TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
+import { FullscreenDirective } from './directives/fullscreen.directive';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     RegisterComponent,
     UserComponent,
     TrimTextPipe,
+    FullscreenDirective,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { RecipesService } from '../../../app/core/firestore';
 import { Recipe } from '../../../app/core/models';
+import * as screenfull from 'screenfull';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,6 +17,7 @@ export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
   checked: string[] = [];
   limitedRecipes: Recipe[];
+  fullscreen: boolean;
 
   constructor(
     private location: Location,
@@ -31,6 +33,11 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (screenfull.enabled) {
+      screenfull.on('change', () => {
+        this.fullscreen = screenfull.isFullscreen;
+      });
+    }
     this.route.fragment.subscribe(f => {
       const element = document.querySelector("#" + f)
       if (element) element.scrollIntoView()
