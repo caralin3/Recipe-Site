@@ -63,7 +63,7 @@ export class RecipeDetailComponent implements OnInit {
          
         console.log(pathImgs)
         // this.images = this.imagesService.getImageByPath(path);
-        // this.images = imgs;
+        this.images = imgs;
         // console.log(this.images);
       });
       // console.log(pathImgs.map(d => [].concat(...d)))

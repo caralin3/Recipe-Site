@@ -38,7 +38,7 @@ export class ImageCarouselComponent implements OnInit {
   }
   
   getImage = () => {
-    if (this.images) {
+    if (!this.images) {
       const image: Image = {
         id: '',
         file: '',

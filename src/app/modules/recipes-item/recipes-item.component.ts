@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from '../../../app/core/models';
+import { ImagesService } from '../../../app/core/firestore';
+import { Image, Recipe } from '../../../app/core/models';
 
 @Component({
   selector: 'app-recipes-item',
@@ -8,10 +9,23 @@ import { Recipe } from '../../../app/core/models';
 })
 export class RecipesItemComponent implements OnInit {
   @Input() recipe: Recipe;
+  thumbnail: Image = {
+    file: 'background1.png',
+    id: '',
+    path: '/assets/images/background1.jpg',
+    name: 'default',
+    size: 0,
+    src: '/assets/images/background1.jpg',
+    userId: '',
+  };
 
-  constructor() { }
+  constructor(private imagesService: ImagesService) { }
 
   ngOnInit() {
+    if (this.recipe.images.length > 0) {
+      this.imagesService.getImageByPath(this.recipe.images[0])
+        .subscribe(imgs => imgs.forEach(img => this.thumbnail = img));
+    }
   }
 
 }

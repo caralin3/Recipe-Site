@@ -1,5 +1,5 @@
 <div class="recipesItem" [routerLink]="['/recipes', recipe.id]">
-  <img class="recipesItem_image" src="/assets/images/background1.jpg">
+  <img class="recipesItem_image" [src]="thumbnail.src" [alt]="thumbnail.name">
   <div class="recipesItem_container">
     <div class="recipesItem_text">
       <div class="recipesItem_row">
