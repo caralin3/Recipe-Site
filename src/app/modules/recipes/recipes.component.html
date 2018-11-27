@@ -1,6 +1,8 @@
 <div class="recipes">
   <app-image-carousel [search]="true" [lowerRightCaption]="'Food Title'"></app-image-carousel>
-  <input class="recipes_search" type="search" placeholder="Search New Recipes" />
+  <div class="recipes_search">
+    <app-recipe-search [comp]="'recipes'"></app-recipe-search>
+  </div>
   <div class="recipes_header">
     <h2 class="recipes_header-text">{{ greeting }}</h2>
     <div class="recipes_buttons">

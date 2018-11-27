@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-image-carousel',
@@ -12,10 +12,23 @@ export class ImageCarouselComponent implements OnInit {
   image: { src: string };
   images: string[];
   currentIndex: number;
+  innerWidth: number;
+  mobile: boolean = false;
 
   constructor() { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 760) {
+      this.mobile = true;
+    } else {
+      this.mobile = false;
+    }
+  }
+
   ngOnInit() {
+    this.onResize();
     this.image = {
       src: '/assets/images/background1.jpg',
     };

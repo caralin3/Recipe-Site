@@ -8,6 +8,7 @@ import { PlannerComponent } from './planner';
 import { RecipeDetailComponent } from './recipe-detail';
 import { RecipeFormComponent } from './recipe-form';
 import { RecipeImportComponent } from './recipe-import';
+import { RecipeSearchComponent } from './recipe-search';
 import { RecipesComponent } from './recipes';
 import { RecipesItemComponent } from './recipes-item';
 import { RegisterComponent } from './register';
@@ -23,6 +24,7 @@ export {
   RecipeDetailComponent,
   RecipeFormComponent,
   RecipeImportComponent,
+  RecipeSearchComponent,
   RecipesComponent,
   RecipesItemComponent,
   RegisterComponent,

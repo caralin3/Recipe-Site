@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../models';
 import { FirebaseRecipeModel } from './recipes.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -95,10 +96,23 @@ export class RecipesService {
       .doc(recipeId).delete();
   }
 
+  // SEARCH
+
+  /* GET recipes whose title contains search term */
+  searchRecipesByTitle(term: string): Observable<Recipe[]> {
+    if (!term.trim()) {
+      // if not search term, return empty recipe array.
+      return of([]);
+    }
+    this.db.collection('recipes',ref => ref.where('title', '>=', term)
+      .where('title', '<=', term + '\uf8ff'))
+      .snapshotChanges()
+  }
+
   // searchRecipes(searchValue){
-  //   return this.db.collection('recipes',ref => ref.where('nameToSearch', '>=', searchValue)
-  //     .where('nameToSearch', '<=', searchValue + '\uf8ff'))
-  //     .snapshotChanges()
+    // return this.db.collection('recipes',ref => ref.where('nameToSearch', '>=', searchValue)
+    //   .where('nameToSearch', '<=', searchValue + '\uf8ff'))
+    //   .snapshotChanges()
   // }
 
   // searchRecipesByAge(value){

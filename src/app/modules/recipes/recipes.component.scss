@@ -51,16 +51,8 @@
   }
 
   &_search {
-    font-family: $font-primary;
-    font-size: 1.2rem;
-    padding: 1rem;
-
     @media only screen and (min-width: 760px) {
       display: none;
-    }
-
-    &:focus {
-      outline-color: $color-primary;
     }
   }
 

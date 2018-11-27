@@ -26,6 +26,7 @@ import {
   RecipeImportComponent,
   RecipesComponent,
   RecipesItemComponent,
+  RecipeSearchComponent,
   RegisterComponent
 } from './modules';
 import { UserService } from './modules/user';
@@ -51,6 +52,7 @@ import { FullscreenDirective } from './directives';
     RecipeImportComponent,
     RecipesComponent,
     RecipesItemComponent,
+    RecipeSearchComponent,
     RegisterComponent,
     UserComponent,
     TrimTextPipe,
