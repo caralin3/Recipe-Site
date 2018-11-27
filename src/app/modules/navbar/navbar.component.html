@@ -8,10 +8,37 @@
   </div>
   <div class="navbar_nav" *ngIf="!mobile || showMenu">
     <i class="fas fa-times navbar_nav-close" *ngIf="mobile && showMenu" (click)="toggleMenu()"></i>
-    <a class="navbar_nav-item" *ngIf="authUser" (click)="toggleMenu()" [routerLink]="['/recipes']" [routerLinkActive]="'navbar_nav-active'">My Recipes</a>
-    <a class="navbar_nav-item" *ngIf="authUser" (click)="toggleMenu()" [routerLink]="['/grocery']" [routerLinkActive]="'navbar_nav-active'">Grocery Lists</a>
-    <a class="navbar_nav-item" *ngIf="authUser" (click)="toggleMenu()" [routerLink]="['/planner']" [routerLinkActive]="'navbar_nav-active'">Meal Planner</a>
-    <a class="navbar_nav-item navbar_nav-item-about" *ngIf="!authUser" [routerLink]="['./']" [routerLinkActive]="'navbar_nav-active'">About</a>
+    <a
+      class="navbar_nav-item"
+      *ngIf="authUser"
+      (click)="toggleMenu()"
+      [routerLink]="['/recipes']"
+      [routerLinkActive]="'navbar_nav-active'"
+      [routerLinkActiveOptions]="{exact: true}"
+    >My Recipes</a>
+    <a
+      class="navbar_nav-item"
+      *ngIf="authUser"
+      (click)="toggleMenu()"
+      [routerLink]="['/grocery']"
+      [routerLinkActive]="'navbar_nav-active'"
+      [routerLinkActiveOptions]="{exact: true}"
+      >Grocery Lists</a>
+    <a
+      class="navbar_nav-item"
+      *ngIf="authUser"
+      (click)="toggleMenu()"
+      [routerLink]="['/planner']"
+      [routerLinkActive]="'navbar_nav-active'"
+      [routerLinkActiveOptions]="{exact: true}"
+      >Meal Planner</a>
+    <a
+      class="navbar_nav-item navbar_nav-item-about"
+      *ngIf="!authUser"
+      [routerLink]="['./']"
+      [routerLinkActive]="'navbar_nav-active'"
+      [routerLinkActiveOptions]="{exact: true}"
+    >About</a>
     <div class="navbar_nav-dropdown" *ngIf="!authUser">
       <a class="navbar_nav-dropdown-item" (click)="toggleMenu()" [routerLink]="['./']" fragment="two">Save Recipes</a>
       <a class="navbar_nav-dropdown-item" (click)="toggleMenu()" [routerLink]="['./']" fragment="three">Import Recipes</a>
