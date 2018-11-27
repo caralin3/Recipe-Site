@@ -48,12 +48,12 @@ import { FullscreenDirective } from './directives';
     PlannerComponent,
     RecipeDetailComponent,
     RecipeFormComponent,
+    RecipeImportComponent,
     RecipesComponent,
     RecipesItemComponent,
     RegisterComponent,
     UserComponent,
     TrimTextPipe,
-    RecipeImportComponent,
   ],
   imports: [
     BrowserModule,

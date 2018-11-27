@@ -1,8 +1,10 @@
 <div class="recipeImport">
-  <a class="recipeImport_cta cta" [routerLink]="'../'">
-    <i class="fas fa-angle-left cta-icon"></i>
-    Back to My Recipes
-  </a>
+  <div class="recipeImport_cta">
+    <a class="cta" [routerLink]="'../'">
+      <i class="fas fa-angle-left cta-icon"></i>
+      Back to My Recipes
+    </a>
+  </div>
   <div class="recipeImport_container">
     <form class="recipeImport_form" [formGroup]="importForm">
       <h2 class="recipeImport_title">Import Recipe</h2>
