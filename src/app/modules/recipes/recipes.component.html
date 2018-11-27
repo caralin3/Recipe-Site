@@ -1,5 +1,10 @@
 <div class="recipes">
-  <app-image-carousel [search]="true" [lowerRightCaption]="'Food Title'"></app-image-carousel>
+  <app-image-carousel *ngIf="(recipes | async)?.length === 0" [search]="true"></app-image-carousel>
+  <app-image-carousel
+    *ngIf="(recipes | async)?.length > 0"
+    [search]="true"
+    [lowerRightCaption]="'Caption Text'"
+  ></app-image-carousel>
   <input class="recipes_search" type="search" placeholder="Search New Recipes" />
   <div *ngIf="(recipes | async)?.length > 0">
     <div class="recipes_header">
