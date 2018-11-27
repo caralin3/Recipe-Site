@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar';
 import { PlannerComponent } from './planner';
 import { RecipeDetailComponent } from './recipe-detail';
 import { RecipeFormComponent } from './recipe-form';
+import { RecipeImportComponent } from './recipe-import';
 import { RecipesComponent } from './recipes';
 import { RecipesItemComponent } from './recipes-item';
 import { RegisterComponent } from './register';
@@ -21,6 +22,7 @@ export {
   PlannerComponent,
   RecipeDetailComponent,
   RecipeFormComponent,
+  RecipeImportComponent,
   RecipesComponent,
   RecipesItemComponent,
   RegisterComponent,

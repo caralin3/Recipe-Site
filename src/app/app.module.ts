@@ -23,6 +23,7 @@ import {
   PlannerComponent,
   RecipeDetailComponent,
   RecipeFormComponent,
+  RecipeImportComponent,
   RecipesComponent,
   RecipesItemComponent,
   RegisterComponent
@@ -52,6 +53,7 @@ import { FullscreenDirective } from './directives';
     RegisterComponent,
     UserComponent,
     TrimTextPipe,
+    RecipeImportComponent,
   ],
   imports: [
     BrowserModule,
