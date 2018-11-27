@@ -1,0 +1,54 @@
+@import '../../../styles';
+
+.recipeResults {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  &_keyword {
+    align-items: center;
+    color: $color-primary;
+    display: flex;
+    font-family: $font-primary;
+    padding: 1rem 0;
+
+    &-word {
+      padding-left: 1rem;
+    }
+  }
+
+  &_results {
+    align-items: center;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(4, auto);
+    justify-content: start;
+    padding: 1rem 0 2rem;
+
+    @media only screen and (max-width: 1095px) {
+      grid-template-columns: repeat(3, auto);
+    }
+
+    @media only screen and (max-width: 760px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &_item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    @media only screen and (max-width: 1095px) {
+      &:last-child {
+        display: none;
+      }
+    }
+
+    @media only screen and (max-width: 760px) {
+      margin: 1rem auto;
+    }
+  }
+}

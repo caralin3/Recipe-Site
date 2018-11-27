@@ -1,0 +1,35 @@
+@import '../../../styles';
+
+.recipeSearch {
+  align-items: center;
+  display: flex;
+
+  &_input {
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    padding: 1rem;
+    width: 100%;
+
+    &-carousel {
+      width: 75%;
+    }
+
+    &:focus {
+      outline-color: $color-primary;
+    }
+  }
+
+  &_icon {
+    background-color: $color-button;
+    color: $white;
+    font-size: 1.2rem;
+    padding: 1.3rem;
+
+    &:focus,
+    &:hover {
+      background-color: darken(#CA4320, 10%);
+      cursor: pointer;
+      outline: none;
+    }
+  }
+}

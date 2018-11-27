@@ -1,0 +1,18 @@
+<div class="recipeSearch">
+  <input
+    class="recipeSearch_input"
+    id="recipe-search"
+    [ngClass]="comp === 'carousel' ? 'recipeSearch_input-carousel' : ''"
+    placeholder="Search Recipes"
+    type="search"
+    #recipeSearch
+    (input)="search(recipeSearch.value)"
+    (keyup.enter)="onEnter(recipeSearch.value)"
+  >
+  <i
+    class="recipeSearch_icon fas fa-search"
+    (click)="search(term)"
+    [routerLink]="['/recipes/search']"
+    [queryParams]="{keyword: term}"
+  ></i>  
+</div>

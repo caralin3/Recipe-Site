@@ -65,7 +65,12 @@
     </section>
     <section class="recipeDetail_notes" *ngIf="recipe.notes">
       <h2 class="recipeDetail_notes-title">Notes</h2>
-      <p>{{ recipe.notes }}</p>
+      <ul class="recipeDetail_noteList" *ngFor="let note of recipe.notes">
+        <li class="recipeDetail_note">
+          <i class="recipeDetail_note-icon fas fa-utensils"></i>
+          <p class="recipeDetail_note-text">{{ note }}</p>
+        </li>
+      </ul>
     </section>
     <section class="recipeDetail_recommendations" *ngIf="!fullscreen">
       <h2 class="recipeDetail_recommendations-title">Recommended Recipes</h2>

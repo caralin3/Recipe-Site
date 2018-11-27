@@ -1,0 +1,14 @@
+<div class="recipeResults">
+  <div class="recipeResults_search">
+    <app-recipe-search></app-recipe-search>
+  </div>
+  <div class="recipeResults_keyword">
+    <h2 class="recipeResults_keyword-label">Search Results For:</h2>
+    <h2 class="recipeResults_keyword-word">{{ keyword }}</h2>
+  </div>
+  <ul class="recipeResults_results">
+    <li class="recipeResults_item" *ngFor="let recipe of recipes$ | async" >
+      <app-recipes-item [recipe]="recipe"></app-recipes-item>
+    </li>
+  </ul>
+</div>

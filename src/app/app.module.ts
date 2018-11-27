@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
 import { FirebaseUserService, RecipesService } from './core/firestore';
 import { UserResolver } from './core/user.resolver';
+import { FullscreenDirective } from './directives';
 import {
   ContactComponent,
   GroceryComponent,
@@ -26,13 +27,14 @@ import {
   RecipeImportComponent,
   RecipesComponent,
   RecipesItemComponent,
+  RecipeSearchComponent,
+  RecipeSearchResultsComponent,
   RegisterComponent
 } from './modules';
 import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { NumberToLabelPipe, TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
-import { FullscreenDirective } from './directives';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { FullscreenDirective } from './directives';
     RecipeImportComponent,
     RecipesComponent,
     RecipesItemComponent,
+    RecipeSearchComponent,
+    RecipeSearchResultsComponent,
     RegisterComponent,
     UserComponent,
     TrimTextPipe,
