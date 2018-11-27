@@ -15,7 +15,9 @@
       [routerLink]="['/recipes']"
       [routerLinkActive]="'navbar_nav-active'"
       [routerLinkActiveOptions]="{exact: true}"
-    >My Recipes</a>
+    >
+      My Recipes
+    </a>
     <a
       class="navbar_nav-item"
       *ngIf="authUser"
@@ -23,7 +25,9 @@
       [routerLink]="['/grocery']"
       [routerLinkActive]="'navbar_nav-active'"
       [routerLinkActiveOptions]="{exact: true}"
-      >Grocery Lists</a>
+    >
+      Grocery Lists
+    </a>
     <a
       class="navbar_nav-item"
       *ngIf="authUser"
@@ -31,14 +35,18 @@
       [routerLink]="['/planner']"
       [routerLinkActive]="'navbar_nav-active'"
       [routerLinkActiveOptions]="{exact: true}"
-      >Meal Planner</a>
+    >
+      Meal Planner
+    </a>
     <a
       class="navbar_nav-item navbar_nav-item-about"
       *ngIf="!authUser"
       [routerLink]="['./']"
       [routerLinkActive]="'navbar_nav-active'"
       [routerLinkActiveOptions]="{exact: true}"
-    >About</a>
+    >
+      About
+    </a>
     <div class="navbar_nav-dropdown" *ngIf="!authUser">
       <a class="navbar_nav-dropdown-item" (click)="toggleMenu()" [routerLink]="['./']" fragment="two">Save Recipes</a>
       <a class="navbar_nav-dropdown-item" (click)="toggleMenu()" [routerLink]="['./']" fragment="three">Import Recipes</a>
