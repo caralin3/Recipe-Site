@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/models';
-// import * as rp from 'request-promise';
-// import * as ch from 'cheerio';
 
 @Component({
   selector: 'app-recipe-import',
@@ -43,13 +41,6 @@ export class RecipeImportComponent implements OnInit {
   importRecipe = (importForm, status) => {
     if (status === 'VALID') {
       console.log(importForm.url)
-      // rp(importForm.url)
-      //   .then((html) => {
-      //     console.log(html);
-      //   })
-      //   .catch(err => {
-      //     console.log(err.message);
-      //   })
     }
   }
 }
