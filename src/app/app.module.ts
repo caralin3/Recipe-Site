@@ -14,9 +14,10 @@ import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
 import { FirebaseUserService, RecipesService } from './core/firestore';
 import { UserResolver } from './core/user.resolver';
-import { FullscreenDirective } from './directives';
+import { DropZoneDirective, FullscreenDirective } from './directives';
 import {
   ContactComponent,
+  FileUploadComponent,
   GroceryComponent,
   HomeComponent,
   ImageCarouselComponent,
@@ -34,11 +35,8 @@ import {
 } from './modules';
 import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
-import { NumberToLabelPipe, TrimTextPipe } from './pipes';
+import { FileSizePipe, NumberToLabelPipe, TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
-import { DropZoneDirective } from './directives/drop-zone.directive';
-import { FileUploadComponent } from './modules/file-upload/file-upload.component';
-import { FileSizePipe } from './pipes/file-size.pipe';
 
 @NgModule({
   declarations: [
