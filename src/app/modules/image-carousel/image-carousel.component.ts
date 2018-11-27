@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Image } from '../../../app/core/models';
 import { Observable } from 'rxjs';
 
@@ -15,11 +15,23 @@ export class ImageCarouselComponent implements OnInit {
   @Input() title: string;
   image: any;
   currentIndex: number;
+  innerWidth: number;
+  mobile: boolean = false;
 
   constructor() { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 760) {
+      this.mobile = true;
+    } else {
+      this.mobile = false;
+    }
+  }
+
   ngOnInit() {
-    this.getImages();
+    this.onResize();
     this.getImage();
   }
 
@@ -38,7 +50,7 @@ export class ImageCarouselComponent implements OnInit {
   }
   
   getImage = () => {
-    if (!this.images) {
+    if (!this.images || this.images.length == 0) {
       const image: Image = {
         id: '',
         file: '',

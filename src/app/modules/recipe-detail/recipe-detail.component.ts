@@ -54,24 +54,27 @@ export class RecipeDetailComponent implements OnInit {
     const pathImgs = [];
     this.recipeFromParam.subscribe(r => {
       this.recipe = r;
-      this.recipe.images.forEach(path => {
-        imgs.push(this.imagesService.getImageByPath(path));
-        const img = this.imagesService.getImageFromPath(path)
-          .subscribe(obs => {console.log(obs)})
-        console.log(img);
-        pathImgs.push(img);
-         
-        console.log(pathImgs)
-        // this.images = this.imagesService.getImageByPath(path);
-        this.images = imgs;
-        // console.log(this.images);
-      });
+      if (this.recipe.images && this.recipe.images.length > 0) {
+        this.recipe.images.forEach(path => {
+          imgs.push(this.imagesService.getImageByPath(path));
+          const img = this.imagesService.getImageFromPath(path)
+            .subscribe(obs => {console.log(obs)})
+          console.log(img);
+          pathImgs.push(img);
+          
+          console.log(pathImgs)
+          // this.images = this.imagesService.getImageByPath(path);
+          this.images = imgs;
+          // console.log(this.images);
+        });
+      }
       // console.log(pathImgs.map(d => [].concat(...d)))
       // pathImgs.forEach(img => console.log(img))
       // const igs = []
       // imgs.forEach(img => img.subscribe(i => this.images.push(i[0])));
       // console.log(this.images);
     });
+    
     // console.log(this.images);
     this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
   }

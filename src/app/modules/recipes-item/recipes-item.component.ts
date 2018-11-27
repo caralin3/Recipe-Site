@@ -22,7 +22,7 @@ export class RecipesItemComponent implements OnInit {
   constructor(private imagesService: ImagesService) { }
 
   ngOnInit() {
-    if (this.recipe.images.length > 0) {
+    if (this.recipe.images && this.recipe.images.length > 0) {
       this.imagesService.getImageByPath(this.recipe.images[0])
         .subscribe(imgs => imgs.forEach(img => this.thumbnail = img));
     }

@@ -80,11 +80,34 @@ export class RecipeFormComponent implements OnInit {
     this.images.push(path);
   }
 
+  getKeywords = (recipe, meal) => {
+    let keywords: string[] = [];
+    const title: string[] = recipe.title.split(' ').map((i: string) => i !== '' && i.toLowerCase().trim());
+    const notes: string[] = recipe.notes && recipe.notes.split(',').map((i: string) => i !== '' && i.toLowerCase().trim());
+    const tags: string[] = recipe.tags && recipe.tags.split(',').map((tag: string) => tag.toLowerCase().trim());
+    const meals: string[] = [];
+    Object.entries(meal).forEach(entry => {
+      if (entry[1]) {
+        meals.push(entry[0].toLowerCase().trim());
+      }
+    });
+    keywords = keywords.concat(title);
+    if (notes) {
+      keywords = keywords.concat(notes);
+    }
+    if (tags) {
+      keywords = keywords.concat(tags);
+    }
+    keywords = keywords.concat(meals);
+    return keywords;
+  }
+
   addRecipe = (recipe, status) => {
     if (status === 'VALID') {
       const ingredients = recipe.ingredients.split('\n').map((i: string) => i !== '' && i.trim());
       const directions = recipe.directions.split('\n').map((d: string) => d !== '' && d.trim());
-      const tags = recipe.tags.split(',').map((tag: string) => tag.trim());
+      const tags = recipe.tags && recipe.tags.split(',').map((tag: string) => tag.trim());
+      const notes = recipe.notes && recipe.notes.split(',').map((note: string) => note.trim());
       let meals = {
         'breakfast': false,
         'lunch': false,
@@ -104,12 +127,17 @@ export class RecipeFormComponent implements OnInit {
       if (!totalTime || totalTime === 0) {
         totalTime += recipe.cookTime + recipe.prepTime;
       }
+
+      const keywords = this.getKeywords(recipe, meals);
+
       const newRecipe: FirebaseRecipeModel = {
         ...recipe,
         directions,
         images: this.images,
         ingredients,
+        keywords,
         meals,
+        notes,
         tags,
         totalTime,
         userId: this.currentUserId,
@@ -117,7 +145,7 @@ export class RecipeFormComponent implements OnInit {
       this.recipesService.createRecipe(newRecipe);
       this.recipeForm.reset();
       this.images = [];
+      this.stars = undefined;
     }
   }
-
 }

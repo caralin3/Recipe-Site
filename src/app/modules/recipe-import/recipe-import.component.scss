@@ -1,0 +1,40 @@
+@import '../../../styles';
+
+.recipeImport {
+  padding: 2rem;
+
+  &_cta {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
+  }
+
+  &_form {
+    align-items: center;
+    background-color: $color-lt-bg;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &_title {
+    color: $color-primary;
+    font-family: $font-primary;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &_control {
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    padding: 1rem;
+    width: 75%;
+  }
+
+  &_button {
+    font-size: 1.2rem;
+    margin: 2rem 0;
+  }
+}
