@@ -98,15 +98,24 @@ export class RecipesService {
 
   // SEARCH
 
-  /* GET recipes whose title contains search term */
-  searchRecipesByTitle(term: string): Observable<Recipe[]> {
+  /* GET recipes whose keywords contains search term */
+  searchRecipes(term: string): Observable<Recipe[]> {
+    const user = firebase.auth().currentUser;
     if (!term.trim()) {
       // if not search term, return empty recipe array.
       return of([]);
     }
-    this.db.collection('recipes',ref => ref.where('title', '>=', term)
-      .where('title', '<=', term + '\uf8ff'))
+    return this.db.collection('recipes', ref => ref.where('userId', '==', user.uid)
+      .where('keywords', 'array-contains', term.toLowerCase().toString()))
       .snapshotChanges()
+      .pipe(map(actions => actions.map(a => {
+        // Get document data
+        const data = a.payload.doc.data() as FirebaseRecipeModel;
+        // Get document id
+        const id = a.payload.doc.id;
+        // Use spread operator to add the id to the document data
+        return { id, ...data } as Recipe;
+      })));
   }
 
   // searchRecipes(searchValue){

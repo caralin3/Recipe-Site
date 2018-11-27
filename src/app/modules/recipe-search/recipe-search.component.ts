@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { RecipesService } from '../../../app/core/firestore';
+import { Recipe } from '../../../app/core/models';
 
 @Component({
   selector: 'app-recipe-search',
@@ -7,10 +11,23 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RecipeSearchComponent implements OnInit {
   @Input() comp: string;
+  recipes$: Observable<Recipe[]>;
+  term: string;
 
-  constructor() { }
+  constructor(
+    private recipeService: RecipesService,
+    private router: Router,
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  search(term: string): void {
+    this.term = term;
   }
 
+  onEnter = (term) => {
+    this.search(term);
+    this.router.navigate(['/recipes/search'], { queryParams: { keyword: term } });
+    this.recipeService.searchRecipes(term);
+  }
 }

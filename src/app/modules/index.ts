@@ -9,6 +9,7 @@ import { RecipeDetailComponent } from './recipe-detail';
 import { RecipeFormComponent } from './recipe-form';
 import { RecipeImportComponent } from './recipe-import';
 import { RecipeSearchComponent } from './recipe-search';
+import { RecipeSearchResultsComponent } from './recipe-search-results';
 import { RecipesComponent } from './recipes';
 import { RecipesItemComponent } from './recipes-item';
 import { RegisterComponent } from './register';
@@ -25,6 +26,7 @@ export {
   RecipeFormComponent,
   RecipeImportComponent,
   RecipeSearchComponent,
+  RecipeSearchResultsComponent,
   RecipesComponent,
   RecipesItemComponent,
   RegisterComponent,

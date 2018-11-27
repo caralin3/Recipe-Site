@@ -10,7 +10,8 @@ import {
   RecipesComponent,
   RecipeDetailComponent,
   RecipeFormComponent,
-  RecipeImportComponent
+  RecipeImportComponent,
+  RecipeSearchResultsComponent,
 } from './modules';
 import { UserComponent } from './modules/user/user.component';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'recipes', component: RecipesComponent, resolve: { data: UserResolver}},
   { path: 'recipes/add', component: RecipeFormComponent, resolve: { data: UserResolver}},
   { path: 'recipes/import', component: RecipeImportComponent, resolve: { data: UserResolver}},
+  { path: 'recipes/search', component: RecipeSearchResultsComponent, resolve: { data: UserResolver}},
   { path: 'recipes/:id', component: RecipeDetailComponent, resolve: { data: UserResolver}},
   { path: 'grocery', component: GroceryComponent, resolve: { data: UserResolver}},
   { path: 'planner', component: PlannerComponent, resolve: { data: UserResolver}},

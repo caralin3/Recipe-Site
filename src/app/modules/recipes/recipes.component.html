@@ -11,12 +11,12 @@
     </div>
   </div>
   <ul class="recipes_list" *ngIf="mealRecipes.length > 0">
-    <li class="recipes_item" *ngFor="let recipe of mealRecipes.slice(0, 4)">
+    <li class="recipes_item recipes_list-item" *ngFor="let recipe of mealRecipes.slice(0, 4)">
       <app-recipes-item [recipe]="recipe"></app-recipes-item>
     </li>
   </ul>
   <ul class="recipes_list" *ngIf="mealRecipes.length === 0">
-    <li class="recipes_item" *ngFor="let recipe of limitedRecipes">
+    <li class="recipes_item recipes_list-item" *ngFor="let recipe of limitedRecipes">
       <app-recipes-item [recipe]="recipe"></app-recipes-item>
     </li>
   </ul>
