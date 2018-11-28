@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, HostListener, OnDestroy } from '@angular/core';
 import { Image, Recipe } from '../../../app/core/models';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ImagesService, RecipesService } from 'src/app/core/firestore';
 import { switchMap } from 'rxjs/operators';
@@ -22,6 +22,8 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
   images$: Observable<Image[]>;
   images: Image[] = [];
   image: Image;
+  recipes: Recipe[] = [];
+  currentRecipe: Recipe;
 
   private subscriptions: Subscription[] = [];
   private defaultImage: Image = {
@@ -81,14 +83,18 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
 
   recipeDetailImages = () => {
     this.subscriptions.push(this.recipe$.subscribe(rec => {
-      rec.images.forEach((path) => {
-        this.images$ = (this.imagesService.getImageFromPath(path));
-        this.subscriptions.push(this.images$.subscribe(imgs => {
-          this.images.push(imgs[0]);
-          this.image = this.images[0];
-        }));
-      });
-      this.startCarousel();
+      if (rec.images && rec.images.length > 0) {
+        rec.images.forEach((path) => {
+          this.images$ = (this.imagesService.getImageFromPath(path));
+          this.subscriptions.push(this.images$.subscribe(imgs => {
+            this.images.push(imgs[0]);
+            this.image = this.images[0];
+          }));
+        });
+        this.startCarousel();
+      } else {
+        this.noImages();
+      }
     }));
   }
 
@@ -103,9 +109,11 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
             const path = rec.images[0];
             this.images$ = this.imagesService.getImageFromPath(path);
             this.subscriptions.push(this.images$.subscribe(imgs => {
+              this.recipes.push(rec);
               this.images.push(imgs[0]);
             }));
           } else {
+            this.recipes.push(rec);
             this.images.push(this.defaultImages[idx]);
             idx++;
           }
@@ -127,11 +135,13 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
       this.currentIndex++;
       this.currentIndex = this.currentIndex % this.images.length;
       this.image = this.images[this.currentIndex];
+      this.currentRecipe = this.recipes[this.currentIndex];
     }, 5000);
   }
   
   selectImage = (index: number) => {
     this.currentIndex = index;
     this.image = this.images[this.currentIndex];
+    this.currentRecipe = this.recipes[this.currentIndex];
   }
 }
