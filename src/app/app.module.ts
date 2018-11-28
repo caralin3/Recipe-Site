@@ -4,8 +4,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,9 +14,10 @@ import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
 import { FirebaseUserService, RecipesService } from './core/firestore';
 import { UserResolver } from './core/user.resolver';
-import { FullscreenDirective } from './directives';
+import { DropZoneDirective, FullscreenDirective } from './directives';
 import {
   ContactComponent,
+  FileUploadComponent,
   GroceryComponent,
   HomeComponent,
   ImageCarouselComponent,
@@ -33,7 +35,7 @@ import {
 } from './modules';
 import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
-import { NumberToLabelPipe, TrimTextPipe } from './pipes';
+import { FileSizePipe, NumberToLabelPipe, TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
 
 @NgModule({
@@ -58,6 +60,9 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     RegisterComponent,
     UserComponent,
     TrimTextPipe,
+    DropZoneDirective,
+    FileUploadComponent,
+    FileSizePipe,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +71,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFirestoreModule.enablePersistence(), // Offline data
+    AngularFireStorageModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

@@ -18,6 +18,7 @@ export class RecipeFormComponent implements OnInit {
   currentUserId: string;
   stars: number;
   hover: number = 0;
+  images: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -75,6 +76,10 @@ export class RecipeFormComponent implements OnInit {
     this.hover = num;
   }
 
+  onImageUpload = (path: string) => {
+    this.images.push(path);
+  }
+
   getKeywords = (recipe, meal) => {
     let keywords: string[] = [];
     const title: string[] = recipe.title.split(' ').map((i: string) => i !== '' && i.toLowerCase().trim());
@@ -128,6 +133,7 @@ export class RecipeFormComponent implements OnInit {
       const newRecipe: FirebaseRecipeModel = {
         ...recipe,
         directions,
+        images: this.images,
         ingredients,
         keywords,
         meals,
@@ -138,6 +144,7 @@ export class RecipeFormComponent implements OnInit {
       }
       this.recipesService.createRecipe(newRecipe);
       this.recipeForm.reset();
+      this.images = [];
       this.stars = undefined;
     }
   }

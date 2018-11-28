@@ -1,23 +1,26 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { RecipesService } from '../../../app/core/firestore';
-import { Recipe } from '../../../app/core/models';
 import * as screenfull from 'screenfull';
+import { RecipesService } from '../../../app/core/firestore';
+import { Image, Recipe } from '../../../app/core/models';
 
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss']
 })
-export class RecipeDetailComponent implements OnInit {
-  recipeFromParam: Observable<Recipe>;
+export class RecipeDetailComponent implements OnInit, OnDestroy {
+  images$: Observable<Image[]>;
+  images: Image[] = [];
+  recipeFromParam$: Observable<Recipe>;
   recipe: Recipe;
   checked: string[] = [];
-  limitedRecipes: Recipe[];
+  limitedRecipes: Observable<Recipe[]>;
   fullscreen: boolean;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private location: Location,
@@ -42,14 +45,20 @@ export class RecipeDetailComponent implements OnInit {
       const element = document.querySelector("#" + f)
       if (element) element.scrollIntoView()
     });
-    this.recipeFromParam = this.route.paramMap.pipe(
+    this.recipeFromParam$ = this.route.paramMap.pipe(
       switchMap(params => {
         const id = params.get('id');
         return this.recipesService.getRecipe(id);
       })
     );
-    this.recipeFromParam.subscribe(r => this.recipe = r);
+    this.subscriptions.push(this.recipeFromParam$.subscribe(rec => {
+      this.recipe = rec;
+    }));
     this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   check = (direction: string, index: number) => {

@@ -1,4 +1,5 @@
 import { ContactComponent } from './contact';
+import { FileUploadComponent } from './file-upload';
 import { GroceryComponent } from './grocery';
 import { HomeComponent } from './home';
 import { ImageCarouselComponent } from './image-carousel';
@@ -16,6 +17,7 @@ import { RegisterComponent } from './register';
 
 export {
   ContactComponent,
+  FileUploadComponent,
   GroceryComponent,
   HomeComponent,
   ImageCarouselComponent,

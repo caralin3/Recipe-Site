@@ -1,0 +1,79 @@
+@import '../../../styles';
+
+.fileUpload {
+  align-items: center;
+  display: flex;
+  padding: 1rem;
+
+  @media only screen and (max-width: 640px) {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &_images {
+    display: flex;
+
+    @media only screen and (max-width: 640px) {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
+
+.uploadedImage {
+  height: 150px;
+  margin: 0 1rem;
+  width: 200px;
+
+  @media only screen and (max-width: 640px) {
+    margin: 1rem;
+  }
+}
+
+.dropzone { 
+  align-items: center;
+  background: $white;
+  border: 2px dashed $color-primary;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column; 
+  height: auto;
+  justify-content: center;
+  padding: 2rem;
+
+  &_title {
+    font-size: 1.2rem;
+    font-family: $font-primary;
+    margin: 0;
+  }
+
+  &_subtitle {
+    color: $color-primary;
+    font-size: 1rem;
+    font-family: $font-primary;
+  }
+
+  &.hovering {
+    border: 2px solid $color-primary;
+    color: #dadada !important;
+  }
+}
+
+.file {
+  &_input {
+    display: none;
+  }
+
+  &_label {
+    color: $color-primary;
+
+    &:focus,
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+// progress::-webkit-progress-value {
+//   transition: width 0.1s ease;
+// }

@@ -1,9 +1,9 @@
 <div class="recipesItem" [routerLink]="['/recipes', recipe.id]">
-  <img class="recipesItem_image" src="/assets/images/background1.jpg">
+  <img class="recipesItem_image" [src]="thumbnail.src" [alt]="thumbnail.name">
   <div class="recipesItem_container">
     <div class="recipesItem_text">
       <div class="recipesItem_row">
-        <h3 class="recipesItem_text-title">{{ recipe.title | trimText: 14 }}</h3>
+        <h3 class="recipesItem_text-title">{{ recipe.title | trimText: 12 }}</h3>
         <div class="recipesItem_stars">
           <i class="fas fa-star recipesItem_star" *ngIf="recipe.myRating >= 1"></i>
           <i class="fas fa-star recipeItem_star" *ngIf="recipe.myRating >= 2"></i>

@@ -1,5 +1,3 @@
-import { mealType } from '../models';
-
 export interface FirebaseRecipeModel {
   calories: number,
   cookTime: number,
