@@ -67,6 +67,7 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
         if (!id) {
           return [];
         }
+        this.images = [];
         return this.recipesService.getRecipe(id);
       })
     );
@@ -79,6 +80,7 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    clearInterval();
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
