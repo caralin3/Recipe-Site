@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { Image } from '../models';
 import { FirebaseImageModel } from './images.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,22 @@ export class ImagesService {
     ));
   }
 
+  getImagesByTitle = (title) => {
+    const user = firebase.auth().currentUser;
+    return this.db.collection<FirebaseImageModel>('images',
+      ref => ref.where('userId', '==', user.uid)
+      .where('recipeId', '==', title)).snapshotChanges()
+      .pipe(map(actions => actions.map(a => {
+        // Get document data
+        const data = a.payload.doc.data() as FirebaseImageModel;
+        // Get document id
+        const id = a.payload.doc.id;
+        // Use spread operator to add the id to the document data
+        return { id, ...data } as Image;
+      })
+    ));
+  }
+
   // Get Limited Images
   getLimitedImages = (limit: number) => {
     const images: Image[] = [];
@@ -44,27 +61,8 @@ export class ImagesService {
     return images;
   }
 
-  getImageFromPath = (path: string) => {
-    // let image: Image;
-    return this.getImages().pipe(map(imgs =>
-      imgs.map(img => {
-        if (img.path === path) {
-          return img;
-        }
-      })
-    ))
-    // this.getImages().subscribe((img: Image[]) => {
-    //   img.forEach((im) => {
-    //     if (im.path === path) {
-    //       image = im;
-    //     }
-    //   });
-    // });
-    // return image;
-  }
-
   // Get Image from Path
-  getImageByPath = (path: string) => {
+  getImageFromPath = (path: string): Observable<Image[]> => {
     const user = firebase.auth().currentUser;
     return this.db.collection<FirebaseImageModel>('images',
       ref => ref.where('userId', '==', user.uid)

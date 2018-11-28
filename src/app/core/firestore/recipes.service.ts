@@ -17,10 +17,27 @@ export class RecipesService {
   }
 
   // Get All Recipes
-  getRecipes = () => {
+  getRecipes = (): Observable<Recipe[]> => {
     const user = firebase.auth().currentUser;
     return this.db.collection<FirebaseRecipeModel>('recipes',
       ref => ref.where('userId', '==', user.uid)).snapshotChanges()
+      .pipe(map(actions => actions.map(a => {
+        // Get document data
+        const data = a.payload.doc.data() as FirebaseRecipeModel;
+        // Get document id
+        const id = a.payload.doc.id;
+        // Use spread operator to add the id to the document data
+        return { id, ...data } as Recipe;
+      })
+    ));
+  }
+
+  // Get Limited Recipes
+  getLimitRecipes = (limit: number): Observable<Recipe[]> => {
+    const user = firebase.auth().currentUser;
+    return this.db.collection<FirebaseRecipeModel>('recipes',
+      ref => ref.where('userId', '==', user.uid).limit(limit))
+      .snapshotChanges()
       .pipe(map(actions => actions.map(a => {
         // Get document data
         const data = a.payload.doc.data() as FirebaseRecipeModel;

@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import { User } from '../../core/models';
 import * as SessionActions from './session.actions';
 

@@ -57,7 +57,7 @@ export class FileUploadComponent implements OnInit {
 
     // Client-side validation example
     if (file.type.split('/')[0] !== 'image') {
-      console.error('unsupported file type :( ');
+      console.error('unsupported file type');
       return;
     }
 
@@ -73,7 +73,7 @@ export class FileUploadComponent implements OnInit {
     // Progress monitoring
     this.percentage = this.task.percentageChanges();
     // Update firestore on completion
-    const image = {
+    const image: FirebaseImageModel = {
       file: file.name,
       name: file.name.slice(0, -4),
       path,

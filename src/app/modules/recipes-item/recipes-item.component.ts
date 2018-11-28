@@ -23,9 +23,8 @@ export class RecipesItemComponent implements OnInit {
 
   ngOnInit() {
     if (this.recipe.images && this.recipe.images.length > 0) {
-      this.imagesService.getImageByPath(this.recipe.images[0])
+      this.imagesService.getImageFromPath(this.recipe.images[0])
         .subscribe(imgs => imgs.forEach(img => this.thumbnail = img));
     }
   }
-
 }
