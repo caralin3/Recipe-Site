@@ -1,11 +1,13 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import * as screenfull from 'screenfull';
-import { RecipesService } from '../../../app/core/firestore';
-import { Image, Recipe } from '../../../app/core/models';
+import { RecipesService, GroceriesService } from '../../../app/core/firestore';
+import { Image, Recipe, GroceryList } from '../../../app/core/models';
+import { AppState } from '../../../app/store';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -18,15 +20,22 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipeFromParam$: Observable<Recipe>;
   recipe: Recipe;
   checked: string[] = [];
+  inGroceries: object;
   limitedRecipes: Observable<Recipe[]>;
+  groceries$: Observable<GroceryList[]>;
+  groceryLists: Observable<{id: string, name: string}[]>;
   fullscreen: boolean;
   private subscriptions: Subscription[] = [];
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
+    private store: Store<AppState>,
+    public groceriesService: GroceriesService,
     public recipesService: RecipesService
-  ) { }
+  ) {
+    this.groceryLists = this.store.select(appState => appState.sessionState.groceryLists);
+  }
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
@@ -51,10 +60,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         return this.recipesService.getRecipe(id);
       })
     );
-    this.subscriptions.push(this.recipeFromParam$.subscribe(rec => {
-      this.recipe = rec;
-    }));
     this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
+    // this.groceries$ = this.groceriesService.getGroceryListByName('Groceries');
+    this.setGroceryItems();
   }
 
   ngOnDestroy() {
@@ -69,4 +77,45 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       this.checked.push(direction);
     }
   }
+
+  setGroceryItems = () => {
+    this.subscriptions.push(this.recipeFromParam$.subscribe(rec => {
+      this.recipe = rec;
+      this.subscriptions.push(this.groceryLists
+        .subscribe(lists => lists.forEach(list => {
+          const id = list.id;
+          const name = list.name;
+          if (name === 'Groceries') {
+            const groceries = this.groceriesService.getGroceryList(id);
+            this.recipe.ingredients.forEach(ing => {
+              const ingred = ing.toLowerCase().trim();
+              this.inGroceries = {
+                ...this.inGroceries,
+                [ingred]: false,
+              }
+              this.subscriptions.push(groceries.subscribe(groc => {
+                this.inGroceries = {
+                  ...this.inGroceries,
+                  [ingred]: groc.items.includes(ingred),
+                }
+              }));
+            });
+          }
+        }))
+      );
+    }));
+  }
+
+  addIngredient = (ingred: string) => {
+    const newIng = ingred.toLowerCase().trim();
+    this.subscriptions.push(this.groceryLists
+      .subscribe(lists => lists.forEach(list => {
+        const id = list.id;
+        const name = list.name;
+        if (name === 'Groceries') {
+          this.groceriesService.addGroceryItem(id, newIng);
+        }
+      }))
+    );
+  } 
 }

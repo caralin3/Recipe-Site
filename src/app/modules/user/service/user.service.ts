@@ -4,7 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AppState } from '../../../../app/store';
-import { FirebaseUserService } from '../../../../app/core/firestore';
+import { FirebaseUserService, GroceriesService } from '../../../../app/core/firestore';
 import * as SessionActions from '../../../store/session/session.actions';
 import { User } from '../../../../app/core/models';
 
@@ -16,8 +16,8 @@ export class UserService {
    public afAuth: AngularFireAuth,
    private store: Store<AppState>,
    public firebaseService: FirebaseUserService,
+   public groceryService: GroceriesService,
   ){ }
-
 
   getCurrentUser = () => {
     return new Promise<any>((resolve, reject) => {
@@ -29,6 +29,12 @@ export class UserService {
               ...doc.payload.data() as User,
               id: user.uid,
             })));
+          const groceryIds = [];
+          this.groceryService.getGroceryLists()
+            .subscribe(groceries => groceries.forEach(list => {
+              groceryIds.push({id: list.id, name: list.name});
+              this.store.dispatch(new SessionActions.SetGroceryLists(groceryIds))
+            }))
         } else {
           reject('No user logged in');
         }

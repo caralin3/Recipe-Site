@@ -110,6 +110,9 @@
   }
 
   &_ingredItem {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
     padding: 1rem;
 
     @media only screen and (max-width: 768px) {
@@ -127,6 +130,22 @@
     &-text {
       font-size: 1.2rem;
       padding-left: 1rem;
+    }
+
+    &-cart {
+      color: $color-button;
+      font-size: 1.2rem;
+      padding-left: 1rem;
+
+      // @media only screen and (max-width: 760px) {
+      //   padding-right: 0;
+      // }
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
     }
 
     &-input {

@@ -88,7 +88,7 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.recipe$.subscribe(rec => {
       if (rec.images && rec.images.length > 0) {
         rec.images.forEach((path) => {
-          this.images$ = (this.imagesService.getImageFromPath(path));
+          this.images$ = this.imagesService.getImageFromPath(path);
           this.subscriptions.push(this.images$.subscribe(imgs => {
             this.images.push(imgs[0]);
             this.image = this.images[0];

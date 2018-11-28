@@ -40,7 +40,8 @@ export interface Recipe {
   tags: string[],
   title: string;
   totalTime: number,
-  yield: number
+  userId: string,
+  yield: number,
 }
 
 // export interface Rating {
@@ -57,7 +58,8 @@ export interface RecipeLists {
 export interface GroceryList {
   id: string,
   name: string,
-  ingredientIds: string[],
+  items: string[],
+  userId: string,
 }
 
 export interface MealCalendar {

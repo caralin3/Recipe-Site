@@ -41,6 +41,17 @@
                 {{ ing }}
               </span>
             </label>
+            <i
+              class="recipeDetail_ingredItem-cart fas fa-cart-plus"
+              *ngIf="!inGroceries[ing]"
+              (click)="addIngredient(ing)"
+            ></i>
+            <i
+              class="recipeDetail_ingredItem-cart fas fa-shopping-cart"
+              *ngIf="inGroceries[ing]"
+              [routerLink]="'/grocery'"
+              fragment="{{ing}}"
+            ></i>
           </li>
         </ul>
       </div>
