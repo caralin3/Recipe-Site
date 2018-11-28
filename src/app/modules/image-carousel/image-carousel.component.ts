@@ -37,6 +37,7 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
   }
   private defaultImages: Image[] = [
     {...this.defaultImage, src: '/assets/images/background1.jpg', name: 'background1'} as Image,
+    {...this.defaultImage, src: '/assets/images/grains.jpg', name: 'grains'} as Image,
     {...this.defaultImage, src: 'https://c.pxhere.com/photos/96/03/meat_bbq_food_barbecue_beef_cooking_eating_fire-807571.jpg!d', name: 'bbq'} as Image,
     {...this.defaultImage, src: 'https://www.goodfreephotos.com/albums/food/cooking-ingredients-with-avocado-mushrooms-eggs.jpg', name: 'avocado'} as Image,
     {...this.defaultImage, src: 'https://images.pexels.com/photos/45247/potato-cook-pot-eat-45247.jpeg?cs=srgb&dl=container-cook-cooking-45247.jpg&fm=jpg', name: 'potato'} as Image,
@@ -118,6 +119,9 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
             idx++;
           }
           this.image = this.images[0];
+          if (!this.image) {
+            this.image = this.defaultImages[0];
+          }
         });
         this.startCarousel();
       }
