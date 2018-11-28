@@ -18,7 +18,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipeFromParam$: Observable<Recipe>;
   recipe: Recipe;
   checked: string[] = [];
-  limitedRecipes: Recipe[];
+  limitedRecipes: Observable<Recipe[]>;
   fullscreen: boolean;
   private subscriptions: Subscription[] = [];
 

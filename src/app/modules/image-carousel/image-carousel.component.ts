@@ -72,7 +72,7 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
     if (this.route.snapshot.paramMap.get('id')) {
       this.recipeDetailImages();
     } else {
-      this.recipes$ = this.recipesService.getLimitRecipes(5);
+      this.recipes$ = this.recipesService.getLimitedRecipes(5);
       this.recipeImages();
     }
   }

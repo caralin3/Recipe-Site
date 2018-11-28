@@ -1,14 +1,14 @@
 <div class="recipes">
-  <app-image-carousel *ngIf="(recipes | async)?.length === 0" [search]="true"></app-image-carousel>
+  <app-image-carousel *ngIf="(recipes$ | async)?.length === 0" [search]="true"></app-image-carousel>
   <app-image-carousel
-    *ngIf="(recipes | async)?.length > 0"
+    *ngIf="(recipes$ | async)?.length > 0"
     [search]="true"
     [lowerRightCaption]="'Caption Text'"
   ></app-image-carousel>
   <div class="recipes_search">
     <app-recipe-search [comp]="'recipes'"></app-recipe-search>
   </div>
-  <div *ngIf="(recipes | async)?.length > 0">
+  <div>
     <div class="recipes_header">
       <h2 class="recipes_header-text">{{ greeting }}</h2>
       <div class="recipes_buttons">
@@ -16,13 +16,13 @@
         <button class="recipes_button" type="button" [routerLink]="'./import'">Import Recipe</button>
       </div>
     </div>
-    <ul class="recipes_list" *ngIf="mealRecipes.length > 0">
-      <li class="recipes_item recipes_list-item" *ngFor="let recipe of mealRecipes.slice(0, 4)">
+    <ul class="recipes_grid" *ngIf="mealRecipes.length > 0">
+      <li class="recipes_item" *ngFor="let recipe of mealRecipes.slice(0, 4)">
         <app-recipes-item [recipe]="recipe"></app-recipes-item>
       </li>
     </ul>
-    <ul class="recipes_list" *ngIf="mealRecipes.length === 0">
-      <li class="recipes_item recipes_list-item" *ngFor="let recipe of limitedRecipes">
+    <ul class="recipes_grid" *ngIf="mealRecipes.length === 0">
+      <li class="recipes_item" *ngFor="let recipe of limitedRecipes | async">
         <app-recipes-item [recipe]="recipe"></app-recipes-item>
       </li>
     </ul>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <ul class="recipes_grid">
-      <li class="recipes_item" *ngFor="let recipe of recipes | async">
+      <li class="recipes_item" *ngFor="let recipe of recipes$ | async">
         <app-recipes-item [recipe]="recipe"></app-recipes-item>
       </li>
     </ul>
@@ -41,7 +41,7 @@
       <i class="fas fa-chevron-circle-up"></i>
     </a>
   </div>
-  <div class="recipes_none" *ngIf="(recipes | async)?.length === 0">
+  <div class="recipes_none" *ngIf="(recipes$ | async)?.length === 0">
     <h2 class="recipes_none-text">Start adding or importing your favorite recipes!</h2>
     <div class="recipes_none-buttons">
       <button class="recipes_button" type="button" [routerLink]="'./add'">Add Recipe</button>

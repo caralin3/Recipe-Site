@@ -10,9 +10,9 @@ import { Recipe } from '../../../app/core/models';
 })
 export class RecipesComponent implements OnInit {
   showTop: boolean;
-  recipes: Observable<Recipe[]>;
+  recipes$: Observable<Recipe[]>;
+  limitedRecipes: Observable<Recipe[]>;
   mealRecipes: Recipe[];
-  limitedRecipes: Recipe[];
   greeting: string;
 
   constructor(public recipesService: RecipesService) {}
@@ -27,8 +27,8 @@ export class RecipesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.recipes = this.recipesService.getRecipes();
-    this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
+    this.recipes$ = this.recipesService.getRecipes();
+    this.limitedRecipes = this.recipesService.getLimitedRecipes(5);
     this.setGreeting();
   }
 

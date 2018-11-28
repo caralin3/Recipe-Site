@@ -33,7 +33,7 @@ export class RecipesService {
   }
 
   // Get Limited Recipes
-  getLimitRecipes = (limit: number): Observable<Recipe[]> => {
+  getLimitedRecipes = (limit: number): Observable<Recipe[]> => {
     const user = firebase.auth().currentUser;
     return this.db.collection<FirebaseRecipeModel>('recipes',
       ref => ref.where('userId', '==', user.uid).limit(limit))
@@ -47,19 +47,6 @@ export class RecipesService {
         return { id, ...data } as Recipe;
       })
     ));
-  }
-
-  // Get Limited Recipes
-  getLimitedRecipes = (limit: number) => {
-    let recipes: Recipe[] = [];
-    this.getRecipes().subscribe((rec: Recipe[]) => {
-      rec.forEach((r, i) => {
-        if (i < limit) {
-          recipes.push(r);
-        }
-      });
-    });
-    return recipes;
   }
 
   // Get Recipes by Meal
