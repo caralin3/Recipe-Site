@@ -83,4 +83,15 @@
       </div>
     </section>
   </div>
+  <video
+    *ngIf="true"
+    autoplay
+    muted
+    loop
+    height="0"
+    width="0"
+    onloadedmetadata="this.muted = true"
+  >
+    <source src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4">
+  </video>
 </div>
