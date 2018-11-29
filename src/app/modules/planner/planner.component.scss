@@ -1,0 +1,23 @@
+@import '../../../styles';
+
+.planner {
+  overflow-x: hidden;
+
+  &_header {
+    align-items: center;
+    background-color: $color-primary;
+    display: flex;
+    
+    &-title {
+      color: $white;
+      font-family: $font-primary;
+      padding: 0 1rem;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+}
