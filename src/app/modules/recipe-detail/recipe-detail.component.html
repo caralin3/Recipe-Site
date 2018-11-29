@@ -86,7 +86,7 @@
     <section class="recipeDetail_recommendations" *ngIf="!fullscreen">
       <h2 class="recipeDetail_recommendations-title">Recommended Recipes</h2>
       <div class="recipeDetail_recommendations-container">
-        <ul class="recipeDetail_recommendations-list" *ngFor="let rec of limitedRecipes | async">
+        <ul class="recipeDetail_recommendations-list" *ngFor="let rec of limitedRecipes$ | async">
           <li>
             <app-recipes-item [recipe]="rec"></app-recipes-item>
           </li>

@@ -56,6 +56,7 @@ export interface RecipeLists {
 }
 
 export interface GroceryList {
+  completed: string[],
   id: string,
   name: string,
   items: string[],

@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import * as screenfull from 'screenfull';
 import { RecipesService, GroceriesService } from '../../../app/core/firestore';
-import { Image, Recipe, GroceryList } from '../../../app/core/models';
+import { Image, Recipe } from '../../../app/core/models';
 import { AppState } from '../../../app/store';
 
 @Component({
@@ -18,12 +18,11 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   images$: Observable<Image[]>;
   images: Image[] = [];
   recipeFromParam$: Observable<Recipe>;
+  limitedRecipes$: Observable<Recipe[]>;
+  groceryLists$: Observable<{id: string, name: string}[]>;
   recipe: Recipe;
   checked: string[] = [];
   inGroceries: object;
-  limitedRecipes: Observable<Recipe[]>;
-  groceries$: Observable<GroceryList[]>;
-  groceryLists: Observable<{id: string, name: string}[]>;
   fullscreen: boolean;
   private subscriptions: Subscription[] = [];
 
@@ -34,7 +33,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     public groceriesService: GroceriesService,
     public recipesService: RecipesService
   ) {
-    this.groceryLists = this.store.select(appState => appState.sessionState.groceryLists);
+    this.groceryLists$ = this.store.select(appState => appState.sessionState.groceryLists);
   }
 
   @HostListener("window:scroll", [])
@@ -60,8 +59,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         return this.recipesService.getRecipe(id);
       })
     );
-    this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
-    // this.groceries$ = this.groceriesService.getGroceryListByName('Groceries');
+    this.limitedRecipes$ = this.recipesService.getLimitedRecipes(4);
     this.setGroceryItems();
   }
 
@@ -81,7 +79,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   setGroceryItems = () => {
     this.subscriptions.push(this.recipeFromParam$.subscribe(rec => {
       this.recipe = rec;
-      this.subscriptions.push(this.groceryLists
+      this.subscriptions.push(this.groceryLists$
         .subscribe(lists => lists.forEach(list => {
           const id = list.id;
           const name = list.name;
@@ -108,12 +106,12 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   addIngredient = (ingred: string) => {
     const newIng = ingred.toLowerCase().trim();
-    this.subscriptions.push(this.groceryLists
+    this.subscriptions.push(this.groceryLists$
       .subscribe(lists => lists.forEach(list => {
         const id = list.id;
         const name = list.name;
         if (name === 'Groceries') {
-          this.groceriesService.addGroceryItem(id, newIng);
+          this.groceriesService.addGroceryItem(id, newIng, 'items');
         }
       }))
     );

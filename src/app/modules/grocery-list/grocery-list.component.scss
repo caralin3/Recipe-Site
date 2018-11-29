@@ -1,0 +1,134 @@
+@import '../../../styles';
+
+.groceryList {
+  background-color: $color-lt-bg;
+  -webkit-box-shadow: 0px 9px 17px 2px rgba(204,204,204,0.75);
+  -moz-box-shadow: 0px 9px 17px 2px rgba(204,204,204,0.75);
+  box-shadow: 0px 9px 17px 2px rgba(204,204,204,0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 2rem;
+    
+  &_list {
+    padding: 0 1rem;
+  }
+
+  &_header {
+    align-items: center;
+    display: flex;
+    font-family: $font-primary;
+    justify-content: space-between;
+
+    &:focus,
+    &:hover {
+      .groceryList_header-del {
+        opacity: 1;
+      }
+    }
+
+    &-left {
+      align-items: center;
+      display: flex;
+    }
+    
+    &-length {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+
+    &-del {
+      opacity: 0;
+    }
+    
+    &-add,
+    &-del {
+      color: $color-button;
+      font-size: 1.2rem;
+      padding: 0 0.5rem;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  &_item {
+    padding-bottom: 2rem;
+
+    &:focus,
+    &:hover {
+      cursor: pointer;
+      outline: none;
+
+      .groceryList_minus {
+        opacity: 1;
+      }
+    }
+
+    &-label {
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+    
+    &-num {
+      font-size: 1.2rem;
+      padding: 0 1rem;
+
+      @media only screen and (max-width: 768px) {
+        padding: 0 0.5rem;
+      }
+    }
+
+    &-text {
+      font-family: $font-primary;
+      font-size: 1.2rem;
+      padding: 0 1rem;
+
+      @media only screen and (max-width: 768px) {
+        padding: 0 0.5rem;
+      }
+    }
+
+    &-input {
+      display: none;
+    }
+  }
+
+  &_checked {
+    text-decoration: line-through;
+  }
+
+  &_checkbox {
+    color: $color-button;
+    font-size: 1.2rem;
+  }
+
+  &_minus {
+    color: $color-button;
+    font-size: 1rem;
+    opacity: 0;
+
+    &:focus,
+    &:hover {
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
+  &_new {
+    font-family: $font-primary;
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 150px;
+
+    &:focus {
+      outline-color: $color-primary;
+    }
+  }
+}

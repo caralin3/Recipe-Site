@@ -1,6 +1,7 @@
 import { ContactComponent } from './contact';
 import { FileUploadComponent } from './file-upload';
 import { GroceryComponent } from './grocery';
+import { GroceryListComponent } from './grocery-list';
 import { HomeComponent } from './home';
 import { ImageCarouselComponent } from './image-carousel';
 import { LoginComponent } from './login';
@@ -19,6 +20,7 @@ export {
   ContactComponent,
   FileUploadComponent,
   GroceryComponent,
+  GroceryListComponent,
   HomeComponent,
   ImageCarouselComponent,
   LoginComponent,

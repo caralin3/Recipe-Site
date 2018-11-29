@@ -73,24 +73,24 @@ export class GroceriesService {
   }
 
   // Update items in GroceryList
-  addGroceryItem = (groceryId: string, item: string) => {
+  addGroceryItem = (groceryId: string, item: string, list: string) => {
     const user = firebase.auth().currentUser;
-    return this.db.collection<FirebaseGroceryListModel>('groceries',
+    this.db.collection<FirebaseGroceryListModel>('groceries',
       ref => ref.where('userId', '==', user.uid))
       .doc(groceryId)
       .update({
-        items: firebase.firestore.FieldValue.arrayUnion(item),
+        [list]: firebase.firestore.FieldValue.arrayUnion(item),
       });
   }
 
   // Update items in GroceryList
-  removeGroceryItem = (groceryId: string, item: string) => {
+  removeGroceryItem = (groceryId: string, item: string, list: string) => {
     const user = firebase.auth().currentUser;
-    return this.db.collection<FirebaseGroceryListModel>('groceries',
+    this.db.collection<FirebaseGroceryListModel>('groceries',
       ref => ref.where('userId', '==', user.uid))
       .doc(groceryId)
       .update({
-        items: firebase.firestore.FieldValue.arrayRemove(item),
+        [list]: firebase.firestore.FieldValue.arrayRemove(item),
       });
   }
 
