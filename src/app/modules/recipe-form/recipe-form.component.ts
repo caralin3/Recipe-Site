@@ -65,6 +65,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
         myRating: ['', Validators.required ],
         notes: [this.defaultRecipe.notes.join('\n')],
         prepTime: [this.defaultRecipe.prepTime],
+        src: [this.defaultRecipe.src, Validators.required],
         tags: [''],
         title: [this.defaultRecipe.title, Validators.required ],
         totalTime: [this.defaultRecipe.totalTime],
@@ -80,6 +81,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
         myRating: ['', Validators.required ],
         notes: [''],
         prepTime: [''],
+        src: ['', Validators.required],
         tags: [''],
         title: ['', Validators.required ],
         totalTime: [''],
@@ -140,8 +142,10 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
       const directions = recipe.directions.split('\n').map((d: string) => d !== '' && d.trim());
       const tags = recipe.tags && recipe.tags.split(',').map((tag: string) => tag.trim());
       let notes = recipe.notes && recipe.notes.split(',').map((note: string) => note.trim());
+      let url: string = '';
       if (this.defaultRecipe) {
         notes = recipe.notes && recipe.notes.split('\n').map((note: string) => note.trim());
+        url = this.defaultRecipe.url;
       }
       let meals = {
         'breakfast': false,
@@ -175,6 +179,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
         notes,
         tags,
         totalTime,
+        url,
         userId: this.currentUserId,
       }
       this.recipesService.createRecipe(newRecipe);

@@ -36,10 +36,12 @@ export interface Recipe {
   myRating: number,
   notes: string[],
   prepTime?: number,
-  // TODO: Add servings or url
+  // TODO: Add servings
+  src: string;
   tags: string[],
   title: string;
   totalTime: number,
+  url: string;
   userId: string,
   yield: number,
 }
@@ -52,6 +54,7 @@ export interface ImportedRecipe {
   ingredients: string[],
   notes: string[],
   servings: number,
+  src: string,
   title: string,
   totalTime: number,
   url: string,

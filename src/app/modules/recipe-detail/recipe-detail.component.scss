@@ -85,8 +85,34 @@
     }
   }
 
+  &_imported {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+
+    &-title {
+      // color: $color-primary;
+    }
+
+    &-link {
+      color: $color-primary;
+      padding: 0 0.5rem;
+
+      &:focus,
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-src {
+      color: $color-primary;
+      padding: 0 0.5rem;
+    }
+  }
+
   &_ingredients {
-    padding: 1rem;
+    padding: 0 1rem;
 
     &-header {
       align-items: center;

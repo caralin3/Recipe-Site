@@ -23,10 +23,21 @@
         </div>
       </div>
     </div>
+    <section class="recipeDetail_imported">
+      <h2 *ngIf="recipe.url" class="recipeDetail_imported-title">
+        Imported From:
+        <a class="recipeDetail_imported-link" [href]="recipe.url" target="_blank">{{ recipe.src }}</a>
+      </h2>
+      <h2 *ngIf="!recipe.url" class="recipeDetail_imported-title">
+        Source:
+        <span *ngIf="recipe.src" class="recipeDetail_imported-src">{{ recipe.src }}</span>
+      </h2>
+      <button toggleFullscreen>Toggle fullscreen</button>
+    </section>
     <section class="recipeDetail_ingredients">
       <div class="recipeDetail_ingredients-header">
         <h2 class="recipeDetail_ingredients-title">Ingredients</h2>
-        <button toggleFullscreen>Toggle fullscreen</button>
+        <!-- <button toggleFullscreen>Toggle fullscreen</button> -->
       </div>
       <div class="recipeDetail_ingredients-grid">
         <ul class="recipeDetail_ingredients-list" *ngFor="let ing of recipe.ingredients; let i = index">

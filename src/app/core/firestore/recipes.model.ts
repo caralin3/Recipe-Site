@@ -9,10 +9,11 @@ export interface FirebaseRecipeModel {
   myRating: number,
   notes?: string[],
   prepTime?: number,
-  // rating: Rating,
+  src: string,
   tags?: string[],
   title: string,
   totalTime?: number,
+  url: string,
   userId: string,
   yield: number
 }

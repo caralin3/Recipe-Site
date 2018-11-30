@@ -56,6 +56,7 @@ export class RecipeImportComponent implements OnInit {
   importRecipe = async (url: string) => {
     const API_URL = 'https://recipemine-api.herokuapp.com'
     const fetchUrl = `${API_URL}?url=${url}`
+    // https://www.thekitchn.com/how-to-make-meatballs-cooking-lessons-from-the-kitchn-108048
     try {
       const response = await fetch(fetchUrl);
       if (!response.ok) {
