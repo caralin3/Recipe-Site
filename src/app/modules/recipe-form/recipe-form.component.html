@@ -1,10 +1,13 @@
 <div class="recipeForm">
-  <a class="recipeForm_cta cta" [routerLink]="'../'">
+  <!-- <a class="recipeForm_cta cta" [routerLink]="'../'">
     <i class="fas fa-angle-left cta-icon"></i>
     Back to My Recipes
-  </a>
+  </a> -->
+  <div class="recipeForm_header">
+    <h1 class="recipeForm_header-title">Add Recipe</h1>
+  </div>
   <form class="recipeForm_form" [formGroup]="recipeForm">
-    <h2 class="recipeForm_title">Add Recipe</h2>
+    <h2 class="recipeForm_title">Recipe</h2>
     <div class="recipeForm_rowContainer">
       <div class="recipeForm_row">
         <label class="recipeForm_label">

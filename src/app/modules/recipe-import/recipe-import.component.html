@@ -1,9 +1,12 @@
 <div class="recipeImport">
-  <div class="recipeImport_cta">
+  <!-- <div class="recipeImport_cta">
     <a class="cta" [routerLink]="'../'">
       <i class="fas fa-angle-left cta-icon"></i>
       Back to My Recipes
     </a>
+  </div> -->
+  <div class="recipeImport_header">
+    <h1 class="recipeImport_header-title">Add Recipe</h1>
   </div>
   <div class="recipeImport_container">
     <form class="recipeImport_form" [formGroup]="importForm">
@@ -13,7 +16,7 @@
         class="recipeImport_button"
         type="submit"
         [disabled]="!importForm.valid"
-        (click)="importRecipe(importForm.value, importForm.status)"
+        (click)="getUrl(importForm.value, importForm.status)"
       >
         Import
       </button>

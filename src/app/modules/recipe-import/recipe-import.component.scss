@@ -1,7 +1,28 @@
 @import '../../../styles';
 
 .recipeImport {
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0 2rem;
+
+  &_header {
+    align-items: center;
+    background-color: $color-primary;
+    display: flex;
+    
+    &-title {
+      color: $white;
+      font-family: $font-primary;
+      padding: 0 1rem;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
 
   &_cta {
     align-items: center;
@@ -16,6 +37,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 2rem auto 0;
+    width: 80%;
+
+    @media only screen and (max-width: 640px) {
+      width: 90%;
+    }
   }
 
   &_title {

@@ -36,7 +36,7 @@ export interface Recipe {
   myRating: number,
   notes: string[],
   prepTime?: number,
-  // rating: Rating,
+  // TODO: Add servings or url
   tags: string[],
   title: string;
   totalTime: number,
@@ -44,10 +44,20 @@ export interface Recipe {
   yield: number,
 }
 
-// export interface Rating {
-//   stars: number,
-//   amount: number,
-// }
+export interface ImportedRecipe {
+  calories: number,
+  cookTime: number,
+  prepTime: number,
+  directions: string[],
+  ingredients: string[],
+  notes: string[],
+  servings: number,
+  title: string,
+  totalTime: number,
+  url: string,
+  yield: number,
+  status: 'success' | 'failure'
+}
 
 export interface RecipeLists {
   id: string,
