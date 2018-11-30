@@ -43,14 +43,13 @@
             </label>
             <i
               class="recipeDetail_ingredItem-cart fas fa-cart-plus"
-              *ngIf="!inGroceries[ing]"
+              *ngIf="!inGroceries[ing.toLowerCase()]"
               (click)="addIngredient(ing)"
             ></i>
             <i
               class="recipeDetail_ingredItem-cart fas fa-shopping-cart"
-              *ngIf="inGroceries[ing]"
+              *ngIf="inGroceries[ing.toLowerCase()]"
               [routerLink]="'/grocery'"
-              fragment="{{ing}}"
             ></i>
           </li>
         </ul>
