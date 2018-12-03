@@ -1,5 +1,9 @@
 @import '../../../styles';
 
 .calendar {
-
+  // display: flex;
+  // flex-direction: column;
+  @media only screen and (max-width: 760px) {
+    overflow-x: scroll;
+  }
 }

@@ -5,6 +5,7 @@ import {
   CalendarView
 } from 'angular-calendar';
 import { Subject } from 'rxjs';
+import { externalEvents } from './events';
 
 @Component({
   selector: 'app-calendar',
@@ -20,36 +21,6 @@ export class CalendarComponent {
 
   viewDate = new Date();
 
-  colors: any = {
-    red: {
-      primary: '#ad2121',
-      secondary: '#FAE3E3'
-    },
-    blue: {
-      primary: '#1e90ff',
-      secondary: '#D1E8FF'
-    },
-    yellow: {
-      primary: '#e3bc08',
-      secondary: '#FDF1BA'
-    }
-  };
-
-  externalEvents: CalendarEvent[] = [
-    {
-      title: 'Event 1',
-      color: this.colors.yellow,
-      start: new Date(),
-      draggable: true
-    },
-    {
-      title: 'Event 2',
-      color: this.colors.blue,
-      start: new Date(),
-      draggable: true
-    }
-  ];
-
   events: CalendarEvent[] = [];
 
   activeDayIsOpen = false;
@@ -62,12 +33,12 @@ export class CalendarComponent {
     newEnd,
     allDay
   }: CalendarEventTimesChangedEvent): void {
-    const externalIndex = this.externalEvents.indexOf(event);
+    const externalIndex = externalEvents.indexOf(event);
     if (typeof allDay !== 'undefined') {
       event.allDay = allDay;
     }
     if (externalIndex > -1) {
-      this.externalEvents.splice(externalIndex, 1);
+      externalEvents.splice(externalIndex, 1);
       this.events.push(event);
     }
     event.start = newStart;
@@ -79,12 +50,5 @@ export class CalendarComponent {
       this.activeDayIsOpen = true;
     }
     this.events = [...this.events];
-  }
-
-  externalDrop(event: CalendarEvent) {
-    if (this.externalEvents.indexOf(event) === -1) {
-      this.events = this.events.filter(iEvent => iEvent !== event);
-      this.externalEvents.push(event);
-    }
   }
 }

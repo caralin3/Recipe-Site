@@ -1,0 +1,28 @@
+@import '../../../styles';
+
+.mealsList {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+
+  &_title {
+    margin: 0;
+    font-family: $font-primary;
+    color: $color-primary;
+  }
+
+  &_search {
+    padding: 1rem 0;
+  }
+
+  &_noEvents {
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+  }
+
+  &_recipe {
+    margin: 0 auto;
+    width: 250px;
+  }
+}

@@ -2,7 +2,8 @@
   <input
     class="recipeSearch_input"
     id="recipe-search"
-    [ngClass]="comp === 'carousel' ? 'recipeSearch_input-carousel' : ''"
+    [ngClass]="comp === 'carousel' ? 'recipeSearch_input-carousel' : 
+      comp === 'mealsList' ? 'recipeSearch_input-mealsList' : ''"
     placeholder="Search Recipes"
     type="search"
     #recipeSearch
@@ -11,8 +12,9 @@
   >
   <i
     class="recipeSearch_icon fas fa-search"
+    [ngClass]="comp === 'mealsList' ? 'recipeSearch_icon-mealsList' : ''"
     (click)="search(term)"
-    [routerLink]="['/recipes/search']"
+    [routerLink]="comp === 'mealsList' ? ['/planner'] : ['/recipes/search']"
     [queryParams]="{keyword: term}"
   ></i>  
 </div>
