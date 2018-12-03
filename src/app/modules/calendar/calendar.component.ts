@@ -17,7 +17,7 @@ export class CalendarComponent {
 
   CalendarView = CalendarView;
 
-  view = CalendarView.Month;
+  view = CalendarView.Week;
 
   viewDate = new Date();
 
