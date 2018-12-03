@@ -7,6 +7,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +18,8 @@ import { GroceriesService, ImagesService, FirebaseUserService, RecipesService } 
 import { UserResolver } from './core/user.resolver';
 import { DropZoneDirective, FullscreenDirective } from './directives';
 import {
+  CalendarComponent,
+  CalendarHeaderComponent,
   ContactComponent,
   FileUploadComponent,
   GroceryComponent,
@@ -43,6 +47,8 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
 @NgModule({
   declarations: [
     AppComponent,
+    CalendarComponent,
+    CalendarHeaderComponent,
     ContactComponent,
     FullscreenDirective,
     GroceryComponent,
@@ -76,6 +82,10 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFirestoreModule.enablePersistence(), // Offline data
     AngularFireStorageModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

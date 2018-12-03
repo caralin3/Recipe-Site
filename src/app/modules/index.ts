@@ -1,3 +1,5 @@
+import { CalendarComponent } from './calendar';
+import { CalendarHeaderComponent } from './calendar-header';
 import { ContactComponent } from './contact';
 import { FileUploadComponent } from './file-upload';
 import { GroceryComponent } from './grocery';
@@ -18,6 +20,8 @@ import { RecipesItemComponent } from './recipes-item';
 import { RegisterComponent } from './register';
 
 export {
+  CalendarComponent,
+  CalendarHeaderComponent,
   ContactComponent,
   FileUploadComponent,
   GroceryComponent,
