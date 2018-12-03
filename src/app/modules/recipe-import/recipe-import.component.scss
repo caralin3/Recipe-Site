@@ -64,4 +64,30 @@
     font-size: 1.2rem;
     margin: 2rem 0;
   }
+
+  &_sites {
+    padding: 1rem 2rem 2rem;
+
+    &-title {
+      color: $black;
+      font-family: $font-primary;
+    }
+
+    &-item {
+      padding-left: 1rem;
+
+      a {
+        color: $black;
+        font-family: $font-primary;
+        font-size: 1.2rem;
+        
+        &:focus,
+        &:hover {
+          color: $color-primary;
+          outline: none;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }

@@ -1,10 +1,6 @@
 <div class="recipeForm">
-  <!-- <a class="recipeForm_cta cta" [routerLink]="'../'">
-    <i class="fas fa-angle-left cta-icon"></i>
-    Back to My Recipes
-  </a> -->
   <div class="recipeForm_header">
-    <h1 class="recipeForm_header-title">Add Recipe</h1>
+    <h1 class="recipeForm_header-title">{{ title }}</h1>
   </div>
   <form class="recipeForm_form" [formGroup]="recipeForm">
     <h2 class="recipeForm_title">Recipe</h2>
@@ -27,11 +23,12 @@
               <i
                 class="fa-star recipeForm_star"
                 [ngClass]="(hover >= 1) ? 'fas' : 'far'"
+                (click)="setStars(1)"
                 (mouseover)="onHover(1)"
                 (mouseleave)="onHover(0)"
                 *ngIf="stars === undefined"
               ></i>
-              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 1"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 1" (click)="setStars(1)"></i>
             </label>
             <input class="recipeForm_radio" id="r1" type="radio" value="1" formControlName="myRating">
           </span>
@@ -40,11 +37,12 @@
               <i
                 class="fa-star recipeForm_star"
                 [ngClass]="(hover >= 2) ? 'fas' : 'far'"
+                (click)="setStars(2)"
                 (mouseover)="onHover(2)"
                 (mouseleave)="onHover(0)"
                 *ngIf="stars === undefined || stars < 2"
               ></i>
-              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 2"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 2" (click)="setStars(2)"></i>
             </label>
             <input class="recipeForm_radio" id="r2" type="radio" value="2" formControlName="myRating">
           </span>
@@ -53,11 +51,12 @@
               <i
                 class="fa-star recipeForm_star"
                 [ngClass]="(hover >= 3) ? 'fas' : 'far'"
+                (click)="setStars(3)"
                 (mouseover)="onHover(3)"
                 (mouseleave)="onHover(0)"
                 *ngIf="stars === undefined || stars < 3"
               ></i>
-              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 3"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 3" (click)="setStars(3)"></i>
             </label>
             <input class="recipeForm_radio" id="r3" type="radio" value="3" formControlName="myRating">
           </span>
@@ -66,11 +65,12 @@
               <i
                 class="fa-star recipeForm_star"
                 [ngClass]="(hover >= 4) ? 'fas' : 'far'"
+                (click)="setStars(4)"
                 (mouseover)="onHover(4)"
                 (mouseleave)="onHover(0)"
                 *ngIf="stars === undefined || stars < 4"
               ></i>
-              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 4"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 4" (click)="setStars(4)"></i>
             </label>
             <input class="recipeForm_radio" id="r4" type="radio" value="4" formControlName="myRating">
           </span>
@@ -79,11 +79,12 @@
               <i
                 class="fa-star recipeForm_star"
                 [ngClass]="(hover >= 5) ? 'fas' : 'far'"
+                (click)="setStars(5)"
                 (mouseover)="onHover(5)"
                 (mouseleave)="onHover(0)"
                 *ngIf="stars === undefined || stars < 5"
               ></i>
-              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 5"></i>
+              <i class="fas fa-star recipeForm_star" *ngIf="stars >= 5" (click)="setStars(5)"></i>
             </label>
             <input class="recipeForm_radio" id="r5" type="radio" value="5" formControlName="myRating">
           </span>
@@ -143,21 +144,6 @@
     <div class="recipeForm_rowContainer">
       <div class="recipeForm_row">
         <label class="recipeForm_label">
-          Meals
-          <span class="recipeForm_required">*</span>
-        </label>
-        <select class="recipeForm_control" formControlName="meals" multiple="true">
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-          <option value="snack">Snack</option>
-          <option value="dessert">Dessert</option>
-          <option value="side">Side</option>
-          <option value="appetizer">Appetizer</option>
-        </select>
-      </div>
-      <div class="recipeForm_row">
-        <label class="recipeForm_label">
           Calories
           <span class="recipeForm_required">*</span>
         </label>
@@ -174,8 +160,6 @@
           <p>Copies entered ingredients and opens to calorie calculator to paste ingredients to.</p>
         </div>
       </div>
-    </div>
-    <div class="recipeForm_rowContainer">
       <div class="recipeForm_row">
         <label class="recipeForm_label">
           Source
@@ -184,14 +168,38 @@
         <input class="recipeForm_control" type="text" formControlName="src" placeholder="Recipe Source">
       </div>
       <div class="recipeForm_row">
-        <label class="recipeForm_label">Notes</label>
-        <input class="recipeForm_control" type="text" formControlName="notes" placeholder="Separate with comma...">
-      </div>
-      <div class="recipeForm_row">
         <label class="recipeForm_label">Tags</label>
         <input class="recipeForm_control" type="text" formControlName="tags" placeholder="Separate with comma..." list="tags">
         <datalist id="tags">
         </datalist>
+      </div>
+    </div>
+    <div class="recipeForm_rowContainer">
+      <div class="recipeForm_row">
+        <label class="recipeForm_label">
+          Meals
+          <span class="recipeForm_required">*</span>
+        </label>
+        <select class="recipeForm_control recipeForm_multi" formControlName="meals" multiple="true">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Snack</option>
+          <option value="dessert">Dessert</option>
+          <option value="side">Side</option>
+          <option value="appetizer">Appetizer</option>
+        </select>
+      </div>
+      <div class="recipeForm_group">
+        <label class="recipeForm_label recipeForm_above">
+          Notes
+        </label>
+        <textarea
+          class="recipeForm_textArea"
+          type="text"
+          placeholder="List one note per line..."
+          formControlName="notes">
+        </textarea>
       </div>
     </div>
     <app-file-upload (getImagePath)="onImageUpload($event)" ></app-file-upload>
@@ -199,9 +207,11 @@
       class="recipeForm_button"
       type="submit"
       [disabled]="!recipeForm.valid"
-      (click)="addRecipe(recipeForm.value, recipeForm.status)"
+      [routerLink]="buttonText === 'Update' ? ['/recipes', editId] : '/'"
+      (click)="buttonText === 'Update' ? editRecipe(recipeForm.value, recipeForm.status)
+        : addRecipe(recipeForm.value, recipeForm.status)"
     >
-      Add
+      {{ buttonText }}
     </button>
   </form>
 </div>

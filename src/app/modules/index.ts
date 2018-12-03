@@ -8,6 +8,7 @@ import { LoginComponent } from './login';
 import { NavbarComponent } from './navbar';
 import { PlannerComponent } from './planner';
 import { RecipeDetailComponent } from './recipe-detail';
+import { RecipeEditComponent } from './recipe-edit';
 import { RecipeFormComponent } from './recipe-form';
 import { RecipeImportComponent } from './recipe-import';
 import { RecipeSearchComponent } from './recipe-search';
@@ -27,6 +28,7 @@ export {
   NavbarComponent,
   PlannerComponent,
   RecipeDetailComponent,
+  RecipeEditComponent,
   RecipeFormComponent,
   RecipeImportComponent,
   RecipeSearchComponent,

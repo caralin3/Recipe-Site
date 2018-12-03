@@ -5,20 +5,20 @@
       <div class="recipeDetail_left">
         <h1 class="recipeDetail_title">{{ recipe.title }}</h1>
         <div class="recipeDetail_stars">
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 1"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 2"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 3"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 4"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 5"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 1 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 2 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 3 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 4 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 5 ? 'fas' : 'far'"></i>
         </div>
       </div>
       <div class="recipeDetail_right">
         <div class="recipeDetail_col">
           <h3 class="recipeDetail_col-text">Prep Time: {{ recipe.prepTime || 0 }} mins</h3>
-          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.totalTime || 0 }} mins</h3>
         </div>
         <div class="recipeDetail_col">
-          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.cookTime || 0 }} mins</h3>
           <h3 class="recipeDetail_col-text">Calories: {{ recipe.calories || 'N/A' }} cals</h3>
         </div>
       </div>
@@ -32,12 +32,14 @@
         Source:
         <span *ngIf="recipe.src" class="recipeDetail_imported-src">{{ recipe.src }}</span>
       </h2>
-      <button toggleFullscreen>Toggle fullscreen</button>
+      <span class="recipeDetail_imported-buttons">
+        <button toggleFullscreen>Toggle fullscreen</button>
+        <i class="recipeDetail_edit fas fa-edit" [routerLink]="['/recipes/edit', recipe.id]"></i>
+      </span>
     </section>
     <section class="recipeDetail_ingredients">
       <div class="recipeDetail_ingredients-header">
         <h2 class="recipeDetail_ingredients-title">Ingredients</h2>
-        <!-- <button toggleFullscreen>Toggle fullscreen</button> -->
       </div>
       <div class="recipeDetail_ingredients-grid">
         <ul class="recipeDetail_ingredients-list" *ngFor="let ing of recipe.ingredients; let i = index">

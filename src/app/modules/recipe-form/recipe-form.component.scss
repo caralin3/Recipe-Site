@@ -144,6 +144,11 @@
     width: 10rem;
   }
 
+  &_multi {
+    height: 8rem;
+    overflow-y: auto;
+  }
+
   &_textArea {
     height: 10rem;
     width: 20rem;

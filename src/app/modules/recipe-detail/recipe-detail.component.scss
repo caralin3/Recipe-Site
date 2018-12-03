@@ -91,8 +91,8 @@
     justify-content: space-between;
     padding: 0 1rem;
 
-    &-title {
-      // color: $color-primary;
+    @media only screen and (max-width: 640px) {
+      flex-direction: column;
     }
 
     &-link {
@@ -108,6 +108,24 @@
     &-src {
       color: $color-primary;
       padding: 0 0.5rem;
+    }
+
+    &-buttons {
+      align-items: center;
+      display: flex;
+    }
+  }
+
+  &_edit {
+    color: $color-button;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+
+    &:focus,
+    &:hover {
+      color: darken(#CA4320, 10%);
+      cursor: pointer;
+      outline: none;
     }
   }
 

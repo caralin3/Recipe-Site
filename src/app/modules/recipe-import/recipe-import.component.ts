@@ -16,6 +16,13 @@ export class RecipeImportComponent implements OnInit {
   importForm: FormGroup;
   currentUser: Observable<User>;
   currentUserId: string;
+  sites = [
+    {name: 'AllRecipes', link: 'https://www.allrecipes.com'},
+    {name: 'Genius Kitchen', link: 'https://www.geniuskitchen.com'},
+    {name: 'Food & Wine', link: 'https://www.foodandwine.com'},
+    {name: 'Food Network', link: 'https://www.foodnetwork.com'},
+    {name: 'The Kitchn', link: 'https://www.thekitchn.com'},
+  ]
 
   private subscriptions: Subscription[] = [];
   
