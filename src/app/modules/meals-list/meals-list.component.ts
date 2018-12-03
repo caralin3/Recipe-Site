@@ -1,37 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { CalendarEvent } from 'angular-calendar';
-import { externalEvents } from '../calendar/events';
-import { Observable } from 'rxjs';
-import { Recipe } from 'src/app/core/models';
-import { RecipesService } from 'src/app/core/firestore';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CalendarEvent } from 'angular-calendar';
+import { Observable, Subscription } from 'rxjs';
+import { externalEvents } from '../calendar/events';
+import { RecipesService } from '../../../app/core/firestore';
+import { Recipe } from '../../../app/core/models';
 
 @Component({
   selector: 'app-meals-list',
   templateUrl: './meals-list.component.html',
   styleUrls: ['./meals-list.component.scss']
 })
-export class MealsListComponent implements OnInit {
+export class MealsListComponent implements OnInit, OnDestroy {
   events: CalendarEvent[];
   recipes$: Observable<Recipe[]>;
   term: string;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
-    private recipeService: RecipesService,
+    private recipesService: RecipesService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
 
   ngOnInit() {
     this.events = externalEvents;
-    this.route.queryParams.subscribe(params => {
+    // Initial recipes
+    this.recipes$ = this.recipesService.getLimitedRecipes(5);
+    this.subscriptions.push(this.route.queryParams.subscribe(params => {
       if (params.keyword !== this.term) {
         this.term = params.keyword;
         if (this.term) {
-          this.recipes$ = this.recipeService.searchRecipes(this.term);
+          this.recipes$ = this.recipesService.searchRecipes(this.term);
+        } else {
+          this.recipes$ = this.recipesService.getLimitedRecipes(5);
         }
       }
-    });
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   search(term: string): void {
@@ -41,7 +51,7 @@ export class MealsListComponent implements OnInit {
   onEnter = (term) => {
     this.search(term);
     this.router.navigate(['/recipes/search'], { queryParams: { keyword: term } });
-    this.recipeService.searchRecipes(term);
+    this.recipesService.searchRecipes(term);
   }
 
   externalDrop(event: CalendarEvent) {
@@ -49,5 +59,4 @@ export class MealsListComponent implements OnInit {
       this.events.push(event);
     }
   }
-
 }
