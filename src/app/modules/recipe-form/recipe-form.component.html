@@ -205,6 +205,7 @@
     <app-file-upload (getImagePath)="onImageUpload($event)" ></app-file-upload>
     <button
       class="recipeForm_button"
+      *ngIf="!demo"
       type="submit"
       [disabled]="!recipeForm.valid"
       [routerLink]="buttonText === 'Update' ? ['/recipes', editId] : '/'"
@@ -212,6 +213,14 @@
         : addRecipe(recipeForm.value, recipeForm.status)"
     >
       {{ buttonText }}
+    </button>
+    <button
+      class="recipeForm_button"
+      *ngIf="demo"
+      type="button"
+      [routerLink]="'/home'"
+    >
+      End Demo
     </button>
   </form>
 </div>

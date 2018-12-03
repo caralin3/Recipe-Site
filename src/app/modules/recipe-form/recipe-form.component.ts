@@ -28,6 +28,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   hover: number = 0;
   images: string[] = [];
   editId: string;
+  demo: boolean = false;
 
   private subscriptions: Subscription[] = [];
 
@@ -40,6 +41,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   ) {
     this.currentUser$ = this.store.select(appState => appState.sessionState.currentUser);
     this.importedRecipe$ = this.store.select(appState => appState.sessionState.importedRecipe);
+    this.demo = this.location.path().includes('demo');
   }
   
   ngOnInit() {
@@ -256,7 +258,6 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
       const directions = recipe.directions.split('\n').map((d: string) => d !== '' && d.trim());
       const tags = recipe.tags && recipe.tags.split(',').map((tag: string) => tag.trim());
       let notes = recipe.notes && recipe.notes.split('\n').map((note: string) => note.trim());
-      console.log(notes)
       let url = recipe.url;
       let meals = {
         'breakfast': false,

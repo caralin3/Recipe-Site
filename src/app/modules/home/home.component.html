@@ -36,20 +36,30 @@
     <a class="home_heading" [routerLink]="['./']" fragment="two">Save Favorite Recipes</a>
     <div class="home_content">
       <img class="home_image" src="https://picsum.photos/500/300" />
-      <p class="home_text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+      <div class="home_text">
+        <p><i class="fas fa-utensils home_text-icon"></i>Store all of your favorite recipes in one place</p>
+        <p><i class="fas fa-utensils home_text-icon"></i>Add original recipes or recipes from cookbooks</p>
+        <p><i class="fas fa-utensils home_text-icon"></i>Import recipes from supported sites online</p>
+        <p><i class="fas fa-utensils home_text-icon"></i>Search your saved recipes</p>
+        <p><i class="fas fa-utensils home_text-icon"></i>Rate your saved recipes and add notes</p>
+      </div>
     </div>
   </section>
   <section class="home_section" id="three">
     <a class="home_heading" [routerLink]="['./']" fragment="three">Import Recipes</a>
     <div class="home_content">
-      <p class="home_text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-      <img class="home_image" src="https://picsum.photos/500/300" />
-      <!-- TODO: Goes to demo -->
-      <a class="home_cta cta">
+      <div class="home_text">
+        <p><i class="fas fa-utensils home_text-icon"></i>Enter the url to import the recipe</p>
+        <ul class="home_text-list">
+          <p><i class="fas fa-utensils home_text-icon"></i>Supported Sites Include:</p>
+          <li class="home_text-listItem"><i class="home_text-listItem-icon fas fa-cookie"></i>AllRecipes</li>
+          <li class="home_text-listItem"><i class="home_text-listItem-icon fas fa-cookie"></i>Genius Kitchen</li>
+          <li class="home_text-listItem"><i class="home_text-listItem-icon fas fa-cookie"></i>Food Network</li>
+          <li class="home_text-listItem"><i class="home_text-listItem-icon fas fa-cookie"></i>And more!</li>
+        </ul>
+      </div>
+      <img class="home_image" src="/assets/images/screenshots/import_screenshot.PNG" alt="import_screenshot" />
+      <a class="home_cta cta" [routerLink]="['/home/demo/import']">
         Check It Out
         <i class="fas fa-angle-right cta-icon"></i>
       </a>
@@ -58,17 +68,20 @@
   <section class="home_section" id="four">
     <a class="home_heading" [routerLink]="['./']" fragment="four">Create Grocery Lists</a>
     <div class="home_content">
-      <img class="home_image" src="https://picsum.photos/500/300" />
-      <p class="home_text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+      <img class="home_image" src="/assets/images/screenshots/grocery_screenshot.PNG" alt="grocery_screenshot" />
+      <div class="home_text">
+        <p><i class="fas fa-utensils home_text-icon"></i>Input items into your grocery list</p>
+        <p><i class="fas fa-utensils home_text-icon"></i>Add a list item from recipe ingredients list</p>
+        <p><i class="fas fa-utensils home_text-icon"></i>Just click this symbol <i class="home_text-groceryIcon fas fa-cart-plus"></i> next to the ingredient</p>
+        <p><i class="fas fa-utensils home_text-icon"></i>Check off completed items as you go</p>
+      </div>
     </div>
   </section>
   <section class="home_section" id="five">
       <a class="home_heading" [routerLink]="['./']" fragment="five">Plan Meals</a>
-      <div class="home_content">
-        <img class="home_calendar" src="https://picsum.photos/1000/500" />
-      </div>
+      <!-- <div class="home_content"> -->
+      <img class="home_calendar" src="https://picsum.photos/1000/500" />
+      <!-- </div> -->
     </section>
   <a class="home_top" [routerLink]="['./']" (click)="scrollToTop()" *ngIf="showTop">
     <i class="fas fa-chevron-circle-up"></i>

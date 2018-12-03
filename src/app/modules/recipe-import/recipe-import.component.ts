@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -12,7 +13,7 @@ import * as SessionActions from '../../../app/store/session/session.actions';
   templateUrl: './recipe-import.component.html',
   styleUrls: ['./recipe-import.component.scss']
 })
-export class RecipeImportComponent implements OnInit {
+export class RecipeImportComponent implements OnInit, OnDestroy {
   importForm: FormGroup;
   currentUser: Observable<User>;
   currentUserId: string;
@@ -28,6 +29,7 @@ export class RecipeImportComponent implements OnInit {
   
   constructor(
     private fb: FormBuilder,
+    private location: Location,
     private router: Router,
     private store: Store<AppState>,
 
@@ -63,7 +65,6 @@ export class RecipeImportComponent implements OnInit {
   importRecipe = async (url: string) => {
     const API_URL = 'https://recipemine-api.herokuapp.com'
     const fetchUrl = `${API_URL}?url=${url}`
-    // https://www.thekitchn.com/how-to-make-meatballs-cooking-lessons-from-the-kitchn-108048
     try {
       const response = await fetch(fetchUrl);
       if (!response.ok) {
@@ -72,7 +73,11 @@ export class RecipeImportComponent implements OnInit {
       const data: ImportedRecipe = await response.json();
       this.store.dispatch(new SessionActions.SetImportedRecipe(data));
       localStorage.setItem('importedRecipe', JSON.stringify(data));
-      this.router.navigate(['/recipes/add']);
+      if (this.location.path().includes('demo')) {
+        this.router.navigate(['/home/demo/add']);
+      } else {
+        this.router.navigate(['/recipes/add']);
+      }
     } catch (err) {
       console.error(`Error ${err}`);
     }

@@ -34,7 +34,9 @@ export class GroceryListComponent implements OnInit {
 
   addItem = (item: string) => {
     const newItem = item.toLowerCase().trim();
-    this.groceriesService.addGroceryItem(this.lst.id, newItem, 'items');
+    if (newItem) {
+      this.groceriesService.addGroceryItem(this.lst.id, newItem, 'items');
+    }
     this.adding = false;
   }
 
