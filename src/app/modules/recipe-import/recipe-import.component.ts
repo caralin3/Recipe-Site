@@ -17,6 +17,7 @@ export class RecipeImportComponent implements OnInit, OnDestroy {
   importForm: FormGroup;
   currentUser: Observable<User>;
   currentUserId: string;
+  errorMessage: string;
   sites = [
     {name: 'AllRecipes', link: 'https://www.allrecipes.com'},
     {name: 'Genius Kitchen', link: 'https://www.geniuskitchen.com'},
@@ -79,7 +80,7 @@ export class RecipeImportComponent implements OnInit, OnDestroy {
         this.router.navigate(['/recipes/add']);
       }
     } catch (err) {
-      console.error(`Error ${err}`);
+       this.errorMessage = err.message;
     }
   }
 }

@@ -24,6 +24,12 @@
     }
   }
 
+  &_error {
+    color: $black;
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+
   &_cta {
     align-items: center;
     display: flex;
