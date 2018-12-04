@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../models';
 import { FirebaseRecipeModel } from './recipes.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class RecipesService {
   }
 
   // Get All Recipes
-  getRecipes = () => {
+  getRecipes = (): Observable<Recipe[]> => {
     const user = firebase.auth().currentUser;
     return this.db.collection<FirebaseRecipeModel>('recipes',
       ref => ref.where('userId', '==', user.uid)).snapshotChanges()
@@ -32,16 +33,20 @@ export class RecipesService {
   }
 
   // Get Limited Recipes
-  getLimitedRecipes = (limit: number) => {
-    let recipes: Recipe[] = [];
-    this.getRecipes().subscribe((rec: Recipe[]) => {
-      rec.forEach((r, i) => {
-        if (i < limit) {
-          recipes.push(r);
-        }
-      });
-    });
-    return recipes;
+  getLimitedRecipes = (limit: number): Observable<Recipe[]> => {
+    const user = firebase.auth().currentUser;
+    return this.db.collection<FirebaseRecipeModel>('recipes',
+      ref => ref.where('userId', '==', user.uid).limit(limit))
+      .snapshotChanges()
+      .pipe(map(actions => actions.map(a => {
+        // Get document data
+        const data = a.payload.doc.data() as FirebaseRecipeModel;
+        // Get document id
+        const id = a.payload.doc.id;
+        // Use spread operator to add the id to the document data
+        return { id, ...data } as Recipe;
+      })
+    ));
   }
 
   // Get Recipes by Meal
@@ -95,10 +100,32 @@ export class RecipesService {
       .doc(recipeId).delete();
   }
 
+  // SEARCH
+
+  /* GET recipes whose keywords contains search term */
+  searchRecipes(term: string): Observable<Recipe[]> {
+    const user = firebase.auth().currentUser;
+    if (!term.trim()) {
+      // if not search term, return empty recipe array.
+      return of([]);
+    }
+    return this.db.collection('recipes', ref => ref.where('userId', '==', user.uid)
+      .where('keywords', 'array-contains', term.toLowerCase().toString()))
+      .snapshotChanges()
+      .pipe(map(actions => actions.map(a => {
+        // Get document data
+        const data = a.payload.doc.data() as FirebaseRecipeModel;
+        // Get document id
+        const id = a.payload.doc.id;
+        // Use spread operator to add the id to the document data
+        return { id, ...data } as Recipe;
+      })));
+  }
+
   // searchRecipes(searchValue){
-  //   return this.db.collection('recipes',ref => ref.where('nameToSearch', '>=', searchValue)
-  //     .where('nameToSearch', '<=', searchValue + '\uf8ff'))
-  //     .snapshotChanges()
+    // return this.db.collection('recipes',ref => ref.where('nameToSearch', '>=', searchValue)
+    //   .where('nameToSearch', '<=', searchValue + '\uf8ff'))
+    //   .snapshotChanges()
   // }
 
   // searchRecipesByAge(value){

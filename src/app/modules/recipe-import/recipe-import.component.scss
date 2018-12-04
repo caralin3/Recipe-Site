@@ -1,0 +1,99 @@
+@import '../../../styles';
+
+.recipeImport {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0 2rem;
+
+  &_header {
+    align-items: center;
+    background-color: $color-primary;
+    display: flex;
+    
+    &-title {
+      color: $white;
+      font-family: $font-primary;
+      padding: 0 1rem;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  &_error {
+    color: $black;
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+
+  &_cta {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
+  }
+
+  &_form {
+    align-items: center;
+    background-color: $color-lt-bg;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2rem auto 0;
+    width: 80%;
+
+    @media only screen and (max-width: 640px) {
+      width: 90%;
+    }
+  }
+
+  &_title {
+    color: $color-primary;
+    font-family: $font-primary;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &_control {
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    padding: 1rem;
+    width: 75%;
+  }
+
+  &_button {
+    font-size: 1.2rem;
+    margin: 2rem 0;
+  }
+
+  &_sites {
+    padding: 1rem 2rem 2rem;
+
+    &-title {
+      color: $black;
+      font-family: $font-primary;
+    }
+
+    &-item {
+      padding-left: 1rem;
+
+      a {
+        color: $black;
+        font-family: $font-primary;
+        font-size: 1.2rem;
+        
+        &:focus,
+        &:hover {
+          color: $color-primary;
+          outline: none;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

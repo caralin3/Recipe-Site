@@ -1,8 +1,10 @@
 <div class="carousel">
-  <img class="carousel_image" [src]="image.src" />
-  <input *ngIf="search" class="carousel_search" type="search" placeholder="Search Recipes" />
-  <div class="carousel_caption" *ngIf="lowerRightCaption">
-    <a class="carousel_caption-text">{{ lowerRightCaption }}</a>
+  <img class="carousel_image" *ngIf="image" [src]="image.src" [alt]="image.name" />
+  <div [ngClass]="mobile ? 'carousel_search-mobile' : 'carousel_search'">
+    <app-recipe-search *ngIf="search" [comp]="'carousel'"></app-recipe-search>
+  </div>
+  <div class="carousel_caption" *ngIf="lowerRightCaption && currentRecipe">
+    <a class="carousel_caption-text" [routerLink]="['/recipes', currentRecipe.id]">{{ currentRecipe.title }}</a>
   </div>
   <div class="carousel_title" *ngIf="title">
     <h1 class="carousel_title-text">{{ title }}</h1>

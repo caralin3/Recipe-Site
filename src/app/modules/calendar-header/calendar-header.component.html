@@ -1,0 +1,54 @@
+<div class="calendarHeader">
+  <div class="calendarHeader_buttons">
+    <button
+      class="calendarHeader_button"
+      type="button"
+      mwlCalendarPreviousView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="viewDateChange.next(viewDate)">
+      Previous
+    </button>
+    <button
+      class="calendarHeader_button calendarHeader_button-today"
+      type="button"
+      mwlCalendarToday
+      [(viewDate)]="viewDate"
+      (viewDateChange)="viewDateChange.next(viewDate)">
+      Today
+    </button>
+    <button
+      class="calendarHeader_button"
+      type="button"
+      mwlCalendarNextView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="viewDateChange.next(viewDate)">
+      Next
+    </button>
+  </div>
+  <h3 class="calendarHeader_centerDate">{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</h3>
+  <div class="calendarHeader_buttons">
+    <button
+      class="calendarHeader_button"
+      type="button"
+      (click)="viewChange.emit('month')"
+      [class.active]="view === 'month'">
+      Month
+    </button>
+    <button
+      class="calendarHeader_button"
+      type="button"
+      (click)="viewChange.emit('week')"
+      [class.active]="view === 'week'">
+      Week
+    </button>
+    <button
+      class="calendarHeader_button"
+      type="button"
+      (click)="viewChange.emit('day')"
+      [class.active]="view === 'day'">
+      Day
+    </button>
+  </div>
+</div>

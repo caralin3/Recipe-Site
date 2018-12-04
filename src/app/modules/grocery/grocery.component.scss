@@ -1,0 +1,44 @@
+@import '../../../styles';
+
+.grocery {
+  align-items: start;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  overflow-x: hidden;
+
+  @media only screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media only screen and (max-width: 640px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  &_header {
+    align-items: center;
+    background-color: $color-primary;
+    display: flex;
+    
+    &-title {
+      color: $white;
+      font-family: $font-primary;
+      padding: 0 1rem;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  &_lists {
+    padding: 2rem;
+
+    @media only screen and (max-width: 640px) {
+      padding: 1rem;
+    }
+  }
+}

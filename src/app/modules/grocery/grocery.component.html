@@ -1,3 +1,8 @@
-<div class="grocery">
-  <h2>Grocery Lists</h2>
+<div [class]="lists.length === 1 ? 'grocery_one' : 'grocery'">
+  <div class="grocery_header">
+    <h1 class="grocery_header-title" [routerLink]="['/grocery']">Grocery Lists</h1>
+  </div>
+  <div class="grocery_lists" *ngFor="let lst of lists">
+    <app-grocery-list [lst]="lst"></app-grocery-list>
+  </div>
 </div>

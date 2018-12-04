@@ -2,7 +2,7 @@
   <h1 class="register_header">Create an account</h1>
   <div class="register_form">
     <form class="register_form" [formGroup]="registerForm">
-      <label class="error">{{errorMessage}}</label>
+      <label class="register_error">{{ errorMessage }}</label>
       <div class="register_form-group">
         <label class="register_form-label">First Name</label>
         <input class="register_form-input" type="text" formControlName="firstName" class="form-control">

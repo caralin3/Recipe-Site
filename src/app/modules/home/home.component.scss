@@ -80,6 +80,42 @@
     }
   }
 
+  &_text {
+    align-items: flex-start;
+    color: $color-primary;
+    display: flex;
+    font-family: $font-primary;
+    font-weight: bold;
+    flex-direction: column;
+
+    p {
+      font-size: 1.5rem;
+      line-height: 2;
+      margin: 0;
+
+      @media only screen and (max-width: 640px) {
+        font-size: 1.2rem;
+      }
+    }
+    
+    &-listItem {
+      padding-left: 2rem;
+
+      &-icon {
+        padding-right: 0.5rem;
+      }
+
+    }
+
+    &-icon {
+      padding-right: 1rem;
+    }
+
+    &-groceryIcon {
+      color: $color-button;
+    }
+  }
+
   &_icon {
     padding-right: 0.5rem;
   }
@@ -126,11 +162,12 @@
     display: flex;
     justify-content: space-between;
     padding: 0 5%;
+    width: 90%;
 
     @media only screen and (max-width: 780px) {
       flex-direction: column;
       justify-content: center;
-      padding: 1rem 2rem;
+      padding: 1rem 0;
     }
   }
 
@@ -193,6 +230,10 @@
   }
 
   &_image {
+    border: 1px solid $color-lt-bg;
+    height: 300px;
+    width: 500px;
+
     @media only screen and (max-width: 780px) {
       height: auto;
       width: 100%;
@@ -200,6 +241,9 @@
   }
 
   &_calendar {
+    height: 500px;
+    width: 1000px;
+
     @media only screen and (max-width: 780px) {
       height: auto;
       width: 100%;

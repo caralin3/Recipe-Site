@@ -1,13 +1,29 @@
 @import '../../../styles';
 
 .recipeForm {
-  // background-color: $color-lt-bg;
-  align-items: center;
+  // align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 1rem 0 2rem;
 
+  &_header {
+    align-items: center;
+    background-color: $color-primary;
+    display: flex;
+    
+    &-title {
+      color: $white;
+      font-family: $font-primary;
+      padding: 0 1rem;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
   
   &_cta {
     align-self: flex-start;
@@ -25,14 +41,21 @@
   
   &_form {
     align-items: flex-start;
+    align-self: center;
     background-color: $color-lt-bg;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 2rem;
     padding: 2rem;
+    width: 80%;
 
     @media only screen and (min-width: 641px) {
       align-items: center;
+    }
+
+    @media only screen and (max-width: 640px) {
+      width: auto;
     }
   }
 
@@ -121,6 +144,11 @@
     width: 10rem;
   }
 
+  &_multi {
+    height: 8rem;
+    overflow-y: auto;
+  }
+
   &_textArea {
     height: 10rem;
     width: 20rem;
@@ -150,7 +178,6 @@
 
   &_star {
     color: $color-primary;
-    // color: $color-star;
     font-size: 1.2rem;
     padding-right: 0.5rem;
 

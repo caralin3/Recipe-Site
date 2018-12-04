@@ -1,27 +1,40 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { RecipesService } from '../../../app/core/firestore';
-import { Recipe } from '../../../app/core/models';
+import * as screenfull from 'screenfull';
+import { RecipesService, GroceriesService } from '../../../app/core/firestore';
+import { Image, Recipe } from '../../../app/core/models';
+import { AppState } from '../../../app/store';
 
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.scss']
 })
-export class RecipeDetailComponent implements OnInit {
-  recipeFromParam: Observable<Recipe>;
+export class RecipeDetailComponent implements OnInit, OnDestroy {
+  images$: Observable<Image[]>;
+  images: Image[] = [];
+  recipeFromParam$: Observable<Recipe>;
+  limitedRecipes$: Observable<Recipe[]>;
+  groceryLists$: Observable<{id: string, name: string}[]>;
   recipe: Recipe;
   checked: string[] = [];
-  limitedRecipes: Recipe[];
+  inGroceries: object;
+  fullscreen: boolean;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
+    private store: Store<AppState>,
+    public groceriesService: GroceriesService,
     public recipesService: RecipesService
-  ) { }
+  ) {
+    this.groceryLists$ = this.store.select(appState => appState.sessionState.groceryLists);
+  }
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
@@ -31,18 +44,27 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (screenfull.enabled) {
+      screenfull.on('change', () => {
+        this.fullscreen = screenfull.isFullscreen;
+      });
+    }
     this.route.fragment.subscribe(f => {
       const element = document.querySelector("#" + f)
       if (element) element.scrollIntoView()
     });
-    this.recipeFromParam = this.route.paramMap.pipe(
+    this.recipeFromParam$ = this.route.paramMap.pipe(
       switchMap(params => {
         const id = params.get('id');
         return this.recipesService.getRecipe(id);
       })
     );
-    this.recipeFromParam.subscribe(r => this.recipe = r);
-    this.limitedRecipes = this.recipesService.getLimitedRecipes(4);
+    this.limitedRecipes$ = this.recipesService.getLimitedRecipes(4);
+    this.setGroceryItems();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   check = (direction: string, index: number) => {
@@ -54,4 +76,44 @@ export class RecipeDetailComponent implements OnInit {
     }
   }
 
+  setGroceryItems = () => {
+    this.subscriptions.push(this.recipeFromParam$.subscribe(rec => {
+      this.recipe = rec;
+      this.subscriptions.push(this.groceryLists$
+        .subscribe(lists => lists.forEach(list => {
+          const id = list.id;
+          const name = list.name;
+          if (name === 'Groceries') {
+            const groceries = this.groceriesService.getGroceryList(id);
+            this.recipe.ingredients.forEach(ing => {
+              const ingred = ing.toLowerCase().trim();
+              this.inGroceries = {
+                ...this.inGroceries,
+                [ingred]: false,
+              }
+              this.subscriptions.push(groceries.subscribe(groc => {
+                this.inGroceries = {
+                  ...this.inGroceries,
+                  [ingred]: groc.items.includes(ingred),
+                }
+              }));
+            });
+          }
+        }))
+      );
+    }));
+  }
+
+  addIngredient = (ingred: string) => {
+    const newIng = ingred.toLowerCase().trim();
+    this.subscriptions.push(this.groceryLists$
+      .subscribe(lists => lists.forEach(list => {
+        const id = list.id;
+        const name = list.name;
+        if (name === 'Groceries') {
+          this.groceriesService.addGroceryItem(id, newIng, 'items');
+        }
+      }))
+    );
+  } 
 }

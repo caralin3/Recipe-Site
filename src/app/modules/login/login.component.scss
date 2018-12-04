@@ -12,6 +12,12 @@
     text-align: center;
   }
 
+  &_error {
+    color: $black;
+    font-weight: bold;
+    width: 12rem;
+  }
+
   &_form {
     align-items: center;
     display: flex;

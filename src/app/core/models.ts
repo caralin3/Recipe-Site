@@ -5,6 +5,16 @@ export interface User {
   lastName: string;
 }
 
+export interface Image {
+  id: string;
+  file: string;
+  name: string;
+  path: string;
+  size: number;
+  src: string;
+  userId: string;
+}
+
 export interface Ingredient {
   amount: number,
   id: string,
@@ -21,21 +31,36 @@ export interface Recipe {
   id: string,
   images: string[],
   ingredients: string[],
+  keywords: string[],
   meals: object,
   myRating: number,
-  notes: string,
+  notes: string[],
   prepTime?: number,
-  // rating: Rating,
+  // TODO: Add servings
+  src: string;
   tags: string[],
   title: string;
   totalTime: number,
-  yield?: number
+  url: string;
+  userId: string,
+  yield: number,
 }
 
-// export interface Rating {
-//   stars: number,
-//   amount: number,
-// }
+export interface ImportedRecipe {
+  calories: number,
+  cookTime: number,
+  prepTime: number,
+  directions: string[],
+  ingredients: string[],
+  notes: string[],
+  servings: number,
+  src: string,
+  title: string,
+  totalTime: number,
+  url: string,
+  yield: number,
+  status: 'success' | 'failure'
+}
 
 export interface RecipeLists {
   id: string,
@@ -44,9 +69,11 @@ export interface RecipeLists {
 }
 
 export interface GroceryList {
+  completed: string[],
   id: string,
   name: string,
-  ingredientIds: string[],
+  items: string[],
+  userId: string,
 }
 
 export interface MealCalendar {

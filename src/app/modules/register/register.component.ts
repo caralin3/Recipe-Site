@@ -35,6 +35,7 @@ export class RegisterComponent {
     this.authService.doSignUp(value)
       .then(res => {
         this.errorMessage = "";
+        // TODO: Add default grocery list on register
         this.router.navigate(['/recipes']);
       }, err => {
         console.log(err);

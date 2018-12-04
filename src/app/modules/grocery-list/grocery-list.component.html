@@ -1,0 +1,54 @@
+<div class="groceryList">
+  <div class="groceryList_header">
+    <span class="groceryList_header-left">
+      <h2 class="groceryList_header-title">{{ lst.name }}</h2>
+      <h3 class="groceryList_header-length">({{ (groceries$ | async)?.items.length }})</h3>
+      <i class="groceryList_header-add fas fa-cart-plus" (click)="toggleAdd()"></i>
+    </span>
+    <i
+      class="groceryList_header-del fas fa-minus-circle"
+      *ngIf="lst.name !== 'Groceries'"
+      (click)="removeList()"
+    ></i>
+  </div>
+  <ul class="groceryList_list" *ngFor="let item of (groceries$ | async)?.items; let i = index">
+    <li class="groceryList_item" id="{{item}}">
+      <label class="groceryList_item-label">
+        <input class="groceryList_item-input" type="checkbox" value="dir" (click)="check(item)" />
+        <i *ngIf="completed.indexOf(item) <= -1" class="groceryList_checkbox far fa-square"></i>
+        <i *ngIf="completed.indexOf(item) > -1" class="groceryList_checkbox far fa-check-square"></i>
+        <span
+          class="groceryList_item-text"
+          [ngClass]="{'groceryList_checked': completed.indexOf(item) > -1}">
+          {{ item }}
+        </span>
+      </label>
+    </li>
+  </ul>
+  <input
+    class="groceryList_new"
+    *ngIf="adding"
+    type="text"
+    placeholder="Add Item"
+    #newItem
+    (blur)="addItem(newItem.value)"
+    (keyup.enter)="addItem(newItem.value)"
+  >
+  <div class="groceryList_header">
+    <span class="groceryList_header-left">
+      <h2 class="groceryList_header-title">Completed</h2>
+      <h3 class="groceryList_header-length">({{ (groceries$ | async)?.completed.length }})</h3>
+    </span>
+  </div>
+  <ul class="groceryList_list" *ngFor="let item of (groceries$ | async)?.completed; let i = index">
+    <li class="groceryList_item" id="{{item}}">
+      <label class="groceryList_item-label">
+        <input class="groceryList_item-input" type="checkbox" (click)="check(item)" />
+        <i class="groceryList_checkbox far fa-check-square"></i>
+        <span class="groceryList_item-text">{{ item }}</span>
+      </label>
+      <i class="groceryList_minus fas fa-minus-circle" (click)="clear(item)"></i>
+    </li>
+  </ul>
+</div>
+  

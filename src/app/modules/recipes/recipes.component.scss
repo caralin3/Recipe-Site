@@ -3,6 +3,7 @@
 .recipes {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 
   &_header {
     align-items: center;
@@ -29,7 +30,7 @@
   &_buttons {
     display: flex;
     justify-content: flex-end;
-
+    
     @media only screen and (max-width: 760px) {
       display: block;
     }
@@ -51,29 +52,8 @@
   }
 
   &_search {
-    font-family: $font-primary;
-    font-size: 1.2rem;
-    padding: 1rem;
-
     @media only screen and (min-width: 760px) {
       display: none;
-    }
-
-    &:focus {
-      outline-color: $color-primary;
-    }
-  }
-
-  &_list {
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
-    padding: 2rem;
-    
-    @media only screen and (max-width: 760px) {
-      flex-direction: column;
-      justify-content: space-evenly;
-      padding: 0 1rem 1rem;
     }
   }
   
@@ -83,11 +63,11 @@
     flex-direction: column;
     justify-content: flex-start;
     
-    @media only screen and (max-width: 1095px) {
-      &:last-child {
-        display: none;
-      }
-    }
+    // @media only screen and (max-width: 1095px) {
+    //   &:last-child {
+    //     display: none;
+    //   }
+    // }
 
     @media only screen and (max-width: 760px) {
       margin: 1rem auto;
@@ -97,12 +77,21 @@
   &_grid {
     align-items: center;
     display: grid;
-    grid-row-gap: 2rem;
-    grid-template-columns: repeat(4, auto);
-    padding: 1rem 0 2rem;
+    gap: 3rem;
+    grid-template-columns: repeat(5, auto);
+    justify-content: center;
+    padding: 1rem 1rem 2rem;
+
+    @media only screen and (max-width: 1400px) {
+      grid-template-columns: repeat(4, auto);
+    }
 
     @media only screen and (max-width: 1095px) {
       grid-template-columns: repeat(3, auto);
+    }
+
+    @media only screen and (max-width: 1000px) {
+      grid-template-columns: repeat(2, auto);
     }
 
     @media only screen and (max-width: 760px) {
@@ -120,6 +109,21 @@
 
     @media only screen and (max-width: 760px) {
       right: 0.2rem;
+    }
+  }
+
+  &_none {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-text {
+      color: $color-primary;
+      font-family: $font-primary;
+      font-size: 1.8rem;
+      text-align: center;
+      padding: 1rem;
     }
   }
 }

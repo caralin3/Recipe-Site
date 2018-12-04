@@ -1,30 +1,46 @@
-<div class="recipeDetail" *ngIf="recipe">
+<div class="recipeDetail" *ngIf="recipe" ngsf-fullscreen>
   <app-image-carousel [title]="recipe.title"></app-image-carousel>
   <div class="recipeDetail_container">
     <div class="recipeDetail_header">
       <div class="recipeDetail_left">
         <h1 class="recipeDetail_title">{{ recipe.title }}</h1>
         <div class="recipeDetail_stars">
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 1"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 2"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 3"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 4"></i>
-          <i class="fas fa-star recipeDetail_star" *ngIf="recipe.myRating >= 5"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 1 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 2 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 3 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 4 ? 'fas' : 'far'"></i>
+          <i class="fa-star recipeDetail_star" [ngClass]="recipe.myRating >= 5 ? 'fas' : 'far'"></i>
         </div>
       </div>
       <div class="recipeDetail_right">
         <div class="recipeDetail_col">
           <h3 class="recipeDetail_col-text">Prep Time: {{ recipe.prepTime || 0 }} mins</h3>
-          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.totalTime || 0 }} mins</h3>
         </div>
         <div class="recipeDetail_col">
-          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.prepTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.cookTime || 0 }} mins</h3>
           <h3 class="recipeDetail_col-text">Calories: {{ recipe.calories || 'N/A' }} cals</h3>
         </div>
       </div>
     </div>
+    <section class="recipeDetail_imported">
+      <h2 *ngIf="recipe.url" class="recipeDetail_imported-title">
+        Imported From:
+        <a class="recipeDetail_imported-link" [href]="recipe.url" target="_blank">{{ recipe.src }}</a>
+      </h2>
+      <h2 *ngIf="!recipe.url" class="recipeDetail_imported-title">
+        Source:
+        <span *ngIf="recipe.src" class="recipeDetail_imported-src">{{ recipe.src }}</span>
+      </h2>
+      <span class="recipeDetail_imported-buttons">
+        <button toggleFullscreen>Toggle fullscreen</button>
+        <i class="recipeDetail_edit fas fa-edit" [routerLink]="['/recipes/edit', recipe.id]"></i>
+      </span>
+    </section>
     <section class="recipeDetail_ingredients">
-      <h2 class="recipeDetail_ingredients-title">Ingredients</h2>
+      <div class="recipeDetail_ingredients-header">
+        <h2 class="recipeDetail_ingredients-title">Ingredients</h2>
+      </div>
       <div class="recipeDetail_ingredients-grid">
         <ul class="recipeDetail_ingredients-list" *ngFor="let ing of recipe.ingredients; let i = index">
           <li class="recipeDetail_ingredItem">
@@ -38,6 +54,16 @@
                 {{ ing }}
               </span>
             </label>
+            <i
+              class="recipeDetail_ingredItem-cart fas fa-cart-plus"
+              *ngIf="!inGroceries[ing.toLowerCase()]"
+              (click)="addIngredient(ing)"
+            ></i>
+            <i
+              class="recipeDetail_ingredItem-cart fas fa-shopping-cart"
+              *ngIf="inGroceries[ing.toLowerCase()]"
+              [routerLink]="'/grocery'"
+            ></i>
           </li>
         </ul>
       </div>
@@ -60,18 +86,35 @@
         </li>
       </ul>
     </section>
-    <section class="recipeDetail_notes">
+    <section class="recipeDetail_notes" *ngIf="recipe.notes">
       <h2 class="recipeDetail_notes-title">Notes</h2>
+      <ul class="recipeDetail_noteList" *ngFor="let note of recipe.notes">
+        <li class="recipeDetail_note">
+          <i class="recipeDetail_note-icon fas fa-utensils"></i>
+          <p class="recipeDetail_note-text">{{ note }}</p>
+        </li>
+      </ul>
     </section>
-    <section class="recipeDetail_recommendations">
+    <section class="recipeDetail_recommendations" *ngIf="!fullscreen">
       <h2 class="recipeDetail_recommendations-title">Recommended Recipes</h2>
       <div class="recipeDetail_recommendations-container">
-        <ul class="recipeDetail_recommendations-list" *ngFor="let recipe of limitedRecipes">
+        <ul class="recipeDetail_recommendations-list" *ngFor="let rec of limitedRecipes$ | async">
           <li>
-            <app-recipes-item [recipe]="recipe"></app-recipes-item>
+            <app-recipes-item [recipe]="rec"></app-recipes-item>
           </li>
         </ul>
       </div>
     </section>
   </div>
+  <video
+    *ngIf="true"
+    autoplay
+    muted
+    loop
+    height="0"
+    width="0"
+    onloadedmetadata="this.muted = true"
+  >
+    <source src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4">
+  </video>
 </div>
