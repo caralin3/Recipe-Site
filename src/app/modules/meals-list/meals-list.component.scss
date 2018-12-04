@@ -30,9 +30,10 @@
 .drag-active {
   pointer-events: none;
   position: relative;
+  opacity: 0.05;
   z-index: 1;
 }
 
 .drag-over {
-  background-color: #eee;
+  background-color: $very-light-gray;
 }

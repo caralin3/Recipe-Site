@@ -7,6 +7,7 @@ import {
 import { Observable, Subject, Subscription } from 'rxjs';
 import { EventsService } from '../../../app/core/firestore';
 import { User, Recipe } from '../../../app/core/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -26,7 +27,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
   
-  constructor(private eventsService: EventsService) {}
+  constructor(
+    private router: Router,
+    private eventsService: EventsService
+  ) {}
 
   ngOnInit() {
     this.fetchEvents();
@@ -40,6 +44,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.events$ = this.eventsService.getEvents();
   }
 
+  eventClicked({ event }: { event: CalendarEvent }): void {
+    this.router.navigate(['/recipes/', event.meta.recipe.id]);
+  }
+
   eventDropped({
     event,
     newStart,
@@ -50,13 +58,11 @@ export class CalendarComponent implements OnInit, OnDestroy {
       event.allDay = allDay;
     }
     event.start = newStart;
-    console.log('START', newStart)
     let end = new Date(newStart);
     end.setMinutes(end.getMinutes() + event.meta.recipe.totalTime);
     if (!event.meta.recipe.totalTime) {
       end.setMinutes(end.getMinutes() + event.meta.recipe.cookTime)
     }
-    console.log('END', end);
     if (newEnd) {
       event.end = newEnd;
     } else {

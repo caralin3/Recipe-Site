@@ -1,9 +1,44 @@
 @import '../../../styles';
 
 .calendar {
-  // display: flex;
-  // flex-direction: column;
-  @media only screen and (max-width: 760px) {
-    overflow-x: scroll;
+  display: flex;
+  flex-direction: column;
+
+  // @media only screen and (max-width: 760px) {
+  //   overflow-x: hidden;
+  // }
+
+  &_loading {
+    align-self: center;
+    padding-top: 10rem;
+
+    @media only screen and (max-width: 760px) {
+      padding: 1rem 0;
+    }
+  }
+
+  &_icon {
+    color: $color-primary;
+    font-size: 3rem;
+
+    @media only screen and (max-width: 760px) {
+      font-size: 2rem;
+    }
+  }
+
+  &_event {
+    color: $color-button;
+
+    &-action {
+      color: $color-primary;
+  
+      &:hover {
+        color: $color-button;
+      }
+    }
+
+    &-month {
+      
+    }
   }
 }

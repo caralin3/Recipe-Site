@@ -15,8 +15,7 @@
         (dragStart)="setEvent({event: event, recipe: recipe})"
       >
         <a>
-          <!-- <app-recipes-item [recipe]="recipe"></app-recipes-item> -->
-          {{ recipe.title }}
+          <app-recipes-item [recipe]="recipe" [planner]="true"></app-recipes-item>
         </a>
       </li>
     </ul>

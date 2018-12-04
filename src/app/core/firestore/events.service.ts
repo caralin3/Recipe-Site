@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { CalendarEvent } from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -29,6 +29,15 @@ export class EventsService {
         if (data.end) {
           data.end = new Date(data.end);
         }
+        const actions: CalendarEventAction[] = [
+          {
+            label: '<i class="far fa-trash-alt"></i>',
+            onClick: ({ event }: { event: CalendarEvent }): void => {
+              this.deleteEvent(event.id as string);
+            }
+          }
+        ];
+        data.actions = actions;
         // Get document id
         const id = a.payload.doc.id;
         // Use spread operator to add the id to the document data
@@ -42,6 +51,7 @@ export class EventsService {
     const newEvent = {
       ...event,
       start: event.start.toLocaleString(),
+      end: event.end && event.end.toLocaleString(),
     }
     this.eventsCollection.add(newEvent);
   }
