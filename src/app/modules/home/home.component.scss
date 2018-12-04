@@ -230,7 +230,7 @@
   }
 
   &_image {
-    border: 1px solid $very-light-gray;
+    border: 1px solid $color-lt-bg;
     height: 300px;
     width: 500px;
 
@@ -241,6 +241,9 @@
   }
 
   &_calendar {
+    height: 500px;
+    width: 1000px;
+
     @media only screen and (max-width: 780px) {
       height: auto;
       width: 100%;

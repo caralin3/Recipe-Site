@@ -20,4 +20,19 @@
       }
     }
   }
+
+  &_content {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 2fr;
+    padding: 1rem;
+
+    @media only screen and (max-width: 760px) {
+      align-items: center;
+      display: flex;
+      flex-direction: column-reverse;
+      // overflow-x: scroll;
+    }
+  }
 }

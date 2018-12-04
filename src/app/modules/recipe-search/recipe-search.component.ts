@@ -27,7 +27,11 @@ export class RecipeSearchComponent implements OnInit {
 
   onEnter = (term) => {
     this.search(term);
-    this.router.navigate(['/recipes/search'], { queryParams: { keyword: term } });
+    if (this.comp === 'mealsList') {
+      this.router.navigate(['/planner'], { queryParams: { keyword: term } });
+    } else {
+      this.router.navigate(['/recipes/search'], { queryParams: { keyword: term } });
+    }
     this.recipeService.searchRecipes(term);
   }
 }

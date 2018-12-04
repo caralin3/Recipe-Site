@@ -1,3 +1,5 @@
+import { CalendarComponent } from './calendar';
+import { CalendarHeaderComponent } from './calendar-header';
 import { ContactComponent } from './contact';
 import { FileUploadComponent } from './file-upload';
 import { GroceryComponent } from './grocery';
@@ -5,6 +7,7 @@ import { GroceryListComponent } from './grocery-list';
 import { HomeComponent } from './home';
 import { ImageCarouselComponent } from './image-carousel';
 import { LoginComponent } from './login';
+import { MealsListComponent } from './meals-list';
 import { NavbarComponent } from './navbar';
 import { PlannerComponent } from './planner';
 import { RecipeDetailComponent } from './recipe-detail';
@@ -18,6 +21,8 @@ import { RecipesItemComponent } from './recipes-item';
 import { RegisterComponent } from './register';
 
 export {
+  CalendarComponent,
+  CalendarHeaderComponent,
   ContactComponent,
   FileUploadComponent,
   GroceryComponent,
@@ -25,6 +30,7 @@ export {
   HomeComponent,
   ImageCarouselComponent,
   LoginComponent,
+  MealsListComponent,
   NavbarComponent,
   PlannerComponent,
   RecipeDetailComponent,

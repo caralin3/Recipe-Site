@@ -1,0 +1,23 @@
+<div class="mealsList">
+  <h2 class="mealsList_title">Recipes</h2>
+  <div class="mealsList_search">
+    <app-recipe-search [comp]="'mealsList'"></app-recipe-search>
+  </div>
+  <div class="mealsList_container">
+    <p class="mealsList_noRecipes" *ngIf="!(recipes$ | async)">No recipes</p>
+    <ul class="mealsList_list">
+      <li
+        class="mealsList_recipe"
+        *ngFor="let recipe of recipes$ | async"
+        mwlDraggable
+        [dropData]="{event: event, recipe: recipe}"
+        dragActiveClass="drag-active"
+        (dragStart)="setEvent({event: event, recipe: recipe})"
+      >
+        <a>
+          <app-recipes-item [recipe]="recipe" [planner]="true"></app-recipes-item>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

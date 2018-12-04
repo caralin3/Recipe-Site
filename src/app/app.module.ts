@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,15 +8,26 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DragAndDropModule } from 'angular-draggable-droppable';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
-import { GroceriesService, ImagesService, FirebaseUserService, RecipesService } from './core/firestore';
+import {
+  EventsService,
+  GroceriesService,
+  ImagesService,
+  FirebaseUserService,
+  RecipesService
+} from './core/firestore';
 import { UserResolver } from './core/user.resolver';
 import { DropZoneDirective, FullscreenDirective } from './directives';
 import {
+  CalendarComponent,
+  CalendarHeaderComponent,
   ContactComponent,
   FileUploadComponent,
   GroceryComponent,
@@ -23,6 +35,7 @@ import {
   HomeComponent,
   ImageCarouselComponent,
   LoginComponent,
+  MealsListComponent,
   NavbarComponent,
   PlannerComponent,
   RecipeDetailComponent,
@@ -43,6 +56,8 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
 @NgModule({
   declarations: [
     AppComponent,
+    CalendarComponent,
+    CalendarHeaderComponent,
     ContactComponent,
     FullscreenDirective,
     GroceryComponent,
@@ -50,6 +65,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     HomeComponent,
     ImageCarouselComponent,
     LoginComponent,
+    MealsListComponent,
     NavbarComponent,
     NumberToLabelPipe,
     PlannerComponent,
@@ -70,12 +86,18 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFirestoreModule.enablePersistence(), // Offline data
     AngularFireStorageModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    DragAndDropModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -83,7 +105,17 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
       sessionState: sessionReducer,
     })
   ],
-  providers: [AuthGuard, AuthService, GroceriesService, ImagesService, RecipesService, UserResolver, UserService, FirebaseUserService],
+  providers: [
+    AuthGuard,
+    AuthService,
+    EventsService,
+    GroceriesService,
+    ImagesService,
+    RecipesService,
+    UserResolver,
+    UserService,
+    FirebaseUserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

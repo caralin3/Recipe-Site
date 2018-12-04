@@ -1,0 +1,89 @@
+<div class="calendar">
+  <app-calendar-header
+    [(view)]="view"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="fetchEvents()"
+    (viewChange)="fetchEvents()"
+  >
+  </app-calendar-header>
+
+  <ng-template #loading>
+    <div class="calendar_loading">
+      <span class="calendar_icon fa-stack fa-2x fa-spin">
+        <i class="far fa-circle fa-stack-2x"></i>
+        <i class="fas fa-stack-1x fa-utensils"></i>
+      </span>
+    </div>
+  </ng-template>
+
+  <ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top">
+      <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template
+    #eventTitleTemplate
+    let-event="event"
+    let-view="view"
+    let-locale="locale">
+    <span
+      class="calendar_event cal-event-title"
+      [innerHTML]="event.title | calendarEventTitle:view:event">
+    </span>
+  </ng-template>
+
+  <ng-template
+    #actionsTemplate
+    let-event="event">
+    <span *ngIf="event.actions" class="cal-event-actions">
+      <a
+        class="calendar_event-action cal-event-action"
+        *ngFor="let action of event.actions"
+        (mwlClick)="action.onClick({event: event})"
+        [ngClass]="action.cssClass"
+        [innerHtml]="action.label">
+      </a>
+    </span>
+  </ng-template>
+
+  <div *ngIf="events$ | async; else loading; let events">
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate"
+        [events]="events"
+        [eventActionsTemplate]="actionsTemplate"
+        [cellTemplate]="customCellTemplate"
+        [activeDayIsOpen]="activeDayIsOpen"
+        [refresh]="refresh"
+        (dayClicked)="activeDayIsOpen = !activeDayIsOpen"
+        (eventTimesChanged)="eventDropped($event)"
+        (eventClicked)="eventClicked($event)">
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+        [viewDate]="viewDate"
+        [eventActionsTemplate]="actionsTemplate"
+        [events]="events"
+        [eventTitleTemplate]="eventTitleTemplate"
+        [refresh]="refresh"
+        [snapDraggedEvents]="false"
+        (eventTimesChanged)="eventDropped($event)"
+        (eventClicked)="eventClicked($event)">
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view
+        *ngSwitchCase="CalendarView.Day"
+        [viewDate]="viewDate"
+        [events]="events"
+        [eventActionsTemplate]="actionsTemplate"
+        [eventTitleTemplate]="eventTitleTemplate"
+        [refresh]="refresh"
+        [snapDraggedEvents]="false"
+        (eventTimesChanged)="eventDropped($event)"
+        (eventClicked)="eventClicked($event)">
+      </mwl-calendar-day-view>
+    </div>
+  </div>
+</div>
