@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarEvent } from 'angular-calendar';
 import { Observable, Subscription } from 'rxjs';
-import { externalEvents } from '../calendar/events';
 import { RecipesService } from '../../../app/core/firestore';
 import { Recipe } from '../../../app/core/models';
 
@@ -12,8 +11,8 @@ import { Recipe } from '../../../app/core/models';
   styleUrls: ['./meals-list.component.scss']
 })
 export class MealsListComponent implements OnInit, OnDestroy {
-  events: CalendarEvent[];
   recipes$: Observable<Recipe[]>;
+  event: CalendarEvent<{recipe: Recipe}>;
   term: string;
 
   private subscriptions: Subscription[] = [];
@@ -22,10 +21,15 @@ export class MealsListComponent implements OnInit, OnDestroy {
     private recipesService: RecipesService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+    this.event = {
+      start: new Date(),
+      title: 'New Event',
+      draggable: true,
+    }
+  }
 
   ngOnInit() {
-    this.events = externalEvents;
     // Initial recipes
     this.recipes$ = this.recipesService.getLimitedRecipes(5);
     this.subscriptions.push(this.route.queryParams.subscribe(params => {
@@ -54,9 +58,13 @@ export class MealsListComponent implements OnInit, OnDestroy {
     this.recipesService.searchRecipes(term);
   }
 
-  externalDrop(event: CalendarEvent) {
-    if (this.events.indexOf(event) === -1) {
-      this.events.push(event);
+  setEvent = (data: {event: CalendarEvent, recipe: Recipe}) => {
+    this.event = {
+      ...data.event,
+      title: data.recipe.title,
+      meta: {
+        recipe: data.recipe
+      }
     }
   }
 }

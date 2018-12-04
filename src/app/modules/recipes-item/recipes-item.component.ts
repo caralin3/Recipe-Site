@@ -9,6 +9,7 @@ import { Image, Recipe } from '../../../app/core/models';
 })
 export class RecipesItemComponent implements OnInit {
   @Input() recipe: Recipe;
+  @Input() image: string;
   thumbnail: Image = {
     file: 'background1.png',
     id: '',

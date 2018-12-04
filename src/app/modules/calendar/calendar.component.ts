@@ -1,11 +1,12 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
-import { Subject } from 'rxjs';
-import { externalEvents } from './events';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { EventsService } from '../../../app/core/firestore';
+import { User, Recipe } from '../../../app/core/models';
 
 @Component({
   selector: 'app-calendar',
@@ -13,19 +14,31 @@ import { externalEvents } from './events';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent {
-
+export class CalendarComponent implements OnInit, OnDestroy {
   CalendarView = CalendarView;
-
   view = CalendarView.Week;
-
   viewDate = new Date();
-
-  events: CalendarEvent[] = [];
-
   activeDayIsOpen = false;
-
   refresh = new Subject<void>();
+  events$: Observable<CalendarEvent<{recipe: Recipe}>[]>;
+  currentUser$: Observable<User>;
+  currentUserId: string;
+
+  private subscriptions: Subscription[] = [];
+  
+  constructor(private eventsService: EventsService) {}
+
+  ngOnInit() {
+    this.fetchEvents();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  fetchEvents = () => {
+    this.events$ = this.eventsService.getEvents();
+  }
 
   eventDropped({
     event,
@@ -33,22 +46,32 @@ export class CalendarComponent {
     newEnd,
     allDay
   }: CalendarEventTimesChangedEvent): void {
-    const externalIndex = externalEvents.indexOf(event);
     if (typeof allDay !== 'undefined') {
       event.allDay = allDay;
     }
-    if (externalIndex > -1) {
-      externalEvents.splice(externalIndex, 1);
-      this.events.push(event);
-    }
     event.start = newStart;
+    console.log('START', newStart)
+    let end = new Date(newStart);
+    end.setMinutes(end.getMinutes() + event.meta.recipe.totalTime);
+    if (!event.meta.recipe.totalTime) {
+      end.setMinutes(end.getMinutes() + event.meta.recipe.cookTime)
+    }
+    console.log('END', end);
     if (newEnd) {
       event.end = newEnd;
+    } else {
+      event.end = end;
     }
+
+    if (event.id) {
+      this.eventsService.updateEvent(event.id as string, event);
+    } else {
+      this.eventsService.createEvent(event);
+    }
+
     if (this.view === 'month') {
       this.viewDate = newStart;
       this.activeDayIsOpen = true;
     }
-    this.events = [...this.events];
   }
 }

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,12 +10,19 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DragAndDropModule } from 'angular-draggable-droppable';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard, AuthService } from './core/auth'
-import { GroceriesService, ImagesService, FirebaseUserService, RecipesService } from './core/firestore';
+import {
+  EventsService,
+  GroceriesService,
+  ImagesService,
+  FirebaseUserService,
+  RecipesService
+} from './core/firestore';
 import { UserResolver } from './core/user.resolver';
 import { DropZoneDirective, FullscreenDirective } from './directives';
 import {
@@ -78,6 +86,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
@@ -88,6 +97,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
+    DragAndDropModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -95,7 +105,17 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
       sessionState: sessionReducer,
     })
   ],
-  providers: [AuthGuard, AuthService, GroceriesService, ImagesService, RecipesService, UserResolver, UserService, FirebaseUserService],
+  providers: [
+    AuthGuard,
+    AuthService,
+    EventsService,
+    GroceriesService,
+    ImagesService,
+    RecipesService,
+    UserResolver,
+    UserService,
+    FirebaseUserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

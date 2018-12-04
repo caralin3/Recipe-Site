@@ -14,7 +14,7 @@ export class GroceriesService {
   private groceriesCollection: AngularFirestoreCollection<{}>; 
 
   constructor(public db: AngularFirestore) {
-    this.groceriesCollection = db.collection<string>('groceries');
+    this.groceriesCollection = db.collection<FirebaseGroceryListModel>('groceries');
   }
 
   // Get All GroceryLists

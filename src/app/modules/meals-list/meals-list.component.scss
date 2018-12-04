@@ -15,7 +15,7 @@
     padding: 1rem 0;
   }
 
-  &_noEvents {
+  &_noRecipes {
     font-family: $font-primary;
     font-size: 1.2rem;
     padding-left: 1rem;
@@ -25,4 +25,14 @@
     margin: 1rem auto;
     width: 250px;
   }
+}
+
+.drag-active {
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.drag-over {
+  background-color: #eee;
 }
