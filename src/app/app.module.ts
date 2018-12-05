@@ -52,6 +52,7 @@ import { UserService } from './modules/user';
 import { UserComponent } from './modules/user/user.component';
 import { FileSizePipe, NumberToLabelPipe, TrimTextPipe } from './pipes';
 import { reducer as sessionReducer } from './store/session/session.reducer';
+import { MmToHhmmPipe } from './pipes/mm-to-hhmm.pipe';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { reducer as sessionReducer } from './store/session/session.reducer';
     DropZoneDirective,
     FileUploadComponent,
     FileSizePipe,
+    MmToHhmmPipe,
   ],
   imports: [
     BrowserModule,

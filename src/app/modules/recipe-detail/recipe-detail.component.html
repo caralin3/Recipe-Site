@@ -14,11 +14,11 @@
       </div>
       <div class="recipeDetail_right">
         <div class="recipeDetail_col">
-          <h3 class="recipeDetail_col-text">Prep Time: {{ recipe.prepTime || 0 }} mins</h3>
-          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.totalTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Prep Time: {{ recipe.prepTime || 0 | mmToHhmm }}</h3>
+          <h3 class="recipeDetail_col-text">Total Time: {{ recipe.totalTime || 0 | mmToHhmm }}</h3>
         </div>
         <div class="recipeDetail_col">
-          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.cookTime || 0 }} mins</h3>
+          <h3 class="recipeDetail_col-text">Cook Time: {{ recipe.cookTime || 0 | mmToHhmm }}</h3>
           <h3 class="recipeDetail_col-text">Calories: {{ recipe.calories || 'N/A' }} cals</h3>
         </div>
       </div>
