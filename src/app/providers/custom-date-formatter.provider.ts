@@ -8,19 +8,18 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     return new DatePipe(locale).transform(date, 'EEE', locale);
   }
 
-  // public monthViewTitle({ date, locale }: DateFormatterParams): string {
-  //   return new DatePipe(locale).transform(date, 'MMM y', locale);
-  // }
-
   public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
+    if (window.innerWidth < 760) {
+      return new Intl.DateTimeFormat(locale, {weekday: 'short'}).format(date).substr(0, 1);
+    }
     return new DatePipe(locale).transform(date, 'EEE', locale);
+  }
+
+  public weekViewColumnSubHeader({ date, locale }: DateFormatterParams): string {
+    return new DatePipe(locale).transform(date, 'dd', locale);
   }
 
   public dayViewTitle({ date, locale }: DateFormatterParams): string {
     return new DatePipe(locale).transform(date, 'EEE, MMM, dd y', locale);
   }
-
-  // public dayViewHour({ date, locale }: DateFormatterParams): string {
-  //   return new DatePipe(locale).transform(date, 'HH:mm', locale);
-  // }
 }
