@@ -59,6 +59,7 @@ export class EventsService {
   // Update Event
   updateEvent = (eventId: string, event: CalendarEvent<{recipe: Recipe}>) => {
     const user = firebase.auth().currentUser;
+    delete event.actions;
     return this.db.collection<CalendarEvent<{recipe: Recipe}>>('events',
       ref => ref.where('meta.recipe.userId', '==', user.uid))
       .doc(eventId)

@@ -3,7 +3,7 @@
   <div class="recipesItem_container">
     <div class="recipesItem_text">
       <div class="recipesItem_row">
-        <h3 class="recipesItem_text-title" *ngIf="!planner">{{ recipe.title | trimText: 10 }}</h3>
+        <h3 class="recipesItem_text-title" *ngIf="!planner">{{ recipe.title | trimText: 10 : recipe.myRating }}</h3>
         <h3 class="recipesItem_text-title" *ngIf="planner">{{ recipe.title | trimText: 25 }}</h3>
         <div class="recipesItem_stars" *ngIf="!planner">
           <i class="fas fa-star recipesItem_star" *ngIf="recipe.myRating >= 1"></i>
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="recipesItem_row">
-        <h3 class="recipesItem_text-num">Time: {{ recipe.totalTime || 0 }} mins</h3>
+        <h3 class="recipesItem_text-num">Time: {{ recipe.totalTime || recipe.cookTime || 0 | mmToHhmm }}</h3>
         <h3 class="recipesItem_text-num">{{ recipe.calories }} calories</h3>
       </div>
     </div>

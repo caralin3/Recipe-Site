@@ -4,10 +4,6 @@
   display: flex;
   flex-direction: column;
 
-  // @media only screen and (max-width: 760px) {
-  //   overflow-x: hidden;
-  // }
-
   &_loading {
     align-self: center;
     padding-top: 10rem;
@@ -35,10 +31,6 @@
       &:hover {
         color: $color-button;
       }
-    }
-
-    &-month {
-      
     }
   }
 }
