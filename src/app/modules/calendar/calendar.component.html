@@ -58,7 +58,7 @@
         [cellTemplate]="customCellTemplate"
         [activeDayIsOpen]="activeDayIsOpen"
         [refresh]="refresh"
-        (dayClicked)="activeDayIsOpen = !activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day.date)"
         (eventTimesChanged)="eventDropped($event)"
         (eventClicked)="eventClicked($event)">
       </mwl-calendar-month-view>

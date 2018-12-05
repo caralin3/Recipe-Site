@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
+import { CalendarEvent } from 'angular-calendar';
 import { Observable, Subscription } from 'rxjs';
-import { RecipesService, EventsService } from '../../../app/core/firestore';
+import { RecipesService } from '../../../app/core/firestore';
 import { Recipe } from '../../../app/core/models';
 
 @Component({
@@ -18,7 +18,6 @@ export class MealsListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private eventsService: EventsService,
     private recipesService: RecipesService,
     private route: ActivatedRoute,
     private router: Router,
