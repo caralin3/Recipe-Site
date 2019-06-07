@@ -64,7 +64,7 @@ export class RecipeImportComponent implements OnInit, OnDestroy {
   }
 
   importRecipe = async (url: string) => {
-    const API_URL = 'https://recipemine-api.herokuapp.com'
+    const API_URL = 'https://recipemine-api.herokuapp.com/api/v1/import'
     const fetchUrl = `${API_URL}?url=${url}`
     try {
       const response = await fetch(fetchUrl);
