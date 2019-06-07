@@ -33,6 +33,7 @@
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.3.3",
     "screenfull": "^3.3.3",
+    "webpack-dev-server": "^3.7.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
